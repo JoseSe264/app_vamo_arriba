@@ -1,2 +1,2 @@
 # app_vamo_arriba
-aplicacion para 
+aplicacion para organizar deberes personales
