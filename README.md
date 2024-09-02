@@ -1,2 +1,2 @@
-# app_Hora_Facil
-aplicacion para toma de horas
+# AppTiro
+aplicación para listas de compras!
