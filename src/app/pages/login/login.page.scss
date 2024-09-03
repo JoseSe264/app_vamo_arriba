@@ -1,0 +1,40 @@
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #0a2e66;
+  
+    .logo {
+      margin-bottom: 20px;
+      width: 150px;
+      height: auto;
+    }
+  
+    .login-item {
+      margin-bottom: 10px;
+      width: 90%;
+      max-width: 400px;
+      --background: #ffffff;
+      border-radius: 8px;
+    }
+  
+    .input {
+      --padding-start: 20px;
+    }
+  
+    .forgot-password {
+      margin-bottom: 20px;
+      color: #ffffff;
+      font-size: 0.9em;
+    }
+  
+    ion-button {
+      margin-top: 10px;
+      width: 90%;
+      max-width: 400px;
+      --border-radius: 20px;
+    }
+  }
+  
