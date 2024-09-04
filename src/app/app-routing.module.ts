@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'index',
     loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule)
   },
+  {
+    path: 'inventario-casa',
+    loadChildren: () => import('./pages/inventario-casa/inventario-casa.module').then( m => m.InventarioCasaPageModule)
+  },
 
 ];
 
