@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Listas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Formulario para agregar nuevas listas -->
+  <ion-item>
+    <ion-input placeholder="Nombre de la lista" [(ngModel)]="nombreLista"></ion-input>
+    <ion-button (click)="agregarLista()" color="success">Agregar Lista</ion-button>
+  </ion-item>
+
+  <!-- Mostrar listas con ion-accordion -->
+  <ion-accordion-group>
+    <ion-accordion *ngFor="let lista of listas">
+      <ion-item slot="header">
+        <ion-label>{{ lista.nombre }}</ion-label>
+
+        <!-- Botones de editar y eliminar lista -->
+        <ion-button fill="clear" color="medium" (click)="editarLista(lista)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="eliminarLista(lista)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-list slot="content">
+        <!-- Formulario para agregar productos -->
+        <ion-item>
+          <ion-input placeholder="Nombre del producto" [(ngModel)]="nombreProducto"></ion-input>
+          <ion-button (click)="agregarProducto(lista)" color="success">Añadir</ion-button>
+        </ion-item>
+
+        <!-- Mostrar productos con botones de editar y eliminar -->
+        <ion-item *ngFor="let producto of lista.productos">
+          <ion-label>{{ producto }}</ion-label>
+
+          <!-- Botón para editar producto -->
+          <ion-button fill="clear" color="medium" (click)="editarProducto(lista, producto)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+
+          <!-- Botón para eliminar producto -->
+          <ion-button fill="clear" color="danger" (click)="eliminarProducto(lista, producto)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- Botones Cancelar y Listo -->
+  <div class="ion-text-center">
+    <ion-button color="light">Cancelar</ion-button>
+    <ion-button color="primary">Listo</ion-button>
+  </div>
+</ion-content>

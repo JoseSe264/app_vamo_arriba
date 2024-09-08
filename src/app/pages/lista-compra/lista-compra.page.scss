@@ -1,0 +1,77 @@
+// Fondo principal
+ion-content {
+    background-color: #0a59d8;
+  }
+  
+  // Estilo del título
+  ion-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  
+  // Estilos de los botones de "Cancelar" y "Listo"
+  .ion-text-center {
+    margin-top: 20px;
+  }
+  
+  ion-button {
+    margin: 10px;
+    width: 120px;
+    font-size: 18px;
+    border-radius: 12px;
+  }
+  
+  ion-button[color="light"] {
+    background-color: #00AEEF;   // Color para "Cancelar"
+    color: #FFFFFF;
+  }
+  
+  ion-button[color="primary"] {
+    background-color: #FFFFFF;   // Fondo blanco
+    color: #00AEEF;              // Texto azul claro
+    border: 2px solid #00AEEF;   // Borde azul claro
+  }
+  
+  // Estilo de los ítems (listas y productos)
+  ion-item {
+    background-color: #031C54;  // Fondo azul oscuro
+    color: #FFFFFF;             // Texto blanco
+    --border-color: transparent;
+  }
+  
+  ion-item ion-label {
+    font-size: 18px;
+    color: #FFFFFF;
+  }
+  
+  // CheckBox estilo blanco
+  ion-checkbox {
+    --background: #FFFFFF;
+    --checkmark-color: #031C54;
+  }
+  
+  ion-button.fill-clear {
+    color: #FFFFFF;
+  }
+  
+  // Estilos del accordion
+  ion-accordion-group {
+    --background: transparent;
+  }
+  
+  ion-accordion ion-item {
+    --background: transparent;
+    color: #FFFFFF;
+  }
+  
+  // Botones de acción dentro de listas
+  ion-button[color="medium"] {
+    color: #FFFFFF;
+  }
+  
+  ion-button[color="danger"] {
+    color: #FF4C4C;
+  }
+  
