@@ -1,10 +1,17 @@
-<ion-header>
+<!--
+<ion-header id="header">
   <ion-toolbar color="primary">
-    <ion-title>Listas</ion-title>
+    <ion-title>AppTiro listas</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> 
+-->
 
-<ion-content class="ion-padding">
+<ion-content id="contenido"class="ion-padding" fullscreen>
+
+  <ion-toolbar >
+    <ion-title>AppTiro Listas</ion-title>
+  </ion-toolbar>
+
   <!-- Formulario para agregar nuevas listas -->
   <ion-item>
     <ion-input placeholder="Nombre de la lista" [(ngModel)]="nombreLista"></ion-input>
@@ -12,7 +19,7 @@
   </ion-item>
 
   <!-- Mostrar listas con ion-accordion -->
-  <ion-accordion-group>
+  <ion-accordion-group id="accordion">
     <ion-accordion *ngFor="let lista of listas">
       <ion-item slot="header">
         <ion-label>{{ lista.nombre }}</ion-label>
@@ -52,8 +59,11 @@
   </ion-accordion-group>
 
   <!-- Botones Cancelar y Listo -->
+  
+</ion-content>
+<ion-footer>   
   <div class="ion-text-center">
     <ion-button color="light">Cancelar</ion-button>
     <ion-button color="primary">Listo</ion-button>
   </div>
-</ion-content>
+</ion-footer>

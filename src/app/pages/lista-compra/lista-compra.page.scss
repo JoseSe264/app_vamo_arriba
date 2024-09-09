@@ -1,9 +1,19 @@
 // Fondo principal
-ion-content {
-    background-color: #0a59d8;
-  }
+:host {
   
-  // Estilo del título
+  ion-content {
+    background-color: #031C54 !important;  
+    --background: #031C54 !important;     
+  }
+  ion-toolbar{
+    --background: #031C54;
+  }
+  ion-item{
+    background-color: #031C54;
+    --background: #3f578c;
+    color: #dc0707;             // Texto blanco
+    --border-color: transparent;
+  }
   ion-title {
     font-size: 24px;
     font-weight: bold;
@@ -24,14 +34,13 @@ ion-content {
   }
   
   ion-button[color="light"] {
-    background-color: #00AEEF;   // Color para "Cancelar"
+    background-color: #125a74;   // Color  "Cancelar"
     color: #FFFFFF;
   }
   
   ion-button[color="primary"] {
     background-color: #FFFFFF;   // Fondo blanco
     color: #00AEEF;              // Texto azul claro
-    border: 2px solid #00AEEF;   // Borde azul claro
   }
   
   // Estilo de los ítems (listas y productos)
@@ -74,4 +83,8 @@ ion-content {
   ion-button[color="danger"] {
     color: #FF4C4C;
   }
-  
+  ion-footer{
+    background-color: #031C54
+  }
+}
+
