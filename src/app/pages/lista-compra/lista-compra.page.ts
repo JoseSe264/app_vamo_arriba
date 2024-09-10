@@ -1,109 +1,108 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-lista-compra',
   templateUrl: './lista-compra.page.html',
   styleUrls: ['./lista-compra.page.scss'],
 })
 export class ListasPage {
+  listas: any[] = [];
+  nuevoProducto: string = '';
   nombreLista: string = '';
   nombreProducto: string = '';
-  
-  // Listas de compras
-  listas: Array<{ nombre: string, productos: string[] }> = [];
 
-  constructor(private alertController: AlertController) {}
+  constructor(private alertController: AlertController) {
+    this.cargarListas();
+  }
+  async agregarNuevaLista() {
+    const alert = await this.alertController.create({
+      header: 'Nueva Lista',
+      inputs: [
+        {
+          name: 'nombreLista',
+          type: 'text',
+          placeholder: 'Nombre de la lista'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Agregar lista cancelado');
+          }
+        }, {
+          text: 'Agregar',
+          handler: (data) => {
+            if (data.nombreLista.trim() !== '') {
+              this.listas.push({ nombre: data.nombreLista, productos: [] });
+              this.guardarListas();
+            } else {
+              console.log('Nombre de la lista vacío');
+            }
+          }
+        }
+      ]
+    });
 
-  // Agregar nueva lista
+    await alert.present();
+  }
   agregarLista() {
     if (this.nombreLista.trim().length > 0) {
       this.listas.push({ nombre: this.nombreLista, productos: [] });
       this.nombreLista = '';  // Limpiar el input
+    }}
+  limpiarLocalStorage() {
+    localStorage.clear();
+    this.listas = []; // Reiniciar la variable listas
+    console.log('lista limpiada');
+  }
+  cargarListas() {
+    const storedListas = localStorage.getItem('listas');
+    
+    if (!storedListas || storedListas === 'null' || storedListas === '[]') {
+      // Si no hay listas o están vacías, limpiar y agregar una lista predeterminada
+      localStorage.clear();
+      this.listas = [
+        { nombre: 'Lista de prueba', productos: ['Pan', 'Leche', 'Huevos'] }
+      ];
+    } else {
+      this.listas = JSON.parse(storedListas);
+    }
+    console.log(this.listas); // Para verificar si las listas están cargadas correctamente
+  }
+
+  agregarProducto(lista: any) {
+    if (this.nuevoProducto.trim() !== '') {
+      lista.productos.push(this.nuevoProducto);
+      this.nuevoProducto = '';
     }
   }
 
-  // Editar el nombre de la lista
-  async editarLista(lista: any) {
-    const alert = await this.alertController.create({
-      header: 'Editar lista',
-      inputs: [
-        {
-          name: 'nombre',
-          type: 'text',
-          value: lista.nombre,
-          placeholder: 'Nuevo nombre de la lista'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            if (data.nombre.trim()) {
-              lista.nombre = data.nombre;
-            }
-          }
-        }
-      ]
-    });
-    await alert.present();
+  eliminarProducto(lista: any, producto: string) {
+    const index = lista.productos.indexOf(producto);
+    if (index > -1) {
+      lista.productos.splice(index, 1);
+    }
   }
 
-  // Eliminar lista
+  editarLista(lista: any) {
+    console.log('Editar lista', lista);
+  }
+
   eliminarLista(lista: any) {
     this.listas = this.listas.filter(l => l !== lista);
   }
 
-  // Agregar producto a la lista seleccionada
-  agregarProducto(lista: any) {
-    if (this.nombreProducto.trim().length > 0) {
-      lista.productos.push(this.nombreProducto);
-      this.nombreProducto = '';  // Limpiar el input
-    }
+  guardarListas() {
+    // Guardar listas en localStorage
+    localStorage.setItem('listas', JSON.stringify(this.listas));
+    console.log('Listas guardadas:', this.listas);
   }
 
-  // Editar producto de  lista
-  async editarProducto(lista: any, producto: string) {
-    const alert = await this.alertController.create({
-      header: 'Editar producto',
-      inputs: [
-        {
-          name: 'nombre',
-          type: 'text',
-          value: producto,
-          placeholder: 'Nuevo nombre del producto'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Guardar',
-          handler: (data) => {
-            if (data.nombre.trim()) {
-              const index = lista.productos.indexOf(producto);
-              if (index > -1) {
-                lista.productos[index] = data.nombre;
-              }
-            }
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-  // Eliminar producto
-  eliminarProducto(lista: any, producto: string) {
-    const index = lista.productos.indexOf(producto);
-    if (index > -1) {
-      lista.productos.splice(index, 1);  // Elimina el producto del  índice 
-    }
+  cancelar() {
+    console.log('Acción de cancelar');
   }
 }

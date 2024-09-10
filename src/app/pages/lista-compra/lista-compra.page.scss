@@ -1,6 +1,8 @@
 // Fondo principal
 :host {
-  
+  ion-icon{
+    color:#FFFFFF;
+  }
   ion-content {
     background-color: #031C54 !important;  
     --background: #031C54 !important;     
@@ -25,7 +27,10 @@
   .ion-text-center {
     margin-top: 20px;
   }
-  
+  ion-button[id="botton_agregar"] {
+    background-color: #FFFFFF;   // Fondo blanco
+    color: #00AEEF;              // Texto azul claro
+  }
   ion-button {
     margin: 10px;
     width: 120px;
@@ -45,7 +50,7 @@
   
   // Estilo de los ítems (listas y productos)
   ion-item {
-    background-color: #031C54;  // Fondo azul oscuro
+    background-color: #193f92;  // Fondo de listas
     color: #FFFFFF;             // Texto blanco
     --border-color: transparent;
   }
@@ -59,10 +64,6 @@
   ion-checkbox {
     --background: #FFFFFF;
     --checkmark-color: #031C54;
-  }
-  
-  ion-button.fill-clear {
-    color: #FFFFFF;
   }
   
   // Estilos del accordion
