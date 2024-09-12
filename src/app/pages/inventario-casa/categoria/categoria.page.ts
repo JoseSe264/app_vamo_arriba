@@ -1,13 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild , OnInit} from '@angular/core';
 import { NavController } from '@ionic/angular';
+<<<<<<< HEAD
 import { Product } from 'src/app/models/product.model';
+=======
+import { IonAccordionGroup } from '@ionic/angular';
+import { Product } from 'src/app/models/product.model';
+
+>>>>>>> d723680ff25183ffc0257ebf5d7263fba957441f
 
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.page.html',
   styleUrls: ['./categoria.page.scss'],
 })
+
 export class CategoriaPage implements OnInit {
+  @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;
+  isAccordionExpanded = false;
 
   recentProducts: Product[] = [
     {
@@ -30,30 +39,34 @@ export class CategoriaPage implements OnInit {
     }
   ];
 
-
-
-
-
-  constructor(private navCtrl: NavController ) { }
+  constructor(private navCtrl: NavController) {}
 
   ngOnInit() {
-      
-  console.log('')
-
+    console.log('Componente categoría inicializado');
   }
 
-  navigateTocategoria(){
+  toggleAccordion() {
+    if (this.accordionGroup) {
+      this.isAccordionExpanded = !this.isAccordionExpanded;
+      this.accordionGroup.value = this.isAccordionExpanded
+        ? ['Frescos', 'No Perecederos', 'Bebidas']
+        : [];
+    }
+  }
+
+  navigateTocategoria() {
     this.navCtrl.navigateForward('/inventario-casa/categoria');
   }
 
-  navigateToproducto(){
+  navigateToproducto() {
     this.navCtrl.navigateForward('/inventario-casa/producto');
   }
-  
 
-  navigateToproductoEdit(){
-
+  navigateToproductoEdit() {
     this.navCtrl.navigateForward('/inventario-casa/producto-edit');
   }
 
+  navigateTologin() {
+    this.navCtrl.navigateForward('/src/app/pages/login');
+  }
 }

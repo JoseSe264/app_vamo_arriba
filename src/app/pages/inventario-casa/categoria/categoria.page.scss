@@ -3,11 +3,13 @@
     margin-top: 20px;
 
     h1 {
+        text-align: center;
         font-size: 2.5rem; // He cambiado "px" por "rem" para que sea más razonable el tamaño del texto
         font-weight: bold;
     }
 
     p {
+        text-align: center;
         font-size: 1.2rem;
         color: var(--ion-color-medium);
     }
@@ -25,6 +27,9 @@
     .hero {
         margin-top: 50px;
     }
+
+
+    
 }
 
 .titulo{

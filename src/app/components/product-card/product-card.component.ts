@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from 'src/app/models/product.model';
+import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product-card',
@@ -7,7 +10,7 @@ import { Product } from 'src/app/models/product.model';
   styleUrls: ['./product-card.component.scss'],
 })
 export class ProductCardComponent  implements OnInit {
-  @input() product?: Product ; // Recibe un objeto Product como entrada
+  @Input() product?: Product ; // Recibe un objeto Product como entrada
 
 
   constructor() { }

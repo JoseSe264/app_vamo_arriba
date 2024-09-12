@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core'; // Importación de Output y EventEmitter
+
 
 @Component({
   selector: 'app-search-bar',

@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
+import { SharedModule } from 'src/app/components/shared/shared.module';
 import { CategoriaPageRoutingModule } from './categoria-routing.module';
-
 import { CategoriaPage } from './categoria.page';
 
 @NgModule({
@@ -13,7 +11,8 @@ import { CategoriaPage } from './categoria.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CategoriaPageRoutingModule
+    CategoriaPageRoutingModule,
+    SharedModule
   ],
   declarations: [CategoriaPage]
 })

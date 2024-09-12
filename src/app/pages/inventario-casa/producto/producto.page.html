@@ -1,13 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>producto</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>AppTiro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">producto</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div>
+    <h1>Detalle Producto</h1>
+ 
+  </div>
+
+
+
+  <div class="actions">
+    <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
+      Categorias
+    </ion-button>
+    <ion-button expand="block" color="primary" (click)="navigateToproducto()">
+      Producto
+    </ion-button>
+    <ion-button expand="block" color="primary" (click)="navigateToproductoEdit()">
+      Editar Producto
+    </ion-button>
+    <ion-button expand="block" color="primary" (click)="navigateTologin()">
+      login
+    </ion-button>
+  </div>
 </ion-content>
