@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { IonAccordionGroup } from '@ionic/angular';
-import { Product } from 'src/app/models/product.model';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NavController, NavParams } from '@ionic/angular';
+import { Product } from 'src/app/models/product.model'; // Ajusta la ruta según sea necesario
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-producto-edit',
@@ -9,33 +10,52 @@ import { Product } from 'src/app/models/product.model';
   styleUrls: ['./producto-edit.page.scss'],
 })
 export class ProductoEditPage implements OnInit {
-  @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;
-  isAccordionExpanded = false;
+  productForm: FormGroup;
+  
 
-  recentProducts: Product[] = [
-    //... definición de productos
-  ];
-
-  constructor(private navCtrl: NavController) { }
+  constructor(
+    private fb: FormBuilder,
+    private navCtrl: NavController,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.productForm = this.fb.group({
+      nombre: ['', Validators.required],
+      descripcion: [''],
+      cantidad: [0, Validators.required],
+      categoria: ['', Validators.required],
+      precio: [0, Validators.required],
+      status: ['Disponible', Validators.required],
+      imagenUrl: ['']
+    });
+  }
 
   ngOnInit() {
-    console.log('Componente ProductoEditPage inicializado');
-
+    this.productForm = this.fb.group({
+      // Define los controles del formulario aquí
+      nombre: [''],
+      descripcion: [''],
+      cantidad: [''],
+      categoria: [''],
+      precio: [''],
+      status: ['']
+    });
   }
 
-  navigateTocategoria() {
-    this.navCtrl.navigateForward('/inventario-casa/categoria');
+
+  onSubmit() {
+    if (this.productForm.valid) {
+      // Aquí puedes enviar los datos al servidor o hacer alguna otra acción
+      console.log('Producto guardado:', this.productForm.value);
+      this.navCtrl.navigateBack('/inventario-casa/producto'); // Regresa a la lista de productos
+    }
   }
 
-  navigateToproducto() {
-    this.navCtrl.navigateForward('/inventario-casa/producto');
-  }
-
-  navigateToproductoEdit() {
-    this.navCtrl.navigateForward('/inventario-casa/producto-edit');
-  }
-
-  navigateTologin() {
-    this.navCtrl.navigateForward('/src/app/pages/login/login');
+  saveProduct() {
+    if (this.productForm.valid) {
+      // Guardar los datos del producto
+      console.log('Producto guardado:', this.productForm.value);
+      this.navCtrl.navigateBack('/inventario-casa/producto'); // Regresa a la lista de productos
+    }
   }
 }

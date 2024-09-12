@@ -4,79 +4,49 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
+  <ion-list>
+    <ion-item *ngFor="let categoria of categorias">
+      <ion-label>{{ categoria.nombre }}</ion-label>
+      <ion-button color="primary" (click)="seleccionarCategoria(categoria)">Seleccionar</ion-button>
+    </ion-item>
+  </ion-list>
+  
+
+
   <div>
-<<<<<<< HEAD
     <h1 class="titulo"> Inventario </h1>
     <p class="descripcion">Escoge una Categoria</p>
-=======
-    <h1>Inventario</h1>
-    <p>Escoge una Categoria</p>
->>>>>>> d723680ff25183ffc0257ebf5d7263fba957441f
   </div>
-
-<ion-accordion-group expand="inset">      
-    <!-- Categoría 1: Frescos -->
-    <ion-accordion>
-      <ion-item slot="header">
-        <ion-label>Frescos</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
-          Frutas y Verduras
-        </ion-button>
-        <ion-button expand="block" color="primary" (click)="navigateToproducto()">
-          Carnes y Pescados
-        </ion-button>
-      </div>
-    </ion-accordion>
-
-    <!-- Categoría 2: No Perecederos -->
-    <ion-accordion>
-      <ion-item slot="header">
-        <ion-label>No Perecederos</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
-          Arroz y Pastas
-        </ion-button>
-        <ion-button expand="block" color="primary" (click)="navigateToproducto()">
-          Enlatados
-        </ion-button>
-      </div>
-    </ion-accordion>
-
-    <!-- Categoría 3: Bebidas -->
-    <ion-accordion>
-      <ion-item slot="header">
-        <ion-label>Bebidas</ion-label>
-      </ion-item>
-      <div class="ion-padding" slot="content">
-        <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
-          Jugos y Refrescos
-        </ion-button>
-        <ion-button expand="block" color="primary" (click)="navigateToproducto()">
-          Bebidas Alcohólicas
-        </ion-button>
-      </div>
-    </ion-accordion>
-  </ion-accordion-group>
 
   <div class="actions">
     <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
-      Categorias
+      Categoria1
     </ion-button>
     <ion-button expand="block" color="primary" (click)="navigateToproducto()">
       Producto
     </ion-button>
     <ion-button expand="block" color="primary" (click)="navigateToproductoEdit()">
-      Editar Producto
+      Categoria3
     </ion-button>
-    <ion-button expand="block" color="primary" (click)="navigateTologin()">
-      login
-    </ion-button>
+  <!-- Botón para añadir nueva categoría -->
   </div>
+  <ion-button expand="full" color="success" (click)="anadirCategoria()">
+    Añadir Categoría
+  </ion-button>
+  
   
 
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/inicio"></ion-back-button> <!-- Botón para volver a la pantalla de inicio -->
+      </ion-buttons>
+      <ion-title>Categorías</ion-title>
+    </ion-toolbar>
+  </ion-header>
   
+
+
 </ion-content>

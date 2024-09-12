@@ -1,10 +1,10 @@
 export interface Product {
-    id?: string;
-    title: string;
-    description: string;
-    imageUrl: string;
-    status: 'Reportado' | 'Encontrado'  | 'Validado' | 'Entregado';
-    location?: string;
-    dateReported: Date;
-  }
-  
+  id?: string;
+  nombre: string;
+  descripcion: string;
+  cantidad: number;
+  categoria: string;
+  precio: number;
+  status: 'Disponible' | 'Bajo Stock' | 'Agotado';
+  imagenUrl?: string;  // Opcional
+}

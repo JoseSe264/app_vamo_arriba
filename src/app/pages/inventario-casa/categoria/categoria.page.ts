@@ -1,72 +1,55 @@
-import { Component, ViewChild , OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core'; 
 import { NavController } from '@ionic/angular';
-<<<<<<< HEAD
 import { Product } from 'src/app/models/product.model';
-=======
-import { IonAccordionGroup } from '@ionic/angular';
-import { Product } from 'src/app/models/product.model';
-
->>>>>>> d723680ff25183ffc0257ebf5d7263fba957441f
 
 @Component({
   selector: 'app-categoria',
   templateUrl: './categoria.page.html',
   styleUrls: ['./categoria.page.scss'],
 })
-
 export class CategoriaPage implements OnInit {
-  @ViewChild('accordionGroup') accordionGroup!: IonAccordionGroup;
-  isAccordionExpanded = false;
 
-  recentProducts: Product[] = [
-    {
-      id: '1',
-      title: 'iPhone 14',
-      description: 'Teléfono encontrado en el primer piso cerca de la entrada principal',
-      imageUrl: 'https://d1aqw5mz0wngqe.cloudfront.net/images/spree/images/2123123/attachments/large/Apple_iPhone_14_Midnight_1A.jpg?1678205819',
-      status: 'Encontrado',
-      location: 'Piso 1',
-      dateReported: new Date(),
-    },
-    {
-      id: '2',
-      title: 'Mochila Negra',
-      description: 'Mochila negra perdida en el laboratorio de computación',
-      imageUrl: 'https://saxoline.cl/cdn/shop/files/be80f11798a3621a23baa2c2ef8ad8cba04f77fdad9add5abcf048dce2a187ac_2000x.jpg?v=1687469550',
-      status: 'Reportado',
-      location: 'LPC10+1',
-      dateReported: new Date(),
-    }
+  categorias = [
+    { id: 1, nombre: 'No Refrigerado' },
+    { id: 2, nombre: 'Refrigerados' },
+    { id: 3, nombre: 'Congelados' }
+    // Agrega más categorías según sea necesario
   ];
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController) { }
 
   ngOnInit() {
-    console.log('Componente categoría inicializado');
+    console.log('Pantalla de Categorías cargada');
   }
 
-  toggleAccordion() {
-    if (this.accordionGroup) {
-      this.isAccordionExpanded = !this.isAccordionExpanded;
-      this.accordionGroup.value = this.isAccordionExpanded
-        ? ['Frescos', 'No Perecederos', 'Bebidas']
-        : [];
-    }
+  // Función para seleccionar una categoría y mostrar su información en la consola
+  seleccionarCategoria(categoria: { id: number, nombre: string }) {
+    console.log('Categoría seleccionada:', categoria.nombre);
+    // Aquí puedes implementar la lógica para redirigir a una página de productos relacionados
+    // Por ejemplo: this.navCtrl.navigateForward(`/productos/${categoria.id}`);
   }
 
-  navigateTocategoria() {
+  // Navegar a la pantalla para añadir una nueva categoría
+  anadirCategoria() {
+    this.navCtrl.navigateForward('/inventario-casa/nueva-categoria');
+  }
+  
+
+  // Navegación entre pantallas
+  navigateTocategoria(){
     this.navCtrl.navigateForward('/inventario-casa/categoria');
   }
 
-  navigateToproducto() {
+  navigateToproducto(){
     this.navCtrl.navigateForward('/inventario-casa/producto');
   }
-
-  navigateToproductoEdit() {
+  
+  navigateToproductoEdit(){
     this.navCtrl.navigateForward('/inventario-casa/producto-edit');
   }
 
-  navigateTologin() {
-    this.navCtrl.navigateForward('/src/app/pages/login');
+  // Navegar a la pantalla de inicio
+  navigateToInicio() {
+    this.navCtrl.navigateBack('/inicio');
   }
 }
