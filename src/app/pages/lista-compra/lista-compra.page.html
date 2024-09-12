@@ -1,4 +1,4 @@
-<ion-header id="header">
+<ion-header >
   <ion-toolbar color="primary">
     <ion-title>AppTiro Listas</ion-title>
   </ion-toolbar>
@@ -41,22 +41,22 @@
     </ion-button>
 </ion-content>
 
+
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button color="light" (click)="cancelar()">
+      <ion-button (click)="cancelar()">
         <ion-icon slot="start" name="close-outline"></ion-icon>
         Cancelar
       </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
+    
 
-      <ion-button color="primary" (click)="guardarListas()">
+      <ion-button (click)="guardarListas()">
         <ion-icon slot="start" name="checkmark-outline"></ion-icon>
         Listo
       </ion-button>
 
-      <ion-button color="primary" (click)="limpiarLocalStorage()">
+      <ion-button color="danger" (click)="limpiarLocalStorage()">
         Reiniciar listas
       </ion-button>
     </ion-buttons>

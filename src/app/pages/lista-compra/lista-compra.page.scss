@@ -1,91 +1,23 @@
-// Fondo principal
-:host {
-  ion-icon{
-    color:#FFFFFF;
-  }
-  ion-content {
-    background-color: #031C54 !important;  
-    --background: #031C54 !important;     
-  }
-  ion-toolbar{
-    --background: #031C54;
-  }
-  ion-item{
-    background-color: #031C54;
-    --background: #3f578c;
-    color: #dc0707;             // Texto blanco
-    --border-color: transparent;
-  }
-  ion-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #FFFFFF;
-    text-align: center;
-  }
-  
-  // Estilos de los botones de "Cancelar" y "Listo"
-  .ion-text-center {
-    margin-top: 20px;
-  }
-  ion-button[id="botton_agregar"] {
-    background-color: #FFFFFF;   // Fondo blanco
-    color: #00AEEF;              // Texto azul claro
-  }
-  ion-button {
-    margin: 10px;
-    width: 120px;
-    font-size: 18px;
-    border-radius: 12px;
-  }
-  
-  ion-button[color="light"] {
-    background-color: #125a74;   // Color  "Cancelar"
-    color: #FFFFFF;
-  }
-  
-  ion-button[color="primary"] {
-    background-color: #FFFFFF;   // Fondo blanco
-    color: #00AEEF;              // Texto azul claro
-  }
-  
-  // Estilo de los ítems (listas y productos)
-  ion-item {
-    background-color: #193f92;  // Fondo de listas
-    color: #FFFFFF;             // Texto blanco
-    --border-color: transparent;
-  }
-  
-  ion-item ion-label {
-    font-size: 18px;
-    color: #FFFFFF;
-  }
-  
-  // CheckBox estilo blanco
-  ion-checkbox {
-    --background: #FFFFFF;
-    --checkmark-color: #031C54;
-  }
-  
-  // Estilos del accordion
-  ion-accordion-group {
-    --background: transparent;
-  }
-  
-  ion-accordion ion-item {
-    --background: transparent;
-    color: #FFFFFF;
-  }
-  
-  // Botones de acción dentro de listas
-  ion-button[color="medium"] {
-    color: #FFFFFF;
-  }
-  
-  ion-button[color="danger"] {
-    color: #FF4C4C;
-  }
-  ion-footer{
-    background-color: #031C54
-  }
-}
 
+  ion-button{
+    color: #FFFFFF;
+    --border-color: transparent;
+    width: 90%;
+    max-width: 400px;
+    --border-radius: 20px;
+    
+  }
+  ion-accordion{
+    --background: transparent;
+    --color: #FFFFFF;
+    --border-color: transparent;
+    width: 90%;
+    max-width: 400px;
+    --border-radius: 20px;
+    --padding: 10px;
+    margin: 0;
+    --margin-bottom: 20px;
+    --box-shadow: none;
+    --background-color: #2365f4;
+ 
+  }
