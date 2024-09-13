@@ -27,8 +27,8 @@
       <div class="ion-padding" slot="content">
         <ion-list>
           <ion-item *ngFor="let categoria of categorias">
-            <ion-label>{{ categoria.nombre }}</ion-label>
-            <ion-button color="primary" (click)="seleccionarCategoria(categoria)">Seleccionar</ion-button>
+            <ion-label color="white">{{ categoria.nombre }}</ion-label>
+            <ion-button color="white" (click)="seleccionarCategoria(categoria)">Seleccionar</ion-button>
           </ion-item>
         </ion-list>
       </div>
