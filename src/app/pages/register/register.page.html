@@ -8,7 +8,7 @@
   
   <div class="signin-container">
    <form>
-    <form class="form-horizontal">
+    <form class="form-horizontal" [formGroup]="registerForm" (ngSubmit)="onRegister()">
     <img src="assets/logo.png" alt="Logo de AppTiro" class="logo">
    
   
