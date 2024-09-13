@@ -1,3 +1,108 @@
-.title{
+/* Configura la fuente global */
+:host {
+    font-family: 'Lonely Cake', cursive;
+    --background: #03045E; /* Fondo oscuro general para la página */
+  }
+  
+  /* Estilo para el encabezado */
+  ion-header {
+    --background: #03045E; /* Color de fondo del encabezado */
+    --color: #CAF0F8; /* Color del texto del encabezado */
+  }
+  
+  /* Estilo para la barra de herramientas */
+  ion-toolbar {
+    --background: #03045E; /* Fondo oscuro */
+    --color: #CAF0F8; /* Color claro del texto */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra sutil */
+  }
+  
+  /* Estilo para el título del encabezado */
+  ion-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #CAF0F8; /* Color claro para el título */
+  }
+  
+  /* Estilo para el contenido principal */
+  ion-content {
+    --background: #001F3F; /* Fondo oscuro para el contenido */
+    padding: 16px;
+  }
+  
+  /* Estilo para el título de la página */
+  .title {
+    font-size: 2.2rem;
+    color: #90E0EF; /* Color claro para el título de la página */
     text-align: center;
-}
+    margin-bottom: 16px;
+    transition: color 0.3s ease; /* Transición suave para el color */
+  }
+  
+  /* Estilo para la lista de productos */
+  ion-list {
+    --background: #001F3F; /* Fondo oscuro para la lista */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+    padding: 8px;
+  }
+  
+  /* Estilo para los elementos de la lista */
+  ion-item {
+    margin-bottom: 16px;
+    --background: #003366; /* Fondo oscuro para los ítems */
+    --color: #CAF0F8; /* Texto claro */
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+  }
+  
+  /* Efecto de hover para los ítems de la lista */
+  ion-item:hover {
+    --background: #00509E; /* Color de fondo al pasar el ratón */
+    transform: scale(1.02); /* Escalar ligeramente */
+  }
+  
+  /* Estilo para los labels dentro de los items */
+  ion-label {
+    color: #CAF0F8; /* Color claro para los labels */
+  }
+  
+  /* Estilo para los botones de acción */
+  .actions {
+    margin-top: 16px;
+  }
+  
+  .actions ion-button {
+    margin-bottom: 8px;
+    --background: #0077B6; /* Color de fondo de los botones de acción */
+    --color: #FFFFFF; /* Color del texto de los botones de acción */
+    transition: background-color 0.3s ease; /* Transición suave para el fondo */
+  }
+  
+  /* Efecto de hover para los botones de acción */
+  .actions ion-button:hover {
+    --background: #00509E; /* Color de fondo al pasar el ratón */
+  }
+  
+  /* Estilo para los botones principales */
+  ion-button {
+    font-size: 1rem;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --background: #0077B6; /* Color de fondo por defecto */
+    --color: #FFFFFF; /* Color del texto por defecto */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+  }
+  
+  /* Estilo para el botón de añadir producto */
+  ion-button[color="success"] {
+    margin-top: 16px;
+    --background: #00B4D8; /* Color de fondo para el botón de añadir producto */
+    --color: #FFFFFF; /* Color del texto para el botón de añadir producto */
+  }
+  
+  /* Efecto de hover para el botón de añadir producto */
+  ion-button[color="success"]:hover {
+    --background: #0096D6; /* Color de fondo al pasar el ratón */
+  }
+  

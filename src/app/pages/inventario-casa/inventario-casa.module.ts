@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { InventarioCasaPageRoutingModule } from './inventario-casa-routing.module';
 
 import { InventarioCasaPage } from './inventario-casa.page';
+import { PrincipalPageRoutingModule } from './principal/principal-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InventarioCasaPageRoutingModule
+    InventarioCasaPageRoutingModule,
+    PrincipalPageRoutingModule
   ],
   declarations: [InventarioCasaPage]
 })

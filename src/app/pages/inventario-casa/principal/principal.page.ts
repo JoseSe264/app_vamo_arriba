@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-principal',
@@ -8,32 +10,45 @@ import { NavController } from '@ionic/angular';
 })
 export class PrincipalPage implements OnInit {
 
+
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false
+    },
+    loop: true,
+    pagination: {
+      clickable: true
+    }
+  };
+
   constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  // Navegar a una categoría específica
+
+
+
+
   navigateToCategoria(categoria: string) {
-    // Implementa la lógica para navegar a la página de la categoría seleccionada
-    // Por ejemplo, podrías usar una ruta específica o un parámetro para la navegación
     this.navCtrl.navigateForward(`/categoria/${categoria}`);
   }
-  navigateToproducto(){
+
+  navigateToproducto() {
     this.navCtrl.navigateForward('/inventario-casa/producto');
   }
-  
-  navigateToproductoEdit(){
+
+  navigateToproductoEdit() {
     this.navCtrl.navigateForward('/inventario-casa/producto-edit');
   }
 
-  // Navegar a la página de añadir nueva categoría
   addNewCategory() {
-    // Implementa la lógica para navegar a la página de añadir nueva categoría
     this.navCtrl.navigateForward('/add-category');
   }
-  navigateTocategoria(){
+
+  navigateTocategoria() {
     this.navCtrl.navigateForward('/inventario-casa/categoria');
   }
 }
-
