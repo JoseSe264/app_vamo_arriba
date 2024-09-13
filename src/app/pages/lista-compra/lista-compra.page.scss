@@ -1,31 +1,21 @@
   ion-content{
-    --background: blue;
-  
+    --background: blue; //fondo de
   }
-  ion-accordion{
-    --background: transparent;
-    --color: #FFFFFF;
-    --border-color: transparent;
-    width: 90%;
-    max-width: 400px;
-    --border-radius: 20px;
-    --padding: 10px;
-    margin: 0;
-    --margin-bottom: 20px;
-    --box-shadow: none;
-    --background-color: #2365f4; 
+  ion-input{
+    --background: #138ac2;
+    --color: #ffffff;
   }
-
   ion-icon{
     color:#FFFFFF;
   }
+  
   ion-header {
-    ion-toolbar {
+    ion-toolbar{
       --background: #00147e; // Fondo azul oscuro
       --color: #ffffff; // Texto blanco
-  
+    
       ion-title {
-        font-size: 2rem; // Título grande
+        font-size: 2rem; 
         font-weight: bold;
         text-align: center; // Centrar el título
       }
@@ -36,16 +26,11 @@
     background-color: #00147e; // Fondo azul oscuro
     padding: 20px;
   
-    ion-list {
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
-  
       ion-item {
         --border-color: transparent;
         --padding-start: 10px;
         --padding-end: 10px;
-        --background: #00147e; // Fondo azul oscuro para los items
+        --background: #138ac2;
         --color: #ffffff; // Texto blanco
         border-bottom: 1px solid #ffffff; // Líneas blancas divisoras
   
@@ -63,16 +48,20 @@
           }
         }
       }
-    }
+    
   
     #botton_agregar {
       margin-top: 15px;
       --background: #2365f4;
-      --color: #ffffff;
+      color: #ffffff;
       border-radius: 20px;
       padding: 10px;
       width: 100%;
       max-width: 400px;
+    }
+    #icon_plus{
+      margin-top: 15px;
+      color: black !important;
     }
   }
   
@@ -81,23 +70,25 @@
       --background: #00147e;
       display: flex;
       justify-content: space-between;
-  
-      ion-button {
-        --background: #ffffff; // Fondo blanco para los botones del footer
-        --color: #00147e; // Texto azul
-  
-        &.cancelar {
-          --background: #00a3e1; // Fondo azul claro para "Cancelar"
+      ion-buttons {
+        margin-top: 15px;
+
+
+        ion-button {
+        background: #ffffff; // Fondo blanco para los botones del footer
+        color: #00147e; // Texto azul
+        border-radius: 10px;
         }
-  
-        &:hover {
-          opacity: 0.8; // Ligeramente más oscuro al pasar el mouse
+
+        #icon_load_button{
+          color: black;
+         
         }
-  
-        ion-icon {
-          --color: #00147e;
-          margin-right: 5px;
+        #button_bottom{
+          --background: black;
         }
+     
+      
       }
     }
   }

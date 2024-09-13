@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-lista-compra',
@@ -12,8 +15,10 @@ export class ListasPage {
   nombreLista: string = '';
   nombreProducto: string = '';
 
-  constructor(private alertController: AlertController) {
+  constructor(    private navCtrl: NavController
+    ,private alertController: AlertController) {
     this.cargarListas();
+    
   }
   async agregarNuevaLista() {
     const alert = await this.alertController.create({
@@ -94,15 +99,21 @@ export class ListasPage {
 
   eliminarLista(lista: any) {
     this.listas = this.listas.filter(l => l !== lista);
+    alert('lista eliminada');
   }
 
   guardarListas() {
     // Guardar listas en localStorage
     localStorage.setItem('listas', JSON.stringify(this.listas));
+    alert('listas guardadas con exito');
     console.log('Listas guardadas:', this.listas);
   }
 
   cancelar() {
+    // agregar la logica de cancelar
     console.log('Acción de cancelar');
+  }
+  volver() {
+    this.navCtrl.back();
   }
 }
