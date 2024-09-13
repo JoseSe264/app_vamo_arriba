@@ -1,40 +1,59 @@
-.login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: #0a2e66;
-  
-    .logo {
-      margin-bottom: 20px;
-      width: 150px;
-      height: auto;
-    }
-  
-    .login-item {
-      margin-bottom: 10px;
-      width: 90%;
-      max-width: 400px;
-      --background: #ffffff;
-      border-radius: 8px;
-    }
-  
-    .input {
-      --padding-start: 20px;
-    }
-  
-    .forgot-password {
-      margin-bottom: 20px;
-      color: #ffffff;
-      font-size: 0.9em;
-    }
-  
-    ion-button {
-      margin-top: 10px;
-      width: 90%;
-      max-width: 400px;
-      --border-radius: 20px;
-    }
-  }
-  
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #05050c !important;
+  color: white;
+}
+
+.login-card{
+  min-width: 85%;
+  border-radius: 50px;
+  background-color: #0077b6;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+ion-input {
+  margin-bottom: 15px;
+  text-indent: 20px;
+  background-color: white;
+  border-radius: 50px;
+  color:#03045e;
+  border: none;
+}
+
+.container-login{
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+ion-card-content{
+  padding-top:50px;
+}
+
+.forgot-password {
+  text-align: right;
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin-bottom: 15px;
+}
+
+.login-button {
+  margin-bottom: 20px;
+}
+
+.signup-button {
+  width: 80%;
+}
