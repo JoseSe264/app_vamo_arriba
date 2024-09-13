@@ -1,0 +1,47 @@
+.hero {
+    text-align: center;
+    margin-top: 20px;
+
+    h1 {
+        text-align: center;
+        font-size: 2.5rem; // He cambiado "px" por "rem" para que sea más razonable el tamaño del texto
+        font-weight: bold;
+    }
+
+    p {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--ion-color-medium);
+    }
+}
+
+.actions {
+    margin: 20px;
+
+    ion-button {
+        margin-bottom: 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .hero {
+        margin-top: 50px;
+    }
+
+
+    
+}
+
+.titulo{
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'LonelyCake';
+    color: darkblue;
+}
+
+.descripcion{
+    font-size: 1.6rem;
+    text-align: center;
+
+}

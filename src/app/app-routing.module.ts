@@ -28,6 +28,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule)
   },
   {
+    path: 'inventario-casa',
+    loadChildren: () => import('./pages/inventario-casa/inventario-casa.module').then( m => m.InventarioCasaPageModule)
+  },
+  {
     path: 'lista-compra',
     loadChildren: () => import('./pages/lista-compra/lista-compra.module').then( m => m.ListaCompraPageModule)
   },

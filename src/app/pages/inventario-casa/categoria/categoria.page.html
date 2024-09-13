@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>AppTiro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let categoria of categorias">
+      <ion-label>{{ categoria.nombre }}</ion-label>
+      <ion-button color="primary" (click)="seleccionarCategoria(categoria)">Seleccionar</ion-button>
+    </ion-item>
+  </ion-list>
+  
+
+
+  <div>
+    <h1 class="titulo"> Inventario </h1>
+    <p class="descripcion">Escoge una Categoria</p>
+  </div>
+
+  <div class="actions">
+    <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
+      Categoria1
+    </ion-button>
+    <ion-button expand="block" color="primary" (click)="navigateToproducto()">
+      Producto
+    </ion-button>
+    <ion-button expand="block" color="primary" (click)="navigateToproductoEdit()">
+      Categoria3
+    </ion-button>
+  <!-- Botón para añadir nueva categoría -->
+  </div>
+  <ion-button expand="full" color="success" (click)="anadirCategoria()">
+    Añadir Categoría
+  </ion-button>
+  
+  
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/inicio"></ion-back-button> <!-- Botón para volver a la pantalla de inicio -->
+      </ion-buttons>
+      <ion-title>Categorías</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+
+
+</ion-content>

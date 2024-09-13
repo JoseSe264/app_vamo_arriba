@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="logo" >AppTiro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Encabezado -->
+  <div class="header-content">
+    <h1 class="titulo">Inventario</h1>
+    <p class="descripcion">Escoge una Categoría</p>
+  </div>
+
+  <!-- Barra de búsqueda -->
+  <ion-item>
+    <ion-searchbar placeholder="Buscar categorías"></ion-searchbar>
+  </ion-item>
+
+  <!-- Lista de categorías -->
+  <ion-list>
+    <ion-item>
+      <ion-button expand="full" (click)="navigateToCategoria('Categoria1')">
+        Categoría 1
+      </ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-button expand="full" (click)="navigateToCategoria('Categoria2')">
+        Categoría 2
+      </ion-button>
+    </ion-item>
+    <!-- Añade más categorías aquí -->
+  </ion-list>
+
+  <!-- Botón para añadir nueva categoría -->
+  <div class="add-category">
+    <ion-button expand="full" color="secondary" (click)="addNewCategory()">
+      Añadir Nueva Categoría
+    </ion-button>
+  </div>
+</ion-content>
