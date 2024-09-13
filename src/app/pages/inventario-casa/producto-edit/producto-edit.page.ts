@@ -22,9 +22,9 @@ export class ProductoEditPage implements OnInit {
     this.productForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: [''],
-      cantidad: [0, Validators.required],
+      cantidad: [0, [Validators.required, Validators.min(1)]],
       categoria: ['', Validators.required],
-      precio: [0, Validators.required],
+      precio: [0, [Validators.required, Validators.min(0.01)]],
       status: ['Disponible', Validators.required],
       imagenUrl: ['']
     });
