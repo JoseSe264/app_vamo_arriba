@@ -21,7 +21,7 @@ export class ProductoPage implements OnInit {
       categoria: 'No Refrigerado',
       precio: 1.50,
       status: 'Disponible',
-      imagenUrl: 'assets/images/leche.jpg'
+      imagenUrl: ''
     },
     {
       id: '2',

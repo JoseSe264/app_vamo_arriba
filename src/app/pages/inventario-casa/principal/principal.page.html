@@ -1,40 +1,37 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title class="logo" >AppTiro</ion-title>
-  </ion-toolbar>
+
+      <!-- Logo de AppTiro al lado del título -->
+  <ion-title class="imglogo">
+      <img src="assets/icon/car1.png" alt="Logo" class="logo-img" />
+  </ion-title>
+</ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Encabezado -->
+<ion-content  [fullscreen]="true">
+<div class="background-overlay"></div>
+
+  
   <div class="header-content">
-    <h1 class="titulo">Inventario</h1>
-    <p class="descripcion">Escoge una Categoría</p>
+    <h1 class="titulo">Inventario Principal</h1>
   </div>
 
   <!-- Barra de búsqueda -->
-  <ion-item>
-    <ion-searchbar placeholder="Buscar categorías"></ion-searchbar>
-  </ion-item>
+ 
 
-  <!-- Lista de categorías -->
-  <ion-list>
-    <ion-item>
-      <ion-button expand="full" (click)="navigateToCategoria('Categoria1')">
-        Categoría 1
-      </ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-button expand="full" (click)="navigateToCategoria('Categoria2')">
-        Categoría 2
-      </ion-button>
-    </ion-item>
-    <!-- Añade más categorías aquí -->
-  </ion-list>
+ 
 
   <!-- Botón para añadir nueva categoría -->
-  <div class="add-category">
-    <ion-button expand="full" color="secondary" (click)="addNewCategory()">
-      Añadir Nueva Categoría
-    </ion-button>
-  </div>
+  
 </ion-content>
+<div class="actions">
+  <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
+    Categorias
+  </ion-button>
+  <ion-button expand="block" color="primary" (click)="navigateToproducto()">
+    Producto
+  </ion-button>
+  <ion-button expand="block" color="primary" (click)="navigateToproductoEdit()">
+    Inicio
+  </ion-button>

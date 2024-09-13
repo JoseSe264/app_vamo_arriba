@@ -52,4 +52,8 @@ export class CategoriaPage implements OnInit {
   navigateToInicio() {
     this.navCtrl.navigateBack('/inicio');
   }
+
+  navigateToPrincipal(){
+    this.navCtrl.navigateForward('/inventario-casa/principal');
+  }
 }

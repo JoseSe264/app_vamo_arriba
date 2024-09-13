@@ -19,11 +19,21 @@ export class PrincipalPage implements OnInit {
     // Por ejemplo, podrías usar una ruta específica o un parámetro para la navegación
     this.navCtrl.navigateForward(`/categoria/${categoria}`);
   }
+  navigateToproducto(){
+    this.navCtrl.navigateForward('/inventario-casa/producto');
+  }
+  
+  navigateToproductoEdit(){
+    this.navCtrl.navigateForward('/inventario-casa/producto-edit');
+  }
 
   // Navegar a la página de añadir nueva categoría
   addNewCategory() {
     // Implementa la lógica para navegar a la página de añadir nueva categoría
     this.navCtrl.navigateForward('/add-category');
+  }
+  navigateTocategoria(){
+    this.navCtrl.navigateForward('/inventario-casa/categoria');
   }
 }
 
