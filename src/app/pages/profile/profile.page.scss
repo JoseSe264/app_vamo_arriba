@@ -1,0 +1,59 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    height: 100vh;
+    height: 100%;
+    background-color: #03045e;
+  
+    .profile-pic{
+      width: 150px;
+      border-radius: 50%;
+    }
+    .form-horizontal {
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #00549c;
+      border-radius: 20px;
+    }
+    .logo {
+      margin-bottom: 20px;
+      width: 150px;
+      height: auto;
+    }
+  
+    .signin-item {
+      margin-bottom: 10px;
+      width: 90%;
+      max-width: 400px;
+      --background: #ffffff;
+      border-radius: 8px;
+    }
+  
+    .input {
+      --padding-start: 20px;
+    }
+  
+  
+    ion-button {
+      margin-top: 10px;
+      width: 90%;
+      max-width: 400px;
+      --border-radius: 20px;
+    }
+    .ion-avatar {
+      border-radius: 4px;
+    }
+    .profile-item{
+      --border-radius: 10px;
+
+    }
+  }
+  
