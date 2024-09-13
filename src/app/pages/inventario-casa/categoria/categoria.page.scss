@@ -1,47 +1,102 @@
-.hero {
-    text-align: center;
-    margin-top: 20px;
-
-    h1 {
-        text-align: center;
-        font-size: 2.5rem; // He cambiado "px" por "rem" para que sea más razonable el tamaño del texto
-        font-weight: bold;
-    }
-
-    p {
-        text-align: center;
-        font-size: 1.2rem;
-        color: var(--ion-color-medium);
-    }
-}
-
-.actions {
-    margin: 20px;
-
-    ion-button {
-        margin-bottom: 15px;
-    }
-}
-
-@media (min-width: 768px) {
-    .hero {
-        margin-top: 50px;
-    }
-
-
-    
-}
-
-.titulo{
+/* Estilos generales para el contenedor */
+.ion-content {
+    background-color: #CAF0F8; /* Color de fondo */
+    padding: 0;
+  }
+  
+  /* Estilos para el header */
+  ion-header {
+    --background: #0077B6; /* Color de fondo del header */
+    --color: white; /* Color del texto en el header */
+    font-family: 'Lonely Cake', sans-serif; /* Fuente personalizada */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+  }
+  
+  ion-toolbar {
+    --background: #0077B6; /* Color de fondo de la toolbar */
+    --color: white; /* Color del texto en la toolbar */
+  }
+  
+  /* Estilos para el título principal */
+  .titulo {
     font-size: 2.2rem;
     font-weight: bold;
     text-align: center;
-    font-family: 'LonelyCake';
-    color: darkblue;
-}
-
-.descripcion{
+    font-family: 'Lonely Cake', sans-serif;
+    color: #03045E; /* Color principal */
+    margin-top: 20px;
+  }
+  
+  /* Estilos para el texto descriptivo */
+  .descripcion {
     font-size: 1.6rem;
     text-align: center;
-
-}
+    font-family: 'Lonely Cake', sans-serif;
+    color: #0077B6; /* Color secundario */
+    margin-top: 10px;
+  }
+  
+  /* Estilos para los botones de acción */
+  .actions {
+    margin: 20px;
+    
+    ion-button {
+      margin-bottom: 15px;
+      --background: #00B4D8; /* Color de fondo para los botones */
+      --color: white; /* Color del texto de los botones */
+      border-radius: 25px;
+      transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+      
+      &:hover {
+        --background: #0077B6; /* Color al pasar el mouse */
+        transform: scale(1.05); /* Aumentar ligeramente el tamaño del botón */
+      }
+    }
+  }
+  
+  /* Estilos para el acordeón */
+  ion-accordion-group {
+    --background: #90E0EF; /* Color de fondo del grupo de acordeones */
+    margin-top: 20px;
+  }
+  
+  ion-accordion {
+    --background: #FFFFFF; /* Color de fondo del acordeón */
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
+  }
+  
+  ion-item {
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
+  
+  ion-item ion-label {
+    color: #03045E; /* Color de texto de las etiquetas */
+  }
+  
+  /* Estilos para el buscador */
+  ion-searchbar {
+    --background: #FFFFFF; /* Color de fondo del buscador */
+    --color: #03045E; /* Color del texto del buscador */
+    --placeholder-color: #90E0EF; /* Color del placeholder */
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para el botón de añadir categoría */
+  ion-button.expand-full {
+    --background: #00B4D8;
+    --color: white;
+    margin: 20px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    
+    &:hover {
+      --background: #0077B6;
+      transform: scale(1.05);
+    }
+  }
+  

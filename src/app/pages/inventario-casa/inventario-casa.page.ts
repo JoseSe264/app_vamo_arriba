@@ -25,4 +25,9 @@ export class InventarioCasaPage implements OnInit {
   navigateToproductoEdit() {
     this.router.navigate(['/inventario-casa/productoEdit']);  // Navega a la página de Producto Editar
   }
+  navigateToPrincipal() {
+    this.router.navigate(['/inventario-casa/principal']);  // Navega a la página de Producto Editar
+  }
+
+
 }

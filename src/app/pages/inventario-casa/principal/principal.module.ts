@@ -13,8 +13,11 @@ import { PrincipalPage } from './principal.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    PrincipalPageRoutingModule
+    PrincipalPageRoutingModule,
+    
   ],
-  declarations: [PrincipalPage]
+  declarations: [PrincipalPage],
+  exports: [PrincipalPage]
+
 })
 export class PrincipalPageModule {}
