@@ -1,14 +1,40 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>AppTiro</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <h1>PAGINA DE REGISTRO DE USUARIO</h1>
+<ion-content class="ion-padding" fullscreen>
+  
+  <div class="signin-container">
+    <form>
+    <form class="form-horizontal">
+    <img src="assets/logo.png" alt="Logo de AppTiro" class="logo">
+   
+  
+    <ion-item lines="none" class="signin-item">
+      <ion-input type="text" placeholder=" Nombre: " class="input"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="signin-item">
+      <ion-input type="text" placeholder="Apellido: " class="input"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="signin-item">
+      <ion-input type="email" placeholder="email@dominio.com" class="input"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="signin-item">
+      <ion-input type="password input" placeholder="Contraseña" class="input"></ion-input>
+    </ion-item>
+    <ion-item lines="none" class="signin-item">
+      <ion-input type="password input" placeholder="Confirmar Contraseña" class="input"></ion-input>
+    </ion-item>
+    <ion-button expand="block" fill="outline" color="light">
+      Registrarme
+    </ion-button>
+    
+    </form>
+  </form>
+
+  
+
+</div>
 </ion-content>
