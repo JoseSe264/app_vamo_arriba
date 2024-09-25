@@ -28,7 +28,7 @@ export class IndexPage implements OnInit {
 
    // Funciones de navegación
    navigateToInventarioCasa() {
-    this.router.navigate(['/src/app/pages/inventario-casa']);  // Navega a la página de Categoría
+    this.router.navigate(['/inventario-casa']);  // Navega a la página de Categoría
   }
 
   
