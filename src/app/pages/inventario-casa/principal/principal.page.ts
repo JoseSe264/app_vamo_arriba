@@ -33,7 +33,7 @@ export class PrincipalPage implements OnInit {
 
 
   navigateToCategoria(categoria: string) {
-    this.navCtrl.navigateForward(`/categoria/${categoria}`);
+    this.navCtrl.navigateForward('/inventario/categoria');
   }
 
   navigateToproducto() {

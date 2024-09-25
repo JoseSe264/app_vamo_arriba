@@ -14,12 +14,11 @@ export class RegisterPage implements OnInit {
   RegisterForm!: FormGroup;
   
   constructor(
-    private formBuilder: FormBuilder,
-    private navCtrl: NavController,
-    private authService: AuthService
+    private formBuilder: FormBuilder,  // Inyección de FormBuilder
+    private navCtrl: NavController,     // Inyección de NavController
+    private authService: AuthService    // Inyección de AuthService
 
-  ) 
-
+  ) { }
   ngOnInit() {
     this.RegisterForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
