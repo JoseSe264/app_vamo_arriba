@@ -5,32 +5,32 @@
 </ion-header>
 
 <ion-content class="ion-padding" fullscreen>
-  
+
   <div class="signin-container">
-   <form>
-    <form class="form-horizontal" [formGroup]="registerForm" (ngSubmit)="onRegister()">
-    <img src="assets/logo.png" alt="Logo de AppTiro" class="logo">
-   
-  
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="text" placeholder="Nombre: " formControlName></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="text" placeholder="Apellido: " class="input"></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="email" placeholder="email@dominio.com" class="input"></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="password input" placeholder="Contraseña" class="input"></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="password input" placeholder="Confirmar Contraseña"></ion-input>
-    </ion-item>
-    <ion-button expand="block" fill="outline" color="light" >Registrarme</ion-button>
-    
+    <form>
+      <form class="form-horizontal" [formGroup]="RegisterForm" (ngSubmit)="onRegister()">
+        <img src="assets/logos/LoginLogo.png" alt="Logo de AppTiro" class="logo">
+
+
+        <ion-item lines="none" class="signin-item">
+          <ion-input type="text" placeholder="Nombre: " formControlName></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="signin-item">
+          <ion-input type="text" placeholder="Apellido: " class="input"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="signin-item">
+          <ion-input type="email" placeholder="email@dominio.com" class="input"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="signin-item">
+          <ion-input type="password input" placeholder="Contraseña" class="input"></ion-input>
+        </ion-item>
+        <ion-item lines="none" class="signin-item">
+          <ion-input type="password input" placeholder="Confirmar Contraseña"></ion-input>
+        </ion-item>
+        <ion-button expand="block" fill="outline" color="light">Registrarme</ion-button>
+
+      </form>
     </form>
-  </form>
 
   </div>
 
