@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,40 +16,43 @@ export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {
-    // Inicialización del formulario reactivo
+    private router: Router,
+    private authService: AuthService
+  ) { }
+  
+  
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  ngOnInit() {}
-
   async logOn() {
+    const { email, password } = this.loginForm.value;
+
     if (this.loginForm.valid) {
-      const email = this.loginForm.get('email')?.value;
-      const password = this.loginForm.get('password')?.value;
-      const usuario = email.split('@')[0];
+      this.authService.login(email, password)
+        .then(() => {
+          // Navegar a la página de inicio después de iniciar sesión
+          this.navCtrl.navigateForward('/home');
+        })
+        .catch((error) => {
+          console.log('Error al iniciar sesión', error);
+        });
 
+      // Aquí puedes añadir NavigationExtras si necesitas pasar datos adicionales
       const navigationExtras: NavigationExtras = {
-        state: {
-          usuario: usuario,
-          email: email,
-          password: password
-        }
+        queryParams: { email }
       };
-
-      // Navegar a la siguiente página con los datos del usuario
       this.router.navigate(['index'], navigationExtras);
+
     } else {
-      // Manejar caso donde el formulario no es válido
       console.error('Formulario inválido');
     }
   }
 
-  navigateToregister() {
+  navigateToRegister() {
     // Navega a la página de registro
     this.navCtrl.navigateForward('/register'); 
   }

@@ -1,23 +1,75 @@
 import { Injectable } from '@angular/core';
-import { profile } from '../models/profile.model';
+import { User } from 'src/app/models/user.models';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private users: profile[] = []; // Almacenará los usuarios registrados
 
-  constructor() { }
+  constructor(
+    private afAuth: AngularFireAuth,
+    private router: Router
+  ) { }
 
-  // Método para registrar un nuevo usuario
-  register(profile: profile): boolean {
-    // Verifica si el usuario ya está registrado
-    const userExists = this.users.some(user => user.email === profile.email); 
-    if (userExists) {
-      return false; // Retorna false si el usuario ya está registrado
-    }
+  // Crear usuario en Firebase
+  register(user: User): Promise<any> {
+    return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
+      .then((result) => {
+        console.log('Usuario creado exitosamente', result);
+        this.router.navigate(['/login']);
+      })
+      .catch((error) => {
+        console.log('Error al crear el usuario', error);
+        throw error;
+      });
+  }
 
-    this.users.push(profile); // Agrega el nuevo perfil al array
-    return true; // Retorna true si el registro fue exitoso
+  // Iniciar sesión con Firebase
+  login(email: string, password: string): Promise<any> {
+    return this.afAuth.signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log('Inicio sesión exitosamente', result);
+        this.router.navigate(['/index']);
+      })
+      .catch((error) => {
+        console.log('Error al iniciar sesión', error);
+        throw error;
+      });
+  }
+
+  // Cerrar sesión
+  logout(): Promise<any> {
+    return this.afAuth.signOut()
+      .then(() => {
+        console.log('Sesión cerrada exitosamente');
+        this.router.navigate(['/login']);
+      })
+      .catch((error) => {
+        console.log('Error al cerrar sesión', error);
+        throw error;
+      });
+  }
+
+  // Cambio de contraseña
+  resetPassword(email: string): Promise<any> {
+    return this.afAuth.sendPasswordResetEmail(email)
+      .then(() => {
+        console.log('Se envió un correo para restablecer la contraseña');
+        this.router.navigate(['/login']);
+      })
+      .catch((error) => {
+        console.log('Error al enviar correo para restablecer contraseña', error); // Eliminado "envio Unknown word."
+        throw error; // Lanzar el error para que pueda ser manejado en el componente
+      });
+  }
+
+  isLoggedIn(): boolean {
+    return this.afAuth.authState != null;
+  }
+
+  getCurrentUser(): Promise<any> {
+    return this.afAuth.currentUser;
   }
 }
