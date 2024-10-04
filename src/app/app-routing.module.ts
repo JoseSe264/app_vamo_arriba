@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'loader',
     pathMatch: 'full'
   },
   {
@@ -28,9 +28,26 @@ const routes: Routes = [
     loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'inventario-casa',
+    loadChildren: () => import('./pages/inventario-casa/inventario-casa.module').then( m => m.InventarioCasaPageModule)
+  },
+  {
     path: 'lista-compra',
     loadChildren: () => import('./pages/lista-compra/lista-compra.module').then( m => m.ListaCompraPageModule)
   },
+  {
+    path: 'loader',
+    loadChildren: () => import('./pages/loader/loader.module').then( m => m.LoaderPageModule)
+  },  {
+    path: 'not-found',
+    loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+
+
 ];
 
 @NgModule({

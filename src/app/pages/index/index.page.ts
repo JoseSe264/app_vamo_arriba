@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-index',
   templateUrl: './index.page.html',
@@ -7,9 +7,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexPage implements OnInit {
 
-  constructor() { }
+  email!: string;
+  password!: string;
+  usuario!: string;
+
+  constructor(
+    private router: Router
+  ) {
+    if (this.router.getCurrentNavigation()?.extras.state){
+      const datos = this.router.getCurrentNavigation()?.extras.state;
+      this.email = datos?.['email'];
+      this.password = datos?.['password'];
+      this.usuario = datos?.['usuario'];
+    }
+  }
 
   ngOnInit() {
   }
+
+
+   // Funciones de navegación
+   navigateToInventarioCasa() {
+    this.router.navigate(['/inventario-casa']);  // Navega a la página de Categoría
+  }
+
+  
 
 }
