@@ -1,0 +1,42 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="logo">AppTiro</ion-title>
+
+    <!-- Logo de AppTiro al lado del título -->
+    <ion-title class="imglogo">
+      <img src="assets/icon/car1.png" alt="Logo" class="logo-img" />
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" class="ion-content">
+  <div class="background-overlay"></div>
+
+  <div class="header-content">
+    <h1 class="titulo">Inventario Principal</h1>
+  </div>
+
+</ion-content>
+
+
+
+<div class="actions">
+  <ion-button expand="block" color="primary" (click)="navigateTocategoria()">
+    Categorías
+  </ion-button>
+  <ion-button expand="block" color="primary" (click)="navigateToproducto()">
+    Producto
+  </ion-button>
+  <ion-button expand="block" color="primary" routerLink="/index">
+    Inicio
+  </ion-button>
+</div>
+
+
+
+
+
+

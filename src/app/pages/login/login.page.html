@@ -1,33 +1,36 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>AppTiro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="container">
+    <div class="logo">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <img src="assets/logos/LoginLogo" alt="">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <ion-card class="login-card">
+      <ion-card-content>
+          <div class="container-login">
 
-<ion-content class="ion-padding" fullscreen>
-  <div class="login-container">
-    <img src="assets/logo.png" alt="Logo de AppTiro" class="logo">
+            <form [formGroup]="loginForm" (ngSubmit)="logOn()">
 
-    <form>
-      <ion-item lines="none" class="login-item">
-        <ion-input type="text" placeholder="Usuario" class="input"></ion-input>
-      </ion-item>
-      
-      <ion-item lines="none" class="login-item">
-        <ion-input type="password" placeholder="Contraseña" class="input"></ion-input>
-      </ion-item>
+              <ion-input type="text" placeholder="Correo electrónico" formControlName="email"></ion-input>
+              <ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
 
-      <div class="forgot-password">
-        <a href="#">¿Olvidaste tu contraseña?</a>
-      </div>
+              <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
-      <ion-button expand="block" type="submit" color="primary">
-        INGRESAR
-      </ion-button>
+              <ion-button expand="block" color="primary" class="login-button" (click)="logOn()">
+                Iniciar sesión
+              </ion-button>
 
-      <ion-button expand="block" fill="outline" color="light">
-        Registrarme
-      </ion-button>
-    </form>
+            </form>
+          </div>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-button expand="block" color="secondary"   class="signup-button" (click)="navigateToRegister()">
+      Registrarme
+    </ion-button>
   </div>
 </ion-content>

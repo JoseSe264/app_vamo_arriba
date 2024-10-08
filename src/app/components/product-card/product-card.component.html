@@ -1,0 +1,17 @@
+
+<ion-card>
+  <ion-img [src]="product?.imagenUrl" alt="{{ product?.nombre }}"></ion-img>
+
+  <ion-card-header>
+    <ion-card-title>{{ product?.nombre }}</ion-card-title>
+    <ion-note [color]="getStatusColor(product?.status)">{{ product?.status }}</ion-note>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p>{{ product?.descripcion }}</p>
+    <ion-text color="medium">
+      <small>{{ product?.precio }} - {{ product?.status| date:'shortDate' }}</small>
+    </ion-text>
+    <ion-button expand="full" color="primary">Ver Detalles</ion-button>
+  </ion-card-content>
+</ion-card>
