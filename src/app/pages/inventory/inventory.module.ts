@@ -2,18 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { InventoryPageRoutingModule } from './inventory-routing.module';
+
+import { InventoryPage } from './inventory.page';
 import { SharedModule } from 'src/app/components/shared/shared.module';
-import { CategoriaPageRoutingModule } from './categoria-routing.module';
-import { CategoriaPage } from './categoria.page';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     IonicModule,
-    CategoriaPageRoutingModule,
-    SharedModule
+    SharedModule,
+    InventoryPageRoutingModule,
   ],
-  declarations: [CategoriaPage]
+  declarations: [InventoryPage]
 })
-export class CategoriaPageModule {}
+export class InventoryPageModule {}

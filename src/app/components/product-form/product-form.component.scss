@@ -1,0 +1,92 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; 
+  height: 100vh; /* Utiliza solo 100vh */
+  background-color: #00549c;
+}
+
+.form-horizontal {
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #00549c;
+  border-radius: 20px;
+}
+
+.profile-item {
+  --border-radius: 10px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+ion-button {
+  margin-top: 10px;
+  width: 90%;
+  max-width: 400px;
+  --border-radius: 20px;
+  background-color: #007bff; /* Asegúrate de tener un color consistente */
+  color: white; /* Color del texto del botón */
+}
+
+.profile-item-date {
+  ion-label {
+      color: #4a90e2; /* Cambia el color del label */
+      font-weight: bold;
+  }
+
+  ion-datetime {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      color: #333;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      
+      &:focus {
+          border-color: #4a90e2;
+          background-color: #fff;
+      }
+  }
+}
+
+.custom-datetime {
+  width: 100%;
+  border-radius: 5px;
+  padding: 8px;
+  background-color: #eef;
+  text-align: center;
+
+  &:focus {
+      background-color: #fff;
+      border: 1px solid #4a90e2;
+  }
+}
+
+ion-card {
+  margin: 20px; /* Espaciado alrededor del card */
+}
+
+ion-card-title {
+  font-size: 1.5em; /* Tamaño de fuente para el título */
+  color: #03045e; /* Color del título */
+}
+
+ion-item {
+  margin-bottom: 15px; /* Espaciado entre los items */
+}
+
+.profile-container{
+
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+
+}
