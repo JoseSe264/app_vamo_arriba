@@ -1,67 +1,73 @@
-<ion-content [fullscreen]="true" class="ion-padding">
-  <div class="inventory-container">
-    <div class="logo">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12">
-            <p>Inventario</p>
-            <img src="assets/icon/inventory.png" alt="Login Logo">
-            <p>Inventario</p>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inventario</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-    <!-- Encabezado -->
-    <ion-header collapse="condense">
-      <ion-toolbar>
-        <ion-title size="large">Inventory</ion-title>
-      </ion-toolbar>
-    </ion-header>
+<ion-content>
+  <!-- Botón para mostrar el formulario de agregar/editar producto -->
+  <ion-button expand="full" (click)="toggleForm()"> 
+    {{ isEditing ? 'Editar Producto' : 'Añadir Producto' }} <!-- Muestra el texto adecuado -->
+  </ion-button>
 
-    <!-- Contenedor principal -->
+  <!-- Formulario para añadir/editar producto -->
+  <form *ngIf="showForm" [formGroup]="productForm" (ngSubmit)="saveProduct()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
 
-    <!-- Barra de búsqueda -->
-    <app-search-bar></app-search-bar>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input formControlName="descripcion"></ion-input>
+    </ion-item>
 
-    <!-- Separador visual -->
-    <ion-item-divider></ion-item-divider>
+    <ion-item>
+      <ion-label position="floating">Cantidad</ion-label>
+      <ion-input formControlName="cantidad" type="number"></ion-input>
+    </ion-item>
 
-    <!-- Botón agregar producto -->
-    <ion-button expand="full" (click)="toggleForm()">
-      {{ isFormHidden ? 'Añadir Producto' : 'Cancelar' }}
-    </ion-button>
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input formControlName="precio" type="number"></ion-input>
+    </ion-item>
 
-    <!-- Formulario para agregar un nuevo producto -->
-    <div *ngIf="!isFormHidden" class="product-form-container">
-      <app-product-form (productAdded)="addProduct($event)"></app-product-form>
-    </div>
+    <ion-item>
+      <ion-label position="floating">Categoría</ion-label>
+      <ion-select formControlName="categoria">
+        <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">
+          {{ categoria }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
 
-    <!-- Lista de productos -->
-    <ng-container *ngIf="(productos$ | async) as productos">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of productos">
-            <app-product-card [product]="product"></app-product-card>
+    <ion-item>
+      <ion-label position="floating">Fecha de Expiración</ion-label>
+      <ion-datetime formControlName="fechaExpiracion"></ion-datetime>
+    </ion-item>
 
-            <!-- Botones de acción (Editar y Borrar) -->
-            <div class="button-group">
-              <ion-button expand="block" color="secondary" (click)="editProduct(product)">Editar</ion-button>
-              <ion-button expand="block" color="danger" (click)="product.id ? removeProduct(product.id) : null">Borrar</ion-button>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ng-container>
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-select formControlName="status">
+        <ion-select-option value="Disponible">Disponible</ion-select-option>
+        <ion-select-option value="Agotado">Agotado</ion-select-option>
+      </ion-select>
+    </ion-item>
 
+    <ion-button expand="full" type="submit">{{ isEditing ? 'Actualizar Producto' : 'Guardar Producto' }}</ion-button>
+  </form>
 
-    <app-header-custom></app-header-custom>
-
-    <!-- Pie de página (opcional, puedes añadir enlaces o cualquier otra cosa aquí) -->
-    <ion-footer>
-      <ion-toolbar>
-        <ion-title>© Tu Compañía</ion-title>
-      </ion-toolbar>
-    </ion-footer>
-  </div>
+  <!-- Listado de productos -->
+  <ion-list>
+    <ion-item *ngFor="let product of products$ | async">
+      <ion-label>
+        <h2>{{ product.nombre }}</h2>
+        <p>{{ product.descripcion }}</p>
+        <p>Precio: {{ product.precio | currency }}</p>
+        <p>Cantidad: {{ product.cantidad }}</p>
+        <ion-button color="primary" (click)="editProduct(product)">Editar</ion-button>
+        <ion-button color="danger" (click)="removeProduct(product.id)">Eliminar</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

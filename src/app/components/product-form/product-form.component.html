@@ -1,87 +1,16 @@
-<ion-card>
-  <ion-card-header>
-    <ion-card-title>{{ productToEdit ? 'Editar Producto' : 'Agregar Producto' }}</ion-card-title>
-  </ion-card-header>
-
-  <ion-card-content class="profile-container">
-    <!-- Campo para el nombre del producto -->
-    <ion-item class="profile-item" [class.invalid]="!productForm.controls['nombre'].valid && productForm.controls['nombre'].touched">
-      <ion-label position="stacked">Nombre</ion-label>
-      <ion-input 
-        [(ngModel)]="productForm.controls['nombre'].value" 
-        name="nombre" 
-        required></ion-input>
-      <ion-note *ngIf="!productForm.controls['nombre'].valid && productForm.controls['nombre'].touched" color="danger">
-        El nombre es obligatorio.
-      </ion-note>
-    </ion-item>
-
-    <!-- Campo para la cantidad -->
-    <ion-item class="profile-item" [class.invalid]="!productForm.controls['cantidad'].valid && productForm.controls['cantidad'].touched">
-      <ion-label position="stacked">Cantidad</ion-label>
-      <ion-input 
-        type="number" 
-        [(ngModel)]="productForm.controls['cantidad'].value" 
-        name="cantidad" 
-        required min="1"></ion-input>
-      <ion-note *ngIf="!productForm.controls['cantidad'].valid && productForm.controls['cantidad'].touched" color="danger">
-        La cantidad debe ser mayor a 0.
-      </ion-note>
-    </ion-item>
-
-    <!-- Campo para la categoría -->
-    <ion-item class="profile-item">
-      <ion-label position="stacked">Categoría</ion-label>
-      <ion-input 
-        [(ngModel)]="productForm.controls['categoria'].value" 
-        name="categoria"></ion-input>
-    </ion-item>
-
-    <!-- Campo para la fecha de expiración -->
-    <ion-item class="profile-item" [class.invalid]="!productForm.controls['fechaExpiracion'].valid && productForm.controls['fechaExpiracion'].touched">
-      <ion-label position="stacked">Fecha de Expiración</ion-label>
-      <ion-input 
-        type="date" 
-        placeholder="Seleccionar fecha" 
-        [(ngModel)]="productForm.controls['fechaExpiracion'].value" 
-        required>
-      </ion-input>
-      <ion-note *ngIf="!productForm.controls['fechaExpiracion'].valid && productForm.controls['fechaExpiracion'].touched" color="danger">
-        La fecha de expiración es obligatoria.
-      </ion-note>
-    </ion-item>
-
-    <!-- Campo para el precio -->
-    <ion-item class="profile-item" [class.invalid]="!productForm.controls['precio'].valid && productForm.controls['precio'].touched">
-      <ion-label position="stacked">Precio</ion-label>
-      <ion-input 
-        type="number" 
-        [(ngModel)]="productForm.controls['precio'].value" 
-        name="precio" 
-        required min="0.01" step="0.01"></ion-input>
-      <ion-note *ngIf="!productForm.controls['precio'].valid && productForm.controls['precio'].touched" color="danger">
-        El precio debe ser mayor a 0.
-      </ion-note>
-    </ion-item>
-
-    <!-- Campo para la imagen del producto (subida de archivo) -->
-    <ion-item class="profile-item">
-      <ion-label position="stacked">Imagen del Producto</ion-label>
-      <input type="file" (change)="onFileSelected($event)" accept="image/*">
-    </ion-item>
-
-    <!-- Previsualización de la imagen seleccionada -->
-    <ion-item *ngIf="productForm.controls['imagenUrl'] && productForm.controls['imagenUrl'].value" class="profile-item">
-      <img [src]="productForm.controls['imagenUrl'].value" alt="Previsualización" 
-           style="max-width: 150px; max-height: 150px; width: auto; height: auto;">
-    </ion-item>
-    
-    <!-- Botón para agregar o actualizar el producto -->
-    <ion-button expand="full" class="profile-item" (click)="addOrUpdateProduct()" [disabled]="!isFormValid()">
-      {{ productToEdit ? 'Actualizar Producto' : 'Agregar Producto' }}
-    </ion-button>
-
-    <ion-toast [message]="toastMessage" [isOpen]="isToastOpen" (ionToastDidDismiss)="isToastOpen = false"></ion-toast>
-
-  </ion-card-content>
-</ion-card>
+<form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input formControlName="nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-input formControlName="descripcion"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Cantidad</ion-label>
+    <ion-input formControlName="cantidad" type="number"></ion-input>
+  </ion-item>
+  <!-- Más campos como precio, categoría, fecha de expiración -->
+  <ion-button expand="full" type="submit">Guardar Producto</ion-button>
+</form>

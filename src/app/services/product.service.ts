@@ -1,7 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core'; 
 import { Product } from '../models/product.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/compat/database'; // Asegúrate de que esto es correcto
+import { AngularFireDatabase } from '@angular/fire/compat/database'; 
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -24,59 +24,73 @@ export class ProductService {
     this.db.list<Product>('products').snapshotChanges().pipe(
       map(actions => 
         actions.map(a => {
-          const data = a.payload.val() as Product; // Toma el producto como un tipo Product
-          const productId = a.payload.key; // Guarda la referencia del ID del producto
-          return { ...data, id: productId || '' }; // Asigna productId sin sobrescribir el id de data
+          const data = a.payload.val() as Product;
+          const productId = a.payload.key;
+          return { ...data, id: productId || '' }; 
         })
       ),
       catchError(error => {
         console.error("Error loading products:", error);
-        return of([]); // Retorna un array vacío en caso de error
+        return of([]); 
       })
     ).subscribe(products => {
-      this.productsSubject.next(products);  // Actualiza la lista de productos
+      this.productsSubject.next(products);  
     });
   }
 
   // Agregar un nuevo producto
-addProduct(product: Product): void {
-  const newProductRef = this.db.list<Product>('products').push(product); // Pasa el producto como argumento
-  product.id = newProductRef.key || ''; // Asignar un valor por defecto si key es null
-  
-  newProductRef
-    .then(() => {
-      this.productsSubject.next([...this.productsSubject.getValue(), product]); // Agrega el nuevo producto a la lista
-    })
-    .catch(error => {
-      console.error("Error adding product:", error);
-    });
-}
+  addProduct(product: Product): Observable<void> {
+    const newProductRef = this.db.list<Product>('products').push(product); 
+    product.id = newProductRef.key || ''; 
 
+    return new Observable(observer => {
+      newProductRef
+        .then(() => {
+          this.productsSubject.next([...this.productsSubject.getValue(), product]);
+          observer.next();
+          observer.complete();
+        })
+        .catch(error => {
+          console.error("Error adding product:", error);
+          observer.error(error);
+        });
+    });
+  }
 
   // Eliminar un producto por ID
-  removeProduct(id: string): void {
-    this.db.list<Product>('products').remove(id).then(() => {
-      const updatedProducts = this.productsSubject.getValue().filter(product => product.id !== id); // Filtra los productos
-      this.productsSubject.next(updatedProducts); // Actualiza la lista de productos
-    }).catch(error => {
-      console.error("Error removing product:", error);
+  removeProduct(id: string): Observable<void> {
+    return new Observable(observer => {
+      this.db.list<Product>('products').remove(id).then(() => {
+        const updatedProducts = this.productsSubject.getValue().filter(product => product.id !== id);
+        this.productsSubject.next(updatedProducts);
+        observer.next();
+        observer.complete();
+      }).catch(error => {
+        console.error("Error removing product:", error);
+        observer.error(error);
+      });
     });
   }
 
   // Actualizar un producto existente
-  updateProduct(updatedProduct: Product): void {
+  updateProduct(updatedProduct: Product): Observable<void> {
     if (!updatedProduct.id) {
       console.error("Error: Product ID is undefined");
-      return; // Detiene la ejecución si el ID es undefined
+      return of(); 
     }
 
-    this.db.list<Product>('products').update(updatedProduct.id, updatedProduct).then(() => {
-      const products = this.productsSubject.getValue().map(product => 
-        product.id === updatedProduct.id ? updatedProduct : product // Reemplaza el producto actualizado
-      );
-      this.productsSubject.next(products); // Actualiza la lista de productos
-    }).catch(error => {
-      console.error("Error updating product:", error);
+    return new Observable(observer => {
+      this.db.list<Product>('products').update(updatedProduct.id, updatedProduct).then(() => {
+        const products = this.productsSubject.getValue().map(product => 
+          product.id === updatedProduct.id ? updatedProduct : product
+        );
+        this.productsSubject.next(products);
+        observer.next();
+        observer.complete();
+      }).catch(error => {
+        console.error("Error updating product:", error);
+        observer.error(error);
+      });
     });
   }
 }
