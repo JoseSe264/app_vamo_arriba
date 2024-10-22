@@ -11,6 +11,8 @@ import { AngularFireModule } from '@angular/fire/compat'; // Asegúrate de que l
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment';
 
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Asegúrate de usar 'compat'
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -20,7 +22,8 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // Asegúrate de que sea 'firebaseConfig'
     AngularFireAuthModule,// Importar el módulo de autenticación
-    HttpClientModule // Importar el módulo HttpClientModule
+    HttpClientModule, // Importar el módulo HttpClientModule
+    AngularFireDatabaseModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
