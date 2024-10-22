@@ -3,6 +3,9 @@ import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
+
+
 
 @Component({
   selector: 'app-login',
@@ -24,6 +27,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
+      
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -39,6 +43,7 @@ export class LoginPage implements OnInit {
         })
         .catch((error) => {
           console.log('Error al iniciar sesión', error);
+
         });
 
       // Aquí puedes añadir NavigationExtras si necesitas pasar datos adicionales
@@ -48,7 +53,10 @@ export class LoginPage implements OnInit {
       this.router.navigate(['index'], navigationExtras);
 
     } else {
-      console.error('Formulario inválido');
+      //console.error('Formulario inválido');
+      alert("verifique que el correo y la contraseña esten correctamente");
+      
+      
     }
   }
 
