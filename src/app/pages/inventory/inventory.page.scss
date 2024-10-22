@@ -27,24 +27,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 25px; /* Padding horizontal a los lados */
-    margin-bottom: 20px; /* Espacio debajo del logo */
-    width: 150px; /* Ancho del logo */
-    height: auto; /* Ajustar el alto del logo según su ancho */
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
-.product-form-container{
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
 
-}
+
+
 
 /* Estilo adicional para textos dentro del contenedor de inventario */
 .inventory-container h1,
 .inventory-container h2,
 .inventory-container p {
+
     margin: 10px 0; /* Margen para separar textos */
     text-align: center; /* Alinear textos al centro */
 }
@@ -59,3 +54,5 @@
         padding: 0 10px; /* Reducir el padding del logo en pantallas pequeñas */
     }
 }
+
+

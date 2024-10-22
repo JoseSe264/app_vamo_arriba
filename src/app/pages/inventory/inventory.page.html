@@ -1,10 +1,39 @@
-<ion-header>
+<ion-header class="header">
   <ion-toolbar>
-    <ion-title>Inventario</ion-title>
-  </ion-toolbar>
+    <app-search-bar></app-search-bar>
+</ion-toolbar>
 </ion-header>
 
-<ion-content>
+
+
+<ion-content >
+
+
+
+
+    <!-- Logo y título optimizados para pantallas pequeñas -->
+    <div class="logo">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12" class="ion-text-center">
+            <div >
+              <p>Inventario</p>
+              <img src="assets/icon/inventory.png" alt="Inventario Logo" style="width: 150px;">
+          </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+
+
+
+
+
+
+
+
+
   <!-- Botón para mostrar el formulario de agregar/editar producto -->
   <ion-button expand="full" (click)="toggleForm()"> 
     {{ isEditing ? 'Editar Producto' : 'Añadir Producto' }} <!-- Muestra el texto adecuado -->
@@ -71,3 +100,5 @@
     </ion-item>
   </ion-list>
 </ion-content>
+
+<app-header-custom></app-header-custom>
