@@ -66,6 +66,25 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
   }
+
+
+  ion-accordion ion-item[slot="header"] {
+    --background: #0077B6; /* Fondo azul para el encabezado */
+    --color: #FFFFFF; /* Texto blanco en el encabezado */
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-size: 1.2rem; /* Tamaño de fuente más grande */
+    font-weight: bold; /* Negrita para el texto del encabezado */
+  }
+
+  ion-accordion div[slot="content"] {
+    --background: #FFFFFF; /* Fondo blanco para el contenido */
+    padding: 10px;
+    border-top: 1px solid #EEEEEE; /* Línea sutil entre encabezado y contenido */
+  }
+
   
   ion-item {
     --padding-start: 12px;
@@ -99,4 +118,7 @@
       transform: scale(1.05);
     }
   }
-  
+  ion-list {
+    margin: 0;
+    padding: 0;
+  }

@@ -1,48 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { NavController } from '@ionic/angular';
-import { profile } from "src/app/models/profile.model";
-
 import { AuthService } from "src/app/services/auth.service";
+import { User} from "src/app/models/user.models";
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
+
 export class RegisterPage implements OnInit {
 
-  RegisterForm!: FormGroup;
+  registerForm!: FormGroup;
   
   constructor(
-    private formBuilder: FormBuilder,  // Inyección de FormBuilder
+    private fb: FormBuilder,  // Inyección de FormBuilder
     private navCtrl: NavController,     // Inyección de NavController
     private authService: AuthService    // Inyección de AuthService
 
   ) { }
+
   ngOnInit() {
-    this.RegisterForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]],
-      apellido: ['', [Validators.required, Validators.minLength(3)]],
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],}, { validator: this.passwordsMatch });
+      confirmPassword: ['', Validators.required]
+      }, { validator: this.passwordsMatch });
     }
   
- 
-  passwordsMatch(FormGroup : FormGroup){
-    const { password,confirmPassword} = FormGroup.value;
-    return password === confirmPassword? null : {notSame: true};
+  passwordsMatch(formGroup: FormGroup) {
+    const password = formGroup.get('password')?.value;
+    const confirmPassword = formGroup.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordsMismatch: true };
   }
+
+
+    async onRegister() {
+      const user = this.registerForm.value as User;
+      try {
+        const result = await this.authService.register(user);
+        console.log('Registro exitoso', result);
+      } catch (error) {
+        console.log('Error al registrar', error);
+      }
+    }
   
-  
-  onRegister() {
-    const profile = this.RegisterForm.value as profile;
-    if (this.authService.register(profile)) {
-      // Navegar al login después de crear el usuario
-      alert('Usuario creado con éxito');
-      this.navCtrl.navigateBack('/login');
-    } else {
-      alert('El usuario ya está registrado');
+    goToLogin() {
+      this.navCtrl.navigateForward('/login');
     }
   }
-}

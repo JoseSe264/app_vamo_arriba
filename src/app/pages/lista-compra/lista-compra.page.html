@@ -16,10 +16,12 @@
 
             <ion-button fill="clear" (click)="editarLista(lista)">
               <ion-icon name="create-outline">---</ion-icon>
+              Nombre...
             </ion-button>
 
             <ion-button fill="clear" (click)="eliminarLista(lista)">
               <ion-icon name="trash-outline"></ion-icon>
+              Eliminar
             </ion-button>
           </ion-item>
 
@@ -35,7 +37,9 @@
           <ion-item>
             <ion-input placeholder="Agregar producto..." [(ngModel)]="nuevoProducto"></ion-input>
             <ion-button fill="clear" (click)="agregarProducto(lista)">
+
               <ion-icon name="add-outline"></ion-icon>
+              agregar
             </ion-button>
           </ion-item>
 
@@ -53,15 +57,7 @@
   <ion-toolbar>
     
     <ion-buttons>
-      <ion-button slot="start" (click)="cancelar()">
-        <ion-icon id="icon_load_button" name="close-outline"></ion-icon>
-        Cancelar
-      </ion-button>
-    
-      <ion-button slot="start" (click)="guardarListas()">
-        <ion-icon color="success" id="icon_load_button" name="checkmark-outline"></ion-icon>
-        guardar
-      </ion-button>
+
 
       <ion-button id="button_bottom" color="danger" slot="end" (click)="limpiarLocalStorage()">
         Reiniciar listas

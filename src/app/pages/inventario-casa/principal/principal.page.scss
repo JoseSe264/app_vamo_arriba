@@ -92,3 +92,38 @@ ion-content {
 ion-content:hover {
   background-color: #005f73; /* Color de fondo al pasar el ratón */
 }
+/* Estilos para el contenido del acordeón */
+.accordion-content {
+  --background: #FFFFFF; /* Fondo blanco */
+  padding: 10px; /* Padding general */
+}
+
+/* Estilos para los ítems dentro de la lista */
+.categoria-item {
+  --background: #00B4D8; /* Fondo azul claro */
+  --border-radius: 8px; /* Bordes redondeados */
+  --margin-bottom: 10px; /* Espacio entre ítems */
+  --padding-start: 10px; /* Padding interno en el inicio */
+  --padding-end: 10px; /* Padding interno al final */
+  display: flex; /* Flexbox para alinear elementos */
+  justify-content: space-between; /* Espacio entre el texto y el botón */
+  align-items: center; /* Alinear verticalmente */
+}
+
+/* Estilos para la etiqueta de categoría */
+.categoria-label {
+  color: #FFFFFF; /* Texto blanco */
+  font-size: 1rem; /* Tamaño de fuente */
+  flex-grow: 1; /* Permitir que el texto ocupe el espacio disponible */
+}
+
+/* Estilos para el botón de selección */
+.categoria-button {
+  --background: #0077B6; /* Fondo azul */
+  --color: #FFFFFF; /* Texto blanco */
+  border-radius: 5px; /* Bordes redondeados para el botón */
+  --padding-start: 12px; /* Padding horizontal en el botón */
+  --padding-end: 12px; /* Padding horizontal en el botón */
+  --padding-top: 6px; /* Padding vertical en el botón */
+  --padding-bottom: 6px; /* Padding vertical en el botón */
+}

@@ -5,33 +5,39 @@
 </ion-header>
 
 <ion-content class="ion-padding" fullscreen>
-  
   <div class="signin-container">
-   <form>
-    <form class="form-horizontal" [formGroup]="registerForm" (ngSubmit)="onRegister()">
-    <img src="assets/logo.png" alt="Logo de AppTiro" class="logo">
-   
-  
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="text" placeholder="Nombre: " formControlName></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="text" placeholder="Apellido: " class="input"></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="email" placeholder="email@dominio.com" class="input"></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="password input" placeholder="Contraseña" class="input"></ion-input>
-    </ion-item>
-    <ion-item lines="none" class="signin-item">
-      <ion-input type="password input" placeholder="Confirmar Contraseña"></ion-input>
-    </ion-item>
-    <ion-button expand="block" fill="outline" color="light" >Registrarme</ion-button>
-    
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()"> <!-- Cambiar RegisterForm a registerForm -->
+      <img src="assets/logos/LoginLogo.png" alt="Logo de AppTiro" class="logo">
+
+      <ion-item lines="none">
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" formControlName="name" placeholder="John Doe"></ion-input> <!-- Cambiado de 'nombre' a 'name' -->
+      </ion-item>
+
+      
+
+      <ion-item lines="none">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" formControlName="email" placeholder="email@dominio.com"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-label position="floating">Confirmar Contraseña</ion-label>
+        <ion-input type="password" formControlName="confirmPassword" placeholder="Confirmar Contraseña"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" color=" white " [disabled]="registerForm.invalid"> <!-- Cambiar RegisterForm a registerForm -->
+        Registrarme
+      </ion-button>
     </form>
-  </form>
 
+    <div class="login-link">
+      <p>Ya soy miembro <a (click)="goToLogin()">¿Quieres iniciar sesión?</a></p>
+    </div>
   </div>
-
 </ion-content>
