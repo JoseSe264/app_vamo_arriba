@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
-
+import { ListaService } from '../../services/lista.service'; // Importa el servicio
 
 @Component({
   selector: 'app-lista-compra',
@@ -15,11 +14,15 @@ export class ListasPage {
   nombreLista: string = '';
   nombreProducto: string = '';
 
-  constructor(    private navCtrl: NavController
-    ,private alertController: AlertController) {
+  constructor(
+    private navCtrl: NavController,
+    private alertController: AlertController,
+    private listaService: ListaService // Inyecta el servicio
+  ) {
     this.cargarListas();
-    
   }
+
+  // Agregar nueva lista a Firebase
   async agregarNuevaLista() {
     const alert = await this.alertController.create({
       header: 'Nueva Lista',
@@ -42,7 +45,9 @@ export class ListasPage {
           text: 'Agregar',
           handler: (data) => {
             if (data.nombreLista.trim() !== '') {
-              this.listas.push({ nombre: data.nombreLista, productos: [] });
+              const nuevaLista = { nombre: data.nombreLista, productos: [] };
+              this.listas.push(nuevaLista);
+              this.listaService.createLista(nuevaLista); // Guarda la lista en Firebase
               this.guardarListas();
             } else {
               console.log('Nombre de la lista vacío');
@@ -54,34 +59,19 @@ export class ListasPage {
 
     await alert.present();
   }
-  agregarLista() {
-    if (this.nombreLista.trim().length > 0) {
-      this.listas.push({ nombre: this.nombreLista, productos: [] });
-      this.nombreLista = '';  // Limpiar el input
-    }}
-  limpiarLocalStorage() {
-    localStorage.clear();
-    this.listas = []; // Reiniciar la variable listas
-    console.log('lista limpiada');
-  }
+
+  // Cargar listas desde Firebase
   cargarListas() {
-    const storedListas = localStorage.getItem('listas');
-    
-    if (!storedListas || storedListas === 'null' || storedListas === '[]') {
-      // Si no hay listas o están vacías, limpiar y agregar una lista predeterminada
-      localStorage.clear();
-      this.listas = [
-        { nombre: 'Lista de prueba', productos: ['Pan', 'Leche', 'Huevos'] }
-      ];
-    } else {
-      this.listas = JSON.parse(storedListas);
-    }
-    console.log(this.listas); // Para verificar si las listas están cargadas correctamente
+    this.listaService.getListas().subscribe(listas => {
+      this.listas = listas;
+      console.log('Listas cargadas desde Firebase:', this.listas);
+    });
   }
 
   agregarProducto(lista: any) {
     if (this.nuevoProducto.trim() !== '') {
       lista.productos.push(this.nuevoProducto);
+      this.listaService.updateLista(lista.key, lista); // Actualiza la lista en Firebase
       this.nuevoProducto = '';
     }
   }
@@ -90,30 +80,30 @@ export class ListasPage {
     const index = lista.productos.indexOf(producto);
     if (index > -1) {
       lista.productos.splice(index, 1);
+      this.listaService.updateLista(lista.key, lista); // Actualiza la lista en Firebase
     }
-  }
-
-  editarLista(lista: any) {
-    console.log('Editar lista', lista);
   }
 
   eliminarLista(lista: any) {
     this.listas = this.listas.filter(l => l !== lista);
-    alert('lista eliminada');
+    this.listaService.deleteLista(lista.key); // Elimina la lista de Firebase
+    alert('Lista eliminada');
   }
 
   guardarListas() {
-    // Guardar listas en localStorage
-    localStorage.setItem('listas', JSON.stringify(this.listas));
-    alert('listas guardadas con exito');
+    alert('Listas guardadas con éxito');
     console.log('Listas guardadas:', this.listas);
   }
 
-  cancelar() {
-    // agregar la logica de cancelar
-    console.log('Acción de cancelar');
-  }
   volver() {
     this.navCtrl.back();
+  }
+
+  limpiarLocalStorage() {
+    console.log('limpiarLocalStorage');// logica de limpiar todas las listas
+  }
+
+  editarLista(lista: any) {
+    console.log('editarLista', lista); // logica de actualizar la lista
   }
 }

@@ -14,6 +14,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';  // Módulo d
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Módulo de base de datos de Firebase
 import { environment } from 'src/environments/environment';  // Asegúrate de tener la configuración en 'environment'
 
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database'; // Asegúrate de usar 'compat'
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,6 +23,7 @@ import { environment } from 'src/environments/environment';  // Asegúrate de te
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
+
     FormsModule,
     RouterModule,  // Importar el RouterModule para el enrutamiento
     AngularFireModule.initializeApp(environment.firebaseConfig), // Inicializar Firebase
