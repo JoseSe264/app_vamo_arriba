@@ -1,0 +1,39 @@
+ion-header {
+    background-color: var(--ion-color-primary); /* Color del encabezado */
+    color: white; /* Color del texto del encabezado */
+  }
+  
+  ion-title {
+    font-size: 1.5rem; /* Tamaño del título */
+    font-weight: bold; /* Negrita para el título */
+  }
+  
+  ion-button {
+    --background: var(--ion-color-secondary); /* Color de fondo del botón */
+    --color: white; /* Color del texto del botón */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+  
+  ion-button:hover {
+    --background: var(--ion-color-secondary-shade); /* Color del botón al pasar el cursor */
+  }
+  
+  ion-grid {
+    margin: 0; /* Eliminar margen del grid */
+  }
+  
+  ion-col {
+    padding: 10px; /* Espaciado alrededor de cada columna */
+  }
+  
+  ion-footer {
+    background-color: var(--ion-color-light); /* Color de fondo del pie de página */
+    text-align: center; /* Centrar el texto */
+    padding: 10px; /* Espaciado dentro del pie de página */
+  }
+  
+  ion-toolbar {
+    --background: var(--ion-color-primary); /* Color de fondo del toolbar en el footer */
+    color: white; /* Color del texto en el toolbar del footer */
+  }
+  

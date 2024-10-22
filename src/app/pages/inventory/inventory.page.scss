@@ -1,0 +1,58 @@
+/* Contenedor principal del perfil */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh; /* Usar 100vh para asegurar que ocupe toda la pantalla */
+    background-color: #03045e; /* Color de fondo azul oscuro */
+    padding: 20px; /* Agregar un poco de padding para no pegar contenido al borde */
+}
+
+/* Contenedor del inventario */
+.inventory-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Tomar el 100% del contenedor padre */
+    background-color: #05050c !important; /* Fondo negro para el contenedor de inventario */
+    color: white; /* Color de texto blanco */
+    padding: 20px; /* Padding para separar el contenido de los bordes */
+}
+
+/* Estilo del logo */
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+
+
+
+
+/* Estilo adicional para textos dentro del contenedor de inventario */
+.inventory-container h1,
+.inventory-container h2,
+.inventory-container p {
+
+    margin: 10px 0; /* Margen para separar textos */
+    text-align: center; /* Alinear textos al centro */
+}
+
+/* Responsividad: Asegurando que los elementos no se desborden en pantallas pequeñas */
+@media (max-width: 768px) {
+    .profile-container, .inventory-container {
+        padding: 10px; /* Reducir el padding en pantallas pequeñas */
+    }
+
+    .logo {
+        padding: 0 10px; /* Reducir el padding del logo en pantallas pequeñas */
+    }
+}
+
+

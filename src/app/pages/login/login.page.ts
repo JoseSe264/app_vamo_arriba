@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       this.authService.login(email, password)
         .then(() => {
           // Navegar a la página de inicio después de iniciar sesión
-          this.navCtrl.navigateForward('/home');
+          this.navCtrl.navigateForward('/index');
         })
         .catch((error) => {
           console.log('Error al iniciar sesión', error);

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ImageUploaderComponent } from './image-uploader.component';
+import { HeaderCustomComponent } from './header-custom.component';
 
-describe('ImageUploaderComponent', () => {
-  let component: ImageUploaderComponent;
-  let fixture: ComponentFixture<ImageUploaderComponent>;
+describe('HeaderCustomComponent', () => {
+  let component: HeaderCustomComponent;
+  let fixture: ComponentFixture<HeaderCustomComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImageUploaderComponent ],
+      declarations: [ HeaderCustomComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ImageUploaderComponent);
+    fixture = TestBed.createComponent(HeaderCustomComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

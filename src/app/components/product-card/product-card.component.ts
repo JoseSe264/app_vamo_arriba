@@ -14,18 +14,20 @@ export class ProductCardComponent  implements OnInit {
 
 
   constructor() { }
-  getStatusColor(status?: string): string {
+  
+  getStatusColor(status: 'Disponible' | 'Bajo Stock' | 'Agotado'): string {
+  if (!status){
+    return 'medium';
+  }
     switch (status) {
-      case "Reportado":
-        return 'warning';
-      case "Encontrado":
-        return 'success';
-      case "Validado":
-        return 'tertiary';
-      case "Entregado":
-        return 'medium';
+      case 'Disponible':
+        return 'success';    // Verde
+      case 'Bajo Stock':
+        return 'warning';    // Amarillo
+      case 'Agotado':
+        return 'danger';     // Rojo
       default:
-        return 'primary';
+        return 'medium';     // Un color neutral
     }
   }
 

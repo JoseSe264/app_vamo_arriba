@@ -51,10 +51,17 @@ const routes: Routes = [
     path: 'not-found',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+  {
+    path: 'inventory',
+    loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule)
+  },
+  
+  {
+    path: '**', redirectTo: 'not-found'
+  },
 
 
 ];
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
