@@ -3,7 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import Swal from 'sweetalert2';
+
 
 
 
