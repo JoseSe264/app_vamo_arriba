@@ -1,42 +1,29 @@
 <ion-header class="header">
   <ion-toolbar>
-    <app-search-bar></app-search-bar>
-</ion-toolbar>
+    <!-- Barra de búsqueda integrada -->
+    <app-search-bar (searchTermChanged)="onSearchTermChanged($event)"></app-search-bar>
+  </ion-toolbar>
 </ion-header>
 
+<ion-content>
 
-
-<ion-content >
-
-
-
-
-    <!-- Logo y título optimizados para pantallas pequeñas -->
-    <div class="logo">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <div >
-              <p>Inventario</p>
-              <img src="assets/icon/inventory.png" alt="Inventario Logo" style="width: 150px;">
+  <!-- Logo y título -->
+  <div class="logo">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <div>
+            <p>Inventario</p>
+            <img src="assets/icon/inventory.png" alt="Inventario Logo" style="width: 150px;">
           </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-
-
-
-
-
-
-
-
-
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
   <!-- Botón para mostrar el formulario de agregar/editar producto -->
   <ion-button expand="full" (click)="toggleForm()"> 
-    {{ isEditing ? 'Editar Producto' : 'Añadir Producto' }} <!-- Muestra el texto adecuado -->
+    {{ isEditing ? 'Editar Producto' : 'Añadir Producto' }} <!-- Cambia el texto según el estado -->
   </ion-button>
 
   <!-- Formulario para añadir/editar producto -->
@@ -45,7 +32,12 @@
       <ion-label position="floating">Nombre</ion-label>
       <ion-input formControlName="nombre"></ion-input>
     </ion-item>
-
+    <ion-note *ngIf="productForm.get('nombre').hasError('required') && productForm.get('nombre').touched" color="danger">
+      El nombre es obligatorio.
+    </ion-note>
+    <ion-note *ngIf="productForm.get('nombre').hasError('minlength') && productForm.get('nombre').touched" color="danger">
+      El nombre debe tener al menos 3 caracteres.
+    </ion-note>
     <ion-item>
       <ion-label position="floating">Descripción</ion-label>
       <ion-input formControlName="descripcion"></ion-input>
@@ -86,9 +78,9 @@
     <ion-button expand="full" type="submit">{{ isEditing ? 'Actualizar Producto' : 'Guardar Producto' }}</ion-button>
   </form>
 
-  <!-- Listado de productos -->
+  <!-- Listado de productos filtrados -->
   <ion-list>
-    <ion-item *ngFor="let product of products$ | async">
+    <ion-item *ngFor="let product of filteredProducts$ | async">
       <ion-label>
         <h2>{{ product.nombre }}</h2>
         <p>{{ product.descripcion }}</p>
@@ -101,4 +93,5 @@
   </ion-list>
 </ion-content>
 
+<!-- Componente de encabezado -->
 <app-header-custom></app-header-custom>

@@ -8,6 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router'; 
+import { SharedModule } from './components/shared/shared.module';
 
 import { AngularFireModule } from '@angular/fire/compat'; // Firebase compatibilidad
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';  // Módulo de autenticación de Firebase
@@ -22,6 +23,7 @@ import { environment } from 'src/environments/environment';  // Asegúrate de te
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
+    SharedModule, // Importar el módulo SharedModule para compartir componentes y servicios entre las páginas
 
     FormsModule,
     RouterModule,  // Importar el RouterModule para el enrutamiento

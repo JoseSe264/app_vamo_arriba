@@ -1,18 +1,16 @@
-import { Component, EventEmitter, Output } from '@angular/core'; // Importación de Output y EventEmitter
-
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-bar',
-  templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.scss'],
+  template: `
+    <ion-searchbar (ionInput)="onInput($event)"></ion-searchbar>
+  `,
 })
 export class SearchBarComponent {
-  searchTerm: string = '';
+  @Output() searchTermChanged = new EventEmitter<string>();
 
-  @Output() searchChanged = new EventEmitter<string>();
-
-  onSearchChange() {
-    this.searchChanged.emit(this.searchTerm);
+  onInput(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchTermChanged.emit(inputElement.value); // Emitir el valor del input como string
   }
 }
-
