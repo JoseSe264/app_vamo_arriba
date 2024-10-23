@@ -11,7 +11,7 @@ export class ProductService {
   private productsSubject: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
   constructor(@Inject(AngularFireDatabase) private db: AngularFireDatabase) {
-    this.loadProducts();  // Cargar productos al iniciar el servicio
+    this.loadProducts(); // Cargar productos al iniciar el servicio
   }
 
   // Obtener todos los productos como Observable
@@ -66,14 +66,14 @@ export class ProductService {
         observer.next();
         observer.complete();
       }).catch(error => {
-        console.error("Error removing product:", error);
+        console.error("Error Eliminar producto:", error);
         observer.error(error);
       });
     });
   }
 
   // Actualizar un producto existente
-  updateProduct(updatedProduct: Product): Observable<void> {
+  updateProduct(updatedProduct: Product): Observable<Product> {
     if (!updatedProduct.id) {
       console.error("Error: Product ID is undefined");
       return of(); 
@@ -85,12 +85,13 @@ export class ProductService {
           product.id === updatedProduct.id ? updatedProduct : product
         );
         this.productsSubject.next(products);
-        observer.next();
+        observer.next(updatedProduct); // Retornar el producto actualizado
         observer.complete();
       }).catch(error => {
         console.error("Error updating product:", error);
         observer.error(error);
       });
     });
+    
   }
 }

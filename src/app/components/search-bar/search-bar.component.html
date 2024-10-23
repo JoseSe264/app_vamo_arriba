@@ -1,4 +1,1 @@
-<ion-searchbar [(ngModel)]="searchTerm"
- (ionInput)="onSearchChange()"
- placeholder="Buscar Producto..."
- ></ion-searchbar>
+<app-search-bar (searchTermChanged)="onSearchTermChanged($event.target.value)"></app-search-bar>
