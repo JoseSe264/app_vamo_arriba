@@ -46,7 +46,8 @@ const routes: Routes = [
   },
   {
     path: 'inventory',
-    loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule)
+    loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule),
+    canActivate: [authGuard]
   },
   
   {

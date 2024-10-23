@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-
-
-
 
 @Component({
   selector: 'app-login',
@@ -19,15 +15,12 @@ export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private formBuilder: FormBuilder,
-    private router: Router,
     private authService: AuthService
   ) { }
-  
-  
+
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
@@ -36,32 +29,22 @@ export class LoginPage implements OnInit {
     const { email, password } = this.loginForm.value;
 
     if (this.loginForm.valid) {
-      this.authService.login(email, password)
-        .then(() => {
-          // Navegar a la página de inicio después de iniciar sesión
-          this.navCtrl.navigateForward('/index');
-        })
-        .catch((error) => {
-          console.log('Error al iniciar sesión', error);
-
-        });
-
-      // Aquí puedes añadir NavigationExtras si necesitas pasar datos adicionales
-      const navigationExtras: NavigationExtras = {
-        queryParams: { email }
-      };
-      this.router.navigate(['index'], navigationExtras);
-
+      try {
+        await this.authService.login(email, password);
+        // Navegar a la página de inicio después de iniciar sesión exitosamente
+        this.navCtrl.navigateForward('/index');
+      } catch (error) {
+        console.error('Error al iniciar sesión', error);
+        alert("Error en la autenticación. Verifique sus credenciales.");
+      }
     } else {
-      //console.error('Formulario inválido');
-      alert("verifique que el correo y la contraseña esten correctamente");
-      
-      
+      // Formulario no es válido
+      alert("Verifique que el correo y la contraseña sean correctos.");
     }
   }
 
   navigateToRegister() {
     // Navega a la página de registro
-    this.navCtrl.navigateForward('/register'); 
+    this.navCtrl.navigateForward('/register');
   }
 }
