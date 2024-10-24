@@ -13,47 +13,49 @@ import { map } from 'rxjs/operators';
 export class InventoryPage implements OnInit {
   productForm: FormGroup;
   products$: Observable<Product[]>;
-  filteredProducts$: Observable<Product[]>; // Productos filtrados
+  filteredProducts$: Observable<Product[]>;
   showForm = false;
   isEditing = false;
-  currentProduct: Product | null = null; // Producto actual en edición
-  categorias = ['Alimentos', 'Limpieza', 'Electrónica']; // Categorías de ejemplo
+  currentProduct: Product | null = null;
+  categorias = ['Alimentos', 'Limpieza', 'Electrónica'];
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group({
-      nombre: ['', Validators.required],
+      nombre: ['', [Validators.required, Validators.minLength(3)]], // Nombre mínimo de 3 caracteres
       descripcion: ['', Validators.required],
-      cantidad: [0, Validators.required],
+      cantidad: [0, [Validators.required, Validators.min(1)]], // Mínimo de cantidad es 1
       categoria: ['', Validators.required],
       fechaExpiracion: ['', Validators.required],
-      precio: [0, Validators.required],
-      status: ['Disponible', Validators.required],
+      precio: [0, [Validators.required, Validators.min(0.01)]], // El precio debe ser mayor a 0
+      status: [{ value: 'Disponible', disabled: true }, Validators.required],
       imagenUrl: ['']
+    });
+
+    // Detectar cambios en el campo 'cantidad' para actualizar el estado
+    this.productForm.get('cantidad').valueChanges.subscribe(cantidad => {
+      this.updateProductStatus(cantidad);
     });
   }
 
   ngOnInit() {
-    // Obtiene todos los productos al iniciar
     this.products$ = this.productService.getProducts();
-    this.filteredProducts$ = this.products$; // Inicialmente muestra todos los productos
+    this.filteredProducts$ = this.products$;
   }
 
-  // Alterna la visibilidad del formulario
   toggleForm(): void {
     this.showForm = !this.showForm;
     if (!this.showForm) {
-      this.isEditing = false; // Reseteamos el estado de edición
-      this.productForm.reset(); // Limpiar formulario
+      this.isEditing = false;
+      this.productForm.reset();
     }
   }
 
-  // Maneja el término de búsqueda y filtra productos
   onSearchTermChanged(searchTerm: string) {
     if (!searchTerm) {
-      this.filteredProducts$ = this.products$; // Si no hay término de búsqueda, muestra todos los productos
+      this.filteredProducts$ = this.products$;
     } else {
       this.filteredProducts$ = this.products$.pipe(
-        map(products => products.filter(product => 
+        map(products => products.filter(product =>
           product.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
           product.descripcion?.toLowerCase().includes(searchTerm.toLowerCase())
         ))
@@ -61,47 +63,68 @@ export class InventoryPage implements OnInit {
     }
   }
 
-  // Guarda o actualiza el producto
   saveProduct(): void {
+    // Verifica si el formulario es inválido
+    if (this.productForm.invalid) {
+      console.log('El formulario es inválido. No se puede guardar el producto.');
+      return; // Salimos si el formulario es inválido para evitar el guardado
+    }
+  
     const productData = this.productForm.value;
-
+    
+    // Asignar el estado según la cantidad
+    productData.status = this.getProductStatus(this.productForm.get('cantidad').value);
+  
     if (this.isEditing && this.currentProduct) {
-      // Si estamos editando, actualizamos el producto
       productData.id = this.currentProduct.id;
       this.productService.updateProduct(productData);
       console.log('Producto actualizado');
-      this.resetForm();
     } else {
-      // Si no estamos editando, agregamos un nuevo producto
       this.productService.addProduct(productData);
       console.log('Producto agregado');
-      this.resetForm();
     }
+  
+    // Restablecer el formulario después de guardar
+    this.resetForm();
   }
+  
 
-  // Edita un producto
   editProduct(product: Product): void {
     this.currentProduct = product;
-    this.productForm.patchValue(product); // Llenar el formulario con los datos del producto
+    this.productForm.patchValue(product);
     this.isEditing = true;
-    this.showForm = true; // Mostrar el formulario en modo edición
+    this.showForm = true;
   }
 
-  // Elimina un producto
   removeProduct(id: string): void {
     this.productService.removeProduct(id).subscribe(
       () => {
         console.log('Producto eliminado correctamente');
-        // Opcional: cargar productos de nuevo si necesitas refrescar la lista
       },
       (error) => console.error('Error al eliminar producto:', error)
     );
   }
-  
-  // Resetea el formulario
+
   resetForm(): void {
     this.showForm = false;
     this.isEditing = false;
     this.productForm.reset();
+  }
+
+  // Función para cambiar el estado del producto basado en la cantidad
+  updateProductStatus(cantidad: number): void {
+    const statusControl = this.productForm.get('status');
+    statusControl.setValue(this.getProductStatus(cantidad));
+  }
+
+  // Retorna el estado según la cantidad
+  getProductStatus(cantidad: number): string {
+    if (cantidad === 0) {
+      return 'Agotado';
+    } else if (cantidad <= 5) {
+      return 'Bajo Stock';
+    } else {
+      return 'Disponible';
+    }
   }
 }
