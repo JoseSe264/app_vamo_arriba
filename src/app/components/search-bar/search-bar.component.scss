@@ -1,12 +1,11 @@
 .search-bar {
   margin: 20px 0;                 /* Espacio arriba y abajo de la barra de búsqueda */
   border-radius: 10px;            /* Bordes redondeados */
-  box-shadow: #007bff;  /* Sombra suave */
 }
 
 .search-bar ion-searchbar {
   --background: #f8f9fa;          /* Fondo claro para la barra de búsqueda */
-  --color: #333;                  /* Color del texto */
+  --color: #f8f9fa;                  /* Color del texto */
   --border-radius: 10px;          /* Bordes redondeados */
   --padding-start: 12px;          /* Espaciado inicial */
   --padding-end: 12px;            /* Espaciado final */
@@ -16,6 +15,14 @@
 .search-bar ion-searchbar::part(input) {
   font-size: 16px;                /* Tamaño de fuente */
   color: white;                  /* Color del texto del input */
+  padding-top: 8px;               /* Espaciado superior */
+  padding-bottom: 8px;             /* Espaciado inferior */
+  padding-left: 36px;             /* Espaciado izquierdo del input */
+  padding-right: 36px;           /* Espaciado derecho del input */
+  border-radius: 10px;          /* Bordes redondeados */
+  border-color: #ced4da;           /* Color del borde */
+  border-width: 1px;               /* Ancho del borde */
+  border-style: solid;            /* Estilo del borde */
 }
 
 .search-bar ion-searchbar::part(search-icon) {

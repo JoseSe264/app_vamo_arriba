@@ -95,9 +95,10 @@
       <ion-input type="date" formControlName="fechaExpiracion"></ion-input>
 
 <!-- Campo para seleccionar imagen -->
+       <ion-note></ion-note>
  
       <ion-item>
-        <ion-label>Imagen del Producto</ion-label>
+        <ion-label class="custom-label">Imagen del Producto</ion-label>
         <ion-button (click)="selectImage()">Seleccionar Imagen</ion-button>
       </ion-item>
     
@@ -126,7 +127,9 @@
   <!-- Listado de productos filtrados -->
   <ion-list>
     <ion-item *ngFor="let product of filteredProducts$ | async">
+
       <ion-label class="custom-label">
+        <ion-img [src]="product.imagenUrl" alt="{{ product.nombre }}" slot="start"></ion-img>
         <h2>{{ product.nombre }}</h2>
         <p>{{ product.descripcion }}</p>
         <p>Precio: {{ product.precio | currency }}</p>
