@@ -55,4 +55,79 @@
     }
 }
 
+.formProduct{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #00549c;
+    border-radius: 20px;
+    max-width: 400px;
+    padding: 20px;
+    color: white;
+    transition:cubic-bezier(0.895, 0.03, 0.685, 0.22) 
 
+}
+.items{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    
+}
+
+.custom-label {
+    font-size: 16px;               /* Tamaño de la fuente */
+    font-weight: bold;             /* Grosor de la fuente */
+    color:  whitesmoke;                   /* Color del texto */
+    text-align: left;              /* Alineación del texto */
+    text-transform: uppercase;      /* Transformar a mayúsculas */
+    letter-spacing: 0.5px;         /* Espaciado entre letras */
+    line-height: 1.5;              /* Altura de la línea */
+}
+
+.header {
+    background-color: #ffffff; // Color de fondo del encabezado
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Sombra sutil en el encabezado
+  
+    ion-toolbar {
+      padding: 10px; // Espaciado dentro de la barra de herramientas
+    }
+  
+    app-search-bar {
+      width: 100%; // Asegura que la barra de búsqueda ocupe todo el ancho
+      margin: 0; // Sin márgenes
+  
+      // Estilos para la barra de búsqueda
+      ion-searchbar {
+        --background: #f8f9fa; // Fondo claro para la barra de búsqueda
+        --color: #333; // Color del texto
+        --padding-start: 12px; // Espacio al inicio
+        --padding-end: 12px; // Espacio al final
+        --border-radius: 10px; // Bordes redondeados
+  
+        // Estilo para el input
+        &::part(input) {
+          font-size: 16px; // Tamaño de fuente
+          color: #333; // Color del texto del input
+        }
+  
+        // Estilo para el ícono de búsqueda
+        &::part(search-icon) {
+          color: #007bff; // Color del ícono de búsqueda
+        }
+  
+        // Estilo para el botón de cancelar
+        &::part(cancel-button) {
+          color: #d9534f; // Color del botón de cancelar
+        }
+  
+        // Estilo para el texto del placeholder
+        &::part(placeholder) {
+          color: #999; // Color del texto del placeholder
+        }
+      }
+    }
+  }
+  
