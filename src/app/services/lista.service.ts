@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
+import { lista } from '../models/lista.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +12,19 @@ export class ListaService {
 
   constructor(private db: AngularFireDatabase) {}
 
-  // Crear una nueva lista
-  createLista(lista: any): any {
-    return this.db.list(this.dbPath).push(lista);
+  createLista(lista: lista): any {
+    return this.db.list(this.dbPath).set(lista.id!, lista);
   }
 
-  // Obtener todas las listas
-  getListas(): Observable<any[]> {
-    return this.db.list(this.dbPath).valueChanges();
+  getListas(): Observable<lista[]> {
+    return this.db.list<lista>(this.dbPath).valueChanges();
   }
 
-  // Eliminar una lista
-  deleteLista(key: string): Promise<void> {
-    return this.db.list(this.dbPath).remove(key);
+  deleteLista(id: string): Promise<void> {
+    return this.db.list(this.dbPath).remove(id);
   }
 
-  // Actualizar una lista
-  updateLista(key: string, value: any): Promise<void> {
-    return this.db.list(this.dbPath).update(key, value);
+  updateLista(id: string, value: lista): Promise<void> {
+    return this.db.list(this.dbPath).update(id, value);
   }
 }
