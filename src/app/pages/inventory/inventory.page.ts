@@ -4,6 +4,8 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-inventory',
@@ -127,4 +129,25 @@ export class InventoryPage implements OnInit {
       return 'Disponible';
     }
   }
+
+  async selectImage() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Photos, // Puedes cambiar a CameraSource.Camera si prefieres tomar una foto en vez de seleccionar de la galería
+      });
+  
+      // Actualiza la URL de la imagen en el formulario
+      this.productForm.patchValue({
+        imagenUrl: image.webPath // La imagen seleccionada se guarda en la propiedad 'imagenUrl'
+      });
+    } catch (error) {
+      console.error('Error al seleccionar la imagen:', error);
+    }
+  }
+  
+
+
+
 }

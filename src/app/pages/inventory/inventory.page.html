@@ -94,6 +94,18 @@
       <ion-label class="custom-label" position="stacked">Fecha de Expiración</ion-label>
       <ion-input type="date" formControlName="fechaExpiracion"></ion-input>
 
+<!-- Campo para seleccionar imagen -->
+ 
+      <ion-item>
+        <ion-label>Imagen del Producto</ion-label>
+        <ion-button (click)="selectImage()">Seleccionar Imagen</ion-button>
+      </ion-item>
+    
+      <!-- Vista previa de la imagen seleccionada -->
+      <ion-item *ngIf="productForm.get('imagenUrl').value">
+        <ion-img [src]="productForm.get('imagenUrl').value"></ion-img>
+      </ion-item>
+
 
     </ion-item >
     <ion-note *ngIf="productForm.get('fechaExpiracion').hasError('required') && productForm.get('fechaExpiracion').touched" color="danger">

@@ -15,6 +15,7 @@ import { HeaderCustomComponent } from '../header-custom/header-custom.component'
   declarations: [
     ProductCardComponent,
     ProductListComponent,
+    
     HeaderCustomComponent,  // Agrega HeaderCustomComponent al módulo SharedModule
     ProductFormComponent,  // Agrega ProductFormComponent al módulo SharedModule
     SearchBarComponent

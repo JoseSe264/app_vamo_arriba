@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+
 
 @Component({
   selector: 'app-product-form',
@@ -20,7 +22,9 @@ export class ProductFormComponent implements OnInit {
       categoria: [''],
       fechaExpiracion: [''],
       precio: [0],
-      status: ['Disponible']
+      status: ['Disponible'],
+      imagenUrl: [''],
+
     });
   }
 
@@ -42,4 +46,24 @@ export class ProductFormComponent implements OnInit {
     }
     this.productForm.reset(); // Resetea el formulario después de guardar
   }
+
+
+  // Método para seleccionar una imagen usando la cámara o la galería
+async selectImage() {
+  try {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Photos, // Puedes cambiar a CameraSource.Camera para tomar una foto
+    });
+
+    // Actualiza la URL de la imagen en el formulario
+    this.productForm.patchValue({
+      imagenUrl: image.webPath // Guarda la ruta de la imagen seleccionada
+    });
+  } catch (error) {
+    console.error('Error al seleccionar la imagen:', error);
+  }
+}
+
 }
