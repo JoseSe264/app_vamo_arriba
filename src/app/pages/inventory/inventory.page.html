@@ -95,17 +95,19 @@
       <ion-input type="date" formControlName="fechaExpiracion"></ion-input>
 
 <!-- Campo para seleccionar imagen -->
-       <ion-note></ion-note>
- 
-      <ion-item>
-        <ion-label class="custom-label">Imagen del Producto</ion-label>
-        <ion-button (click)="selectImage()">Seleccionar Imagen</ion-button>
-      </ion-item>
-    
-      <!-- Vista previa de la imagen seleccionada -->
-      <ion-item *ngIf="productForm.get('imagenUrl').value">
-        <ion-img [src]="productForm.get('imagenUrl').value"></ion-img>
-      </ion-item>
+<ion-note></ion-note>
+
+<ion-item>
+  <ion-label class="custom-label">Imagen del Producto</ion-label>
+  <ion-button (click)="selectImage()">Seleccionar Imagen</ion-button>
+  <ion-button (click)="takePhoto()">Tomar Foto</ion-button> <!-- Botón para tomar una foto -->
+</ion-item>
+
+<!-- Vista previa de la imagen seleccionada -->
+<ion-item *ngIf="productForm.get('imagenUrl').value">
+  <ion-img [src]="productForm.get('imagenUrl').value"></ion-img>
+</ion-item>
+
 
 
     </ion-item >

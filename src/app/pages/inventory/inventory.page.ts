@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.page.html',
@@ -23,12 +22,12 @@ export class InventoryPage implements OnInit {
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]], // Nombre mínimo de 3 caracteres
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', Validators.required],
-      cantidad: [0, [Validators.required, Validators.min(1)]], // Mínimo de cantidad es 1
+      cantidad: [0, [Validators.required, Validators.min(1)]],
       categoria: ['', Validators.required],
       fechaExpiracion: ['', Validators.required],
-      precio: [0, [Validators.required, Validators.min(0.01)]], // El precio debe ser mayor a 0
+      precio: [0, [Validators.required, Validators.min(0.01)]],
       status: [{ value: 'Disponible', disabled: true }, Validators.required],
       imagenUrl: ['']
     });
@@ -53,43 +52,42 @@ export class InventoryPage implements OnInit {
   }
 
   onSearchTermChanged(searchTerm: string) {
-    if (!searchTerm) {
-      this.filteredProducts$ = this.products$;
-    } else {
-      this.filteredProducts$ = this.products$.pipe(
-        map(products => products.filter(product =>
-          product.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.descripcion?.toLowerCase().includes(searchTerm.toLowerCase())
-        ))
-      );
-    }
+    this.filteredProducts$ = searchTerm
+      ? this.products$.pipe(
+          map(products => products.filter(product =>
+            product.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.descripcion?.toLowerCase().includes(searchTerm.toLowerCase())
+          ))
+        )
+      : this.products$;
   }
 
   saveProduct(): void {
-    // Verifica si el formulario es inválido
     if (this.productForm.invalid) {
       console.log('El formulario es inválido. No se puede guardar el producto.');
-      return; // Salimos si el formulario es inválido para evitar el guardado
+      return;
     }
-  
-    const productData = this.productForm.value;
-    
+
+    const productData = { ...this.productForm.value }; // Clonar el formulario
+
     // Asignar el estado según la cantidad
     productData.status = this.getProductStatus(this.productForm.get('cantidad').value);
-  
-    if (this.isEditing && this.currentProduct) {
-      productData.id = this.currentProduct.id;
-      this.productService.updateProduct(productData);
-      console.log('Producto actualizado');
-    } else {
-      this.productService.addProduct(productData);
-      console.log('Producto agregado');
-    }
-  
-    // Restablecer el formulario después de guardar
-    this.resetForm();
+
+    const saveOperation = this.isEditing && this.currentProduct
+      ? this.productService.updateProduct({ ...productData, id: this.currentProduct.id })
+      : this.productService.addProduct(productData);
+
+    saveOperation.subscribe(
+      () => {
+        const action = this.isEditing ? 'actualizado' : 'agregado';
+        console.log(`Producto ${action}`);
+        this.resetForm();
+      },
+      error => {
+        console.error('Error al guardar producto:', error);
+      }
+    );
   }
-  
 
   editProduct(product: Product): void {
     this.currentProduct = product;
@@ -103,7 +101,7 @@ export class InventoryPage implements OnInit {
       () => {
         console.log('Producto eliminado correctamente');
       },
-      (error) => console.error('Error al eliminar producto:', error)
+      error => console.error('Error al eliminar producto:', error)
     );
   }
 
@@ -113,13 +111,11 @@ export class InventoryPage implements OnInit {
     this.productForm.reset();
   }
 
-  // Función para cambiar el estado del producto basado en la cantidad
   updateProductStatus(cantidad: number): void {
     const statusControl = this.productForm.get('status');
     statusControl.setValue(this.getProductStatus(cantidad));
   }
 
-  // Retorna el estado según la cantidad
   getProductStatus(cantidad: number): string {
     if (cantidad === 0) {
       return 'Agotado';
@@ -135,19 +131,41 @@ export class InventoryPage implements OnInit {
       const image = await Camera.getPhoto({
         quality: 90,
         resultType: CameraResultType.Uri,
-        source: CameraSource.Photos, // Puedes cambiar a CameraSource.Camera si prefieres tomar una foto en vez de seleccionar de la galería
+        source: CameraSource.Photos,
       });
-  
-      // Actualiza la URL de la imagen en el formulario
+
       this.productForm.patchValue({
-        imagenUrl: image.webPath // La imagen seleccionada se guarda en la propiedad 'imagenUrl'
+        imagenUrl: image.webPath
       });
     } catch (error) {
       console.error('Error al seleccionar la imagen:', error);
     }
   }
+
+
+  async takePhoto() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera, // Cambia a Camera para tomar una foto
+      });
   
-
-
+      // Verifica que la ruta de la imagen esté disponible
+      console.log('Image URL:', image.webPath);
+  
+      // Actualiza la URL de la imagen en el formulario
+      if (image.webPath) {
+        this.productForm.patchValue({
+          imagenUrl: image.webPath, // Guarda la ruta de la imagen tomada
+        });
+      } else {
+        console.error('No se pudo obtener la ruta de la imagen.');
+      }
+    } catch (error) {
+      console.error('Error al tomar la foto:', error);
+    }
+  }
+  
 
 }
