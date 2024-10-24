@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-import { ListaService } from '../../services/lista.service'; // Importa el servicio
+import { ListaService } from '../../services/lista.service'; 
+import { lista } from '../../models/lista.model'; // Import de la interfaz lista
 
 @Component({
   selector: 'app-lista-compra',
@@ -9,20 +10,17 @@ import { ListaService } from '../../services/lista.service'; // Importa el servi
   styleUrls: ['./lista-compra.page.scss'],
 })
 export class ListasPage {
-  listas: any[] = [];
+  listas: lista[] = [];
   nuevoProducto: string = '';
-  nombreLista: string = '';
-  nombreProducto: string = '';
-
+  
   constructor(
     private navCtrl: NavController,
     private alertController: AlertController,
-    private listaService: ListaService // Inyecta el servicio
+    private listaService: ListaService
   ) {
     this.cargarListas();
   }
 
-  // Agregar nueva lista a Firebase
   async agregarNuevaLista() {
     const alert = await this.alertController.create({
       header: 'Nueva Lista',
@@ -45,9 +43,9 @@ export class ListasPage {
           text: 'Agregar',
           handler: (data) => {
             if (data.nombreLista.trim() !== '') {
-              const nuevaLista = { nombre: data.nombreLista, productos: [] };
+              const nuevaLista: lista = { id: this.generateId(), nombrelista: data.nombreLista, nombreproducto: '' };
               this.listas.push(nuevaLista);
-              this.listaService.createLista(nuevaLista); // Guarda la lista en Firebase
+              this.listaService.createLista(nuevaLista);
               this.guardarListas();
             } else {
               console.log('Nombre de la lista vacío');
@@ -60,7 +58,6 @@ export class ListasPage {
     await alert.present();
   }
 
-  // Cargar listas desde Firebase
   cargarListas() {
     this.listaService.getListas().subscribe(listas => {
       this.listas = listas;
@@ -68,25 +65,24 @@ export class ListasPage {
     });
   }
 
-  agregarProducto(lista: any) {
+  agregarProducto(lista: lista) {
     if (this.nuevoProducto.trim() !== '') {
-      lista.productos.push(this.nuevoProducto);
-      this.listaService.updateLista(lista.key, lista); // Actualiza la lista en Firebase
+      lista.nombreproducto = this.nuevoProducto;
+      this.listaService.updateLista(lista.id!, lista);
       this.nuevoProducto = '';
     }
   }
 
-  eliminarProducto(lista: any, producto: string) {
-    const index = lista.productos.indexOf(producto);
-    if (index > -1) {
-      lista.productos.splice(index, 1);
-      this.listaService.updateLista(lista.key, lista); // Actualiza la lista en Firebase
+  eliminarProducto(lista: lista, producto: string) {
+    if (lista.nombreproducto === producto) {
+      lista.nombreproducto = '';
+      this.listaService.updateLista(lista.id!, lista);
     }
   }
 
-  eliminarLista(lista: any) {
+  eliminarLista(lista: lista) {
     this.listas = this.listas.filter(l => l !== lista);
-    this.listaService.deleteLista(lista.key); // Elimina la lista de Firebase
+    this.listaService.deleteLista(lista.id!);
     alert('Lista eliminada');
   }
 
@@ -100,10 +96,15 @@ export class ListasPage {
   }
 
   limpiarLocalStorage() {
-    console.log('limpiarLocalStorage');// logica de limpiar todas las listas
+    console.log('limpiarLocalStorage');
   }
 
-  editarLista(lista: any) {
-    console.log('editarLista', lista); // logica de actualizar la lista
+  editarLista(lista: lista) {
+    console.log('editarLista', lista);
+  }
+
+  generateId(): string {
+    return Math.random().toString(36).substring(2, 15);
   }
 }
+
