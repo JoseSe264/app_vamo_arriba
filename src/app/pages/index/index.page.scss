@@ -1,11 +1,11 @@
-/* Estilo general para el ion-app */
+/* Estilos Generales */
 ion-app {
-  --ion-background-color: #f9f9f9; /* Color de fondo neutro */
+  --ion-background-color: #f9f9f9; /* Fondo neutro */
 }
 
-/* Estilos para el encabezado */
+/* Estilos del Encabezado (Header) */
 ion-toolbar {
-  --background: #00549c; /* Color primario para la barra */
+  --background: #00549c;
 }
 
 ion-title {
@@ -14,94 +14,83 @@ ion-title {
   color: white;
 }
 
-/* Estilos para los botones en la cuadrícula */
+/* Botones del Header */
+ion-buttons ion-button {
+  color: #FF4C4C;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Estilo específico para ion-menu-button y el icono de ayuda */
+ion-menu-button, ion-button[fill="clear"] {
+  color: #FF4C4C;
+}
+
+ion-button[fill="clear"]:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Estilos para los botones de la cuadrícula */
+.botones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 ion-button {
+  background-color: #D43F3F;
+  color: white;
   width: 100%;
-  height: 100%;
-  border-radius: 12px; /* Bordes redondeados */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra ligera */
-  padding: 10px;
-  font-size: 0.9em;
-  text-align: center;
+  height: 50px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 ion-button:hover {
-  transform: scale(1.05); /* Efecto hover para agrandar ligeramente */
-  background-color: #004080; /* Cambiar el color de fondo en hover */
+  transform: scale(1.05);
+  background-color: #BF3030;
 }
 
+/* Estilos del icono dentro de los botones */
 ion-icon {
   font-size: 1.3em;
-  margin-right: 8px; /* Espacio entre el icono y el texto */
+  margin-right: 8px;
   color: #ffffff;
 }
 
-/* Configuración de cuadrícula responsiva */
-ion-grid {
-  padding: 20px;
+/* Fondo para el contenido principal */
+ion-content {
+  --background: url('/assets/img_Inv/fondoIndex.jpg') no-repeat center center / cover;
 }
 
-ion-col {
-  padding: 10px;
-}
-
+/* Estilos Responsivos */
 @media (min-width: 768px) {
-  ion-col {
-    --padding-top: 15px;
-    --padding-bottom: 15px;
+  .botones {
+    max-width: 600px;
   }
-
+  ion-title {
+    font-size: 20px;
+  }
   .welcome-text {
     text-align: center;
-    margin: 20px 0;
-    font-size: 1.5em; // Ajusta según sea necesario
-    color: #fff; // Color de texto (ajusta según tu paleta de colores)
-    font-weight: bold; // Opción de negrita para mayor impacto
+    font-size: 1.5em;
+    color: #fff;
+    font-weight: bold;
   }
-
-
-  ion-toolbar {
-    background-color: #3f51b5; /* Color de fondo del toolbar (ejemplo: azul) */
-    color: white; /* Color del texto en el toolbar */
-    --ion-padding-start: 16px; /* Espaciado a la izquierda */
-    --ion-padding-end: 16px; /* Espaciado a la derecha */
-    --ion-padding-top: 8px; /* Espaciado en la parte superior */
-    --ion-padding-bottom: 8px; /* Espaciado en la parte inferior */
-  
-    ion-title {
-      font-size: 20px; /* Tamaño de fuente para el título */
-      font-weight: bold; /* Peso de la fuente */
-      text-align: center; /* Centrar el texto del título */
-      flex: 1; /* Permitir que el título ocupe el espacio restante */
-    }
-  
-    ion-buttons {
-      ion-button {
-        color: white; /* Color de los botones */
-        --padding-start: 8px; /* Espaciado a la izquierda de los botones */
-        --padding-end: 8px; /* Espaciado a la derecha de los botones */
-  
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.2); /* Efecto hover en los botones */
-        }
-      }
-    }
-  
-    ion-menu-button {
-      color: white; /* Color del botón del menú */
-    }
-  
-    /* Estilo para el icono de ayuda */
-    ion-button[fill="clear"] {
-      --background: transparent; /* Hacer el fondo transparente */
-      --color: white; /* Color del icono */
-      
-      &:hover {
-        color: rgba(255, 255, 255, 0.7); /* Cambiar color al pasar el ratón */
-      }
-    }
-  }
-  
-  
 }

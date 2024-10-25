@@ -1,6 +1,6 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar >
+    <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
@@ -11,50 +11,40 @@
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
-
-   
-
   </ion-header>
 
-  <ion-content>
-    <app-image-slider [images]="imageArray"></app-image-slider>
-  </ion-content>
-
-
-
   <ion-content class="ion-padding">
-
-<div>
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6" size-md="3">
-          <ion-button expand="block" color="secondary" routerLink="/lista-compra">
-            <ion-icon slot="start" name="storefront-outline"></ion-icon>
-            Lista de compras
-          </ion-button>
-        </ion-col>
-        <ion-col size="6" size-md="3">
-          <ion-button expand="block" color="secondary" routerLink="/inventory">
-            <ion-icon slot="start" name="home-outline"></ion-icon>
-            Inventario
-          </ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6" size-md="3">
-          <ion-button expand="block" color="secondary" routerLink="/scan">
-            <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-            Escanea tu boleta
-          </ion-button>
-        </ion-col>
-        <ion-col size="6" size-md="3">
-          <ion-button expand="block" color="secondary" routerLink="/profile">
-            <ion-icon slot="start" name="hourglass-outline"></ion-icon>
-            Perfil Usuario
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+    <div class="botones">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/lista-compra">
+              <ion-icon slot="start" name="storefront-outline"></ion-icon>
+              Lista de compras
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/inventory">
+              <ion-icon slot="start" name="home-outline"></ion-icon>
+              Inventario
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/scan">
+              <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+              Escanea tu boleta
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/profile">
+              <ion-icon slot="start" name="hourglass-outline"></ion-icon>
+              Perfil Usuario
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-content>
 </ion-app>
