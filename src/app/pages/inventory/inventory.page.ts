@@ -5,6 +5,8 @@ import { Product } from 'src/app/models/product.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { getStorage, ref, uploadString } from 'firebase/storage';
+
 
 @Component({
   selector: 'app-inventory',
@@ -67,26 +69,48 @@ export class InventoryPage implements OnInit {
       console.log('El formulario es inválido. No se puede guardar el producto.');
       return;
     }
-
+  
     const productData = { ...this.productForm.value }; // Clonar el formulario
-
-    // Asignar el estado según la cantidad
-    productData.status = this.getProductStatus(this.productForm.get('cantidad').value);
-
+  
     const saveOperation = this.isEditing && this.currentProduct
       ? this.productService.updateProduct({ ...productData, id: this.currentProduct.id })
       : this.productService.addProduct(productData);
-
-    saveOperation.subscribe(
-      () => {
-        const action = this.isEditing ? 'actualizado' : 'agregado';
-        console.log(`Producto ${action}`);
-        this.resetForm();
-      },
-      error => {
-        console.error('Error al guardar producto:', error);
-      }
-    );
+  
+    // Si hay una imagen para subir
+    if (productData.imagenUrl) {
+      const storage = getStorage();
+      const storageRef = ref(storage, `products/${Date.now()}.jpg`);
+  
+      // Sube la imagen en formato data_url
+      uploadString(storageRef, productData.imagenUrl, 'data_url').then((snapshot) => {
+        console.log('Imagen subida con éxito:', snapshot);
+        // Continúa con la lógica de guardado del producto
+        saveOperation.subscribe(
+          () => {
+            const action = this.isEditing ? 'actualizado' : 'agregado';
+            console.log(`Producto ${action}`);
+            this.resetForm();
+          },
+          error => {
+            console.error('Error al guardar producto:', error);
+          }
+        );
+      }).catch(error => {
+        console.error('Error al subir la imagen:', error);
+      });
+    } else {
+      // Si no hay imagen, guardar directamente
+      saveOperation.subscribe(
+        () => {
+          const action = this.isEditing ? 'actualizado' : 'agregado';
+          console.log(`Producto ${action}`);
+          this.resetForm();
+        },
+        error => {
+          console.error('Error al guardar producto:', error);
+        }
+      );
+    }
   }
 
   editProduct(product: Product): void {
@@ -109,6 +133,7 @@ export class InventoryPage implements OnInit {
     this.showForm = false;
     this.isEditing = false;
     this.productForm.reset();
+    this.currentProduct = null;
   }
 
   updateProductStatus(cantidad: number): void {
@@ -147,25 +172,28 @@ export class InventoryPage implements OnInit {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
-        resultType: CameraResultType.Uri,
-        source: CameraSource.Camera, // Cambia a Camera para tomar una foto
+        resultType: CameraResultType.Base64, // Cambia a Base64
+        source: CameraSource.Camera,
       });
   
-      // Verifica que la ruta de la imagen esté disponible
-      console.log('Image URL:', image.webPath);
-  
-      // Actualiza la URL de la imagen en el formulario
-      if (image.webPath) {
+      if (image && image.base64String) {
+        const base64Data = `data:image/jpeg;base64,${image.base64String}`;
         this.productForm.patchValue({
-          imagenUrl: image.webPath, // Guarda la ruta de la imagen tomada
+          imagenUrl: base64Data,
         });
       } else {
-        console.error('No se pudo obtener la ruta de la imagen.');
+        console.log('No se seleccionó ninguna imagen.');
       }
     } catch (error) {
-      console.error('Error al tomar la foto:', error);
+      if (error.message.includes('User cancelled photos app')) {
+        console.log('El usuario canceló la selección de la imagen.');
+      } else {
+        console.error('Error al tomar la foto:', error);
+      }
     }
   }
+  
+  
   
 
 }
