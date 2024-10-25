@@ -8,15 +8,6 @@
   color: white;
 }
 
-.product-form-container {
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-
-
-}
-
 .login-card{
   min-width: 85%;
   border-radius: 50px;
@@ -65,4 +56,7 @@ ion-card-content{
 
 .signup-button {
   width: 80%;
+}
+.ion-button{
+  border-radius: 100px;
 }
