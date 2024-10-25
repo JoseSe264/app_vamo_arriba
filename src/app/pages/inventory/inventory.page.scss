@@ -35,12 +35,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 25px; /* Padding lateral */
+  padding: 0 20px; /* Ajustado para mantener consistencia */
 }
 
 /* Formulario de producto */
 .formProduct {
-  width: 300%; /* Para que se adapte al ancho completo del contenedor */
+  width: 100%; /* Para que se adapte al ancho completo del contenedor */
   max-width: 400px; /* Limitar el ancho máximo para evitar que sea demasiado grande en pantallas grandes */
   margin-bottom: 20px;
   display: flex;
@@ -52,8 +52,6 @@
   color: white;
   transition: cubic-bezier(0.895, 0.03, 0.685, 0.22);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-  
 }
 
 /* Estilo para items dentro de inventario */
@@ -62,9 +60,6 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-   
-  
-
 }
 
 /* Estilo para el encabezado */
@@ -198,12 +193,15 @@ ion-button[color="danger"] {
   }
 }
 
-
-
-.inv{
+/* Estilos para el contenedor de inventario */
+.inv {
   width: auto;
   padding: 20px;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+ion-content {
+  --background: url('/assets/img_Inv/Azul.jpg') no-repeat center center / cover;
 }
