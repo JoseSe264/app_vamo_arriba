@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
-   <ion-title>Perfil de Usuario</ion-title>
+    <ion-title>Perfil de Usuario</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding" fullscreen>
   <div class="profile-container">
-
     <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="form-horizontal">
+      
       <ion-avatar>
-        <img src="assets/icon/profile.png " alt="Foto de perfil" class="profile-pic">
+        <img src="assets/icon/profile.png" alt="Foto de perfil" class="profile-pic">
       </ion-avatar>
       
       <ion-item lines="none" class="profile-item">
@@ -17,14 +17,10 @@
         <ion-input formControlName="name" type="text" placeholder="Nombre"></ion-input>
       </ion-item>
 
-      
-
       <ion-item lines="none" class="profile-item">
         <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email" type="email" placeholder="tuemail@dominio.com" [disabled]="true"></ion-input>
       </ion-item>
-
- 
 
       <ion-item lines="none" class="profile-item">
         <ion-label position="floating">URL de Imagen de Perfil</ion-label>
@@ -34,10 +30,14 @@
       <ion-button expand="full" color="primary" type="submit" [disabled]="profileForm.invalid">
         Actualizar Perfil
       </ion-button>
-      
+
       <ion-button expand="full" color="danger" (click)="logout()">
         Cerrar Sesión
       </ion-button>
     </form>
   </div>
+
+  <ion-footer>
+    <app-header-custom></app-header-custom>
+  </ion-footer>
 </ion-content>

@@ -47,7 +47,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #00549c;
   border-radius: 20px;
   padding: 20px;
   color: white;
@@ -93,7 +92,7 @@
           /* Estilo para el input */
           &::part(input) {
               font-size: 16px; /* Tamaño de fuente */
-              color: #333; /* Color del texto del input */
+              color: #05050c; /* Color del texto del input */
           }
 
           /* Estilo para el ícono de búsqueda */
@@ -196,4 +195,14 @@ ion-button[color="danger"] {
   .logo {
       padding: 0 10px; /* Reducir el padding del logo en pantallas pequeñas */
   }
+}
+
+
+
+.inv{
+  width: auto;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }

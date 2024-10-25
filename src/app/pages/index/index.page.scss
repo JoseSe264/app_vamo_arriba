@@ -94,3 +94,39 @@ ion-content {
     font-weight: bold;
   }
 }
+
+
+
+
+/* Estilos específicos para cada imagen */
+#png-banner {
+  width: 50%; /* Ajusta el tamaño del PNG */
+  filter: brightness(0) saturate(100%) invert(34%) sepia(81%) saturate(1785%) hue-rotate(3deg) brightness(93%) contrast(95%); /* Cambia el color del PNG */
+}
+
+#gif-banner {
+  width: 50%; /* Ajusta el tamaño del GIF */
+  filter: grayscale(100%); /* Cambia el color del GIF a escala de grises */
+}
+
+.image-container {
+  display: flex;               /* Activa flexbox */
+  justify-content: center;     /* Centra horizontalmente */
+  align-items: center;     /* Alinea en la parte superior del contenedor */
+  height: auto;                /* Altura del contenedor (ajusta según sea necesario) */
+  margin-bottom: 20px;         /* Espacio entre la imagen y los botones */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo negro transparente */
+
+}
+
+.banner-image {
+  height: 100px;               /* Ajusta el tamaño de la imagen */
+  object-fit: cover;           /* Cubre el área sin deformar la imagen */
+  border-radius: 5px;         /* Añade un borde redondeado para la imagen */
+  transition: transform 0.3s;  /* Transición para el efecto de zoom al pasar el ratón */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra negra para las imágenes */
+  align-items: center;     /* Alinea en la parte superior del contenedor */
+  align-content: center;
+  align-self: center;
+ 
+}

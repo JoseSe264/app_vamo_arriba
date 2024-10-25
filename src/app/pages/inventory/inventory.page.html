@@ -1,11 +1,13 @@
-<ion-header class="header">
-  <ion-toolbar>
-    <!-- Barra de búsqueda integrada -->
-    <app-search-bar (searchTermChanged)="onSearchTermChanged($event)"></app-search-bar>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
+
+  <ion-header class="header">
+    <ion-toolbar>
+      <!-- Barra de búsqueda integrada -->
+      <app-search-bar (searchTermChanged)="onSearchTermChanged($event)"></app-search-bar>
+    </ion-toolbar>
+  </ion-header>
 
   <!-- Logo y título -->
   <div class="logo">
@@ -13,9 +15,10 @@
       <ion-row>
         <ion-col size="12" class="ion-text-center">
           <div>
-            <p>Inventario</p>
-            <img src="assets/icon/inventory.png" alt="Inventario Logo" style="width: 150px;">
-          </div>
+            <p class="inv">Inventario</p>
+            <img src="/assets/logos/AppTiro.png" alt="Banner" class="banner-image">
+
+            <img src="/assets/logos/AppTiro.gif" alt="Banner" class="banner-image">          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
