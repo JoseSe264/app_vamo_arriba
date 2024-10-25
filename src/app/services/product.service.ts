@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Product } from '../models/product.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database'; 
+import { AngularFireStorage } from '@angular/fire/compat/storage'; 
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -10,7 +11,10 @@ import { map, catchError } from 'rxjs/operators';
 export class ProductService {
   private productsSubject: BehaviorSubject<Product[]> = new BehaviorSubject<Product[]>([]);
 
-  constructor(@Inject(AngularFireDatabase) private db: AngularFireDatabase) {
+  constructor(
+    @Inject(AngularFireDatabase) private db: AngularFireDatabase, 
+    private storage: AngularFireStorage 
+  ) {
     this.loadProducts(); // Cargar productos al iniciar el servicio
   }
 
@@ -40,20 +44,28 @@ export class ProductService {
 
   // Agregar un nuevo producto
   addProduct(product: Product): Observable<void> {
-    const newProductRef = this.db.list<Product>('products').push(product); 
-    product.id = newProductRef.key || ''; 
-
     return new Observable(observer => {
-      newProductRef
-        .then(() => {
-          this.productsSubject.next([...this.productsSubject.getValue(), product]);
+      if (product.imagenUrl) {
+        this.uploadImage(product.imagenUrl).then(url => {
+          product.imagenUrl = url; // Sube la imagen y obtiene la URL
+          const newProductRef = this.db.list<Product>('products').push(product); 
+          product.id = newProductRef.key || ''; 
+
+          this.productsSubject.next([...this.productsSubject.getValue(), product]); // Actualiza la lista
           observer.next();
           observer.complete();
-        })
-        .catch(error => {
-          console.error("Error adding product:", error);
+        }).catch(error => {
+          console.error("Error al subir la imagen:", error);
           observer.error(error);
         });
+      } else {
+        const newProductRef = this.db.list<Product>('products').push(product); 
+        product.id = newProductRef.key || ''; 
+
+        this.productsSubject.next([...this.productsSubject.getValue(), product]); // Actualiza la lista
+        observer.next();
+        observer.complete();
+      }
     });
   }
 
@@ -73,25 +85,64 @@ export class ProductService {
   }
 
   // Actualizar un producto existente
-  updateProduct(updatedProduct: Product): Observable<Product> {
-    if (!updatedProduct.id) {
-      console.error("Error: Product ID is undefined");
-      return of(); 
-    }
-
+  updateProduct(updatedProduct: Product): Observable<void> {
     return new Observable(observer => {
-      this.db.list<Product>('products').update(updatedProduct.id, updatedProduct).then(() => {
-        const products = this.productsSubject.getValue().map(product => 
-          product.id === updatedProduct.id ? updatedProduct : product
-        );
-        this.productsSubject.next(products);
-        observer.next(updatedProduct); // Retornar el producto actualizado
-        observer.complete();
-      }).catch(error => {
-        console.error("Error updating product:", error);
-        observer.error(error);
-      });
+      if (updatedProduct.imagenUrl) {
+        this.uploadImage(updatedProduct.imagenUrl).then(url => {
+          updatedProduct.imagenUrl = url; // Sube la imagen y obtiene la URL
+          if (!updatedProduct.id) {
+            console.error("Error: Product ID is undefined");
+            observer.error("Product ID is undefined");
+            return; 
+          }
+
+          this.db.list<Product>('products').update(updatedProduct.id, updatedProduct).then(() => {
+            const products = this.productsSubject.getValue().map(product => 
+              product.id === updatedProduct.id ? updatedProduct : product
+            );
+            this.productsSubject.next(products); // Actualiza el BehaviorSubject
+            observer.next();
+            observer.complete();
+          }).catch(error => {
+            console.error("Error updating product:", error);
+            observer.error(error);
+          });
+        }).catch(error => {
+          console.error("Error uploading image:", error);
+          observer.error(error);
+        });
+      } else {
+        if (!updatedProduct.id) {
+          console.error("Error: Product ID is undefined");
+          observer.error("Product ID is undefined");
+          return; 
+        }
+
+        this.db.list<Product>('products').update(updatedProduct.id, updatedProduct).then(() => {
+          const products = this.productsSubject.getValue().map(product => 
+            product.id === updatedProduct.id ? updatedProduct : product
+          );
+          this.productsSubject.next(products); // Actualiza el BehaviorSubject
+          observer.next();
+          observer.complete();
+        }).catch(error => {
+          console.error("Error updating product:", error);
+          observer.error(error);
+        });
+      }
     });
-    
+  }
+
+  // Método para subir la imagen a Firebase Storage
+  private async uploadImage(imageUrl: string): Promise<string> {
+    try {
+      const filePath = `images/${new Date().getTime()}_image`; // Nombre único para la imagen
+      const fileRef = this.storage.ref(filePath);
+      await fileRef.putString(imageUrl, 'data_url'); // Sube la imagen
+      return await fileRef.getDownloadURL().toPromise(); // Obtiene la URL de descarga
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
   }
 }
