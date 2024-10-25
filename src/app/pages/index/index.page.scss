@@ -1,39 +1,107 @@
-ion-header {
-    background-color: var(--ion-color-primary); /* Color del encabezado */
-    color: white; /* Color del texto del encabezado */
-  }
-  
-  ion-title {
-    font-size: 1.5rem; /* Tamaño del título */
-    font-weight: bold; /* Negrita para el título */
-  }
-  
-  ion-button {
-    --background: var(--ion-color-secondary); /* Color de fondo del botón */
-    --color: white; /* Color del texto del botón */
-    border-radius: 10px; /* Bordes redondeados */
-  }
-  
-  ion-button:hover {
-    --background: var(--ion-color-secondary-shade); /* Color del botón al pasar el cursor */
-  }
-  
-  ion-grid {
-    margin: 0; /* Eliminar margen del grid */
-  }
-  
+/* Estilo general para el ion-app */
+ion-app {
+  --ion-background-color: #f9f9f9; /* Color de fondo neutro */
+}
+
+/* Estilos para el encabezado */
+ion-toolbar {
+  --background: #00549c; /* Color primario para la barra */
+}
+
+ion-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: white;
+}
+
+/* Estilos para los botones en la cuadrícula */
+ion-button {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15); /* Sombra ligera */
+  padding: 10px;
+  font-size: 0.9em;
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+ion-button:hover {
+  transform: scale(1.05); /* Efecto hover para agrandar ligeramente */
+  background-color: #004080; /* Cambiar el color de fondo en hover */
+}
+
+ion-icon {
+  font-size: 1.3em;
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+  color: #ffffff;
+}
+
+/* Configuración de cuadrícula responsiva */
+ion-grid {
+  padding: 20px;
+}
+
+ion-col {
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
   ion-col {
-    padding: 10px; /* Espaciado alrededor de cada columna */
+    --padding-top: 15px;
+    --padding-bottom: 15px;
   }
-  
-  ion-footer {
-    background-color: var(--ion-color-light); /* Color de fondo del pie de página */
-    text-align: center; /* Centrar el texto */
-    padding: 10px; /* Espaciado dentro del pie de página */
+
+  .welcome-text {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.5em; // Ajusta según sea necesario
+    color: #fff; // Color de texto (ajusta según tu paleta de colores)
+    font-weight: bold; // Opción de negrita para mayor impacto
   }
-  
+
+
   ion-toolbar {
-    --background: var(--ion-color-primary); /* Color de fondo del toolbar en el footer */
-    color: white; /* Color del texto en el toolbar del footer */
+    background-color: #3f51b5; /* Color de fondo del toolbar (ejemplo: azul) */
+    color: white; /* Color del texto en el toolbar */
+    --ion-padding-start: 16px; /* Espaciado a la izquierda */
+    --ion-padding-end: 16px; /* Espaciado a la derecha */
+    --ion-padding-top: 8px; /* Espaciado en la parte superior */
+    --ion-padding-bottom: 8px; /* Espaciado en la parte inferior */
+  
+    ion-title {
+      font-size: 20px; /* Tamaño de fuente para el título */
+      font-weight: bold; /* Peso de la fuente */
+      text-align: center; /* Centrar el texto del título */
+      flex: 1; /* Permitir que el título ocupe el espacio restante */
+    }
+  
+    ion-buttons {
+      ion-button {
+        color: white; /* Color de los botones */
+        --padding-start: 8px; /* Espaciado a la izquierda de los botones */
+        --padding-end: 8px; /* Espaciado a la derecha de los botones */
+  
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2); /* Efecto hover en los botones */
+        }
+      }
+    }
+  
+    ion-menu-button {
+      color: white; /* Color del botón del menú */
+    }
+  
+    /* Estilo para el icono de ayuda */
+    ion-button[fill="clear"] {
+      --background: transparent; /* Hacer el fondo transparente */
+      --color: white; /* Color del icono */
+      
+      &:hover {
+        color: rgba(255, 255, 255, 0.7); /* Cambiar color al pasar el ratón */
+      }
+    }
   }
   
+  
+}
