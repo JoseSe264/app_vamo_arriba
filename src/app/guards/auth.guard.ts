@@ -1,29 +1,16 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
+import { Injectable , inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
+export const authGuard: CanActivateFn = (route, state) => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.isLoggedIn().pipe(
-      map(isLoggedIn => {
-        if (isLoggedIn) {
-          return true; // Permitir la navegación
-        } else {
-          alert('No está logueado'); // Mostrar alerta
-          this.router.navigate(['/login']); // Redirigir a login si no está autenticado
-          return false; // Bloquear la navegación
-        }
-      })
-    );
+  if (authService.isLoggedIn()) {
+    console.log(authService.getCurrentUser)
+    return true;
+  } else {
+    router.navigate(['/login']);
+    return false;
   }
 }
