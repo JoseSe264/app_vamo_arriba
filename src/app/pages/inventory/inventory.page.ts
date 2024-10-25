@@ -4,6 +4,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { Product } from 'src/app/models/product.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { getStorage, ref, uploadString } from 'firebase/storage';
+
 
 @Component({
   selector: 'app-inventory',
@@ -21,12 +24,12 @@ export class InventoryPage implements OnInit {
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
     this.productForm = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(3)]], // Nombre mínimo de 3 caracteres
+      nombre: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', Validators.required],
-      cantidad: [0, [Validators.required, Validators.min(1)]], // Mínimo de cantidad es 1
+      cantidad: [0, [Validators.required, Validators.min(1)]],
       categoria: ['', Validators.required],
       fechaExpiracion: ['', Validators.required],
-      precio: [0, [Validators.required, Validators.min(0.01)]], // El precio debe ser mayor a 0
+      precio: [0, [Validators.required, Validators.min(0.01)]],
       status: [{ value: 'Disponible', disabled: true }, Validators.required],
       imagenUrl: ['']
     });
@@ -51,43 +54,64 @@ export class InventoryPage implements OnInit {
   }
 
   onSearchTermChanged(searchTerm: string) {
-    if (!searchTerm) {
-      this.filteredProducts$ = this.products$;
-    } else {
-      this.filteredProducts$ = this.products$.pipe(
-        map(products => products.filter(product =>
-          product.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.descripcion?.toLowerCase().includes(searchTerm.toLowerCase())
-        ))
-      );
-    }
+    this.filteredProducts$ = searchTerm
+      ? this.products$.pipe(
+          map(products => products.filter(product =>
+            product.nombre?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            product.descripcion?.toLowerCase().includes(searchTerm.toLowerCase())
+          ))
+        )
+      : this.products$;
   }
 
   saveProduct(): void {
-    // Verifica si el formulario es inválido
     if (this.productForm.invalid) {
       console.log('El formulario es inválido. No se puede guardar el producto.');
-      return; // Salimos si el formulario es inválido para evitar el guardado
+      return;
     }
   
-    const productData = this.productForm.value;
-    
-    // Asignar el estado según la cantidad
-    productData.status = this.getProductStatus(this.productForm.get('cantidad').value);
+    const productData = { ...this.productForm.value }; // Clonar el formulario
   
-    if (this.isEditing && this.currentProduct) {
-      productData.id = this.currentProduct.id;
-      this.productService.updateProduct(productData);
-      console.log('Producto actualizado');
+    const saveOperation = this.isEditing && this.currentProduct
+      ? this.productService.updateProduct({ ...productData, id: this.currentProduct.id })
+      : this.productService.addProduct(productData);
+  
+    // Si hay una imagen para subir
+    if (productData.imagenUrl) {
+      const storage = getStorage();
+      const storageRef = ref(storage, `products/${Date.now()}.jpg`);
+  
+      // Sube la imagen en formato data_url
+      uploadString(storageRef, productData.imagenUrl, 'data_url').then((snapshot) => {
+        console.log('Imagen subida con éxito:', snapshot);
+        // Continúa con la lógica de guardado del producto
+        saveOperation.subscribe(
+          () => {
+            const action = this.isEditing ? 'actualizado' : 'agregado';
+            console.log(`Producto ${action}`);
+            this.resetForm();
+          },
+          error => {
+            console.error('Error al guardar producto:', error);
+          }
+        );
+      }).catch(error => {
+        console.error('Error al subir la imagen:', error);
+      });
     } else {
-      this.productService.addProduct(productData);
-      console.log('Producto agregado');
+      // Si no hay imagen, guardar directamente
+      saveOperation.subscribe(
+        () => {
+          const action = this.isEditing ? 'actualizado' : 'agregado';
+          console.log(`Producto ${action}`);
+          this.resetForm();
+        },
+        error => {
+          console.error('Error al guardar producto:', error);
+        }
+      );
     }
-  
-    // Restablecer el formulario después de guardar
-    this.resetForm();
   }
-  
 
   editProduct(product: Product): void {
     this.currentProduct = product;
@@ -101,7 +125,7 @@ export class InventoryPage implements OnInit {
       () => {
         console.log('Producto eliminado correctamente');
       },
-      (error) => console.error('Error al eliminar producto:', error)
+      error => console.error('Error al eliminar producto:', error)
     );
   }
 
@@ -109,15 +133,14 @@ export class InventoryPage implements OnInit {
     this.showForm = false;
     this.isEditing = false;
     this.productForm.reset();
+    this.currentProduct = null;
   }
 
-  // Función para cambiar el estado del producto basado en la cantidad
   updateProductStatus(cantidad: number): void {
     const statusControl = this.productForm.get('status');
     statusControl.setValue(this.getProductStatus(cantidad));
   }
 
-  // Retorna el estado según la cantidad
   getProductStatus(cantidad: number): string {
     if (cantidad === 0) {
       return 'Agotado';
@@ -127,4 +150,50 @@ export class InventoryPage implements OnInit {
       return 'Disponible';
     }
   }
+
+  async selectImage() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Photos,
+      });
+
+      this.productForm.patchValue({
+        imagenUrl: image.webPath
+      });
+    } catch (error) {
+      console.error('Error al seleccionar la imagen:', error);
+    }
+  }
+
+
+  async takePhoto() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        resultType: CameraResultType.Base64, // Cambia a Base64
+        source: CameraSource.Camera,
+      });
+  
+      if (image && image.base64String) {
+        const base64Data = `data:image/jpeg;base64,${image.base64String}`;
+        this.productForm.patchValue({
+          imagenUrl: base64Data,
+        });
+      } else {
+        console.log('No se seleccionó ninguna imagen.');
+      }
+    } catch (error) {
+      if (error.message.includes('User cancelled photos app')) {
+        console.log('El usuario canceló la selección de la imagen.');
+      } else {
+        console.error('Error al tomar la foto:', error);
+      }
+    }
+  }
+  
+  
+  
+
 }

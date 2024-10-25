@@ -1,50 +1,45 @@
-<ion-app>
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>¡Hola {{ usuario }}!</ion-title>
-      <ion-buttons slot="end">
-        <ion-button fill="clear">
-          <ion-icon slot="icon-only" name="help-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
+
+
 
   <ion-content class="ion-padding">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" color="secondary" routerLink="/lista-compra">
-            <ion-icon slot="start" name="storefront-outline"></ion-icon>
-            Lista de compras
-          </ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button expand="block" color="secondary" routerLink="/inventory">
-            <ion-icon slot="start" name="home-outline"></ion-icon>
-            Inventario
-          </ion-button>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-button expand="block" color="secondary" routerLink="/scan">
-            <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-            Escanea tu boleta
-          </ion-button>
-        </ion-col>
-        <ion-col size="6">
-          <ion-button expand="block" color="secondary"routerLink="/profile">
-            <ion-icon slot="start" name="hourglass-outline"></ion-icon>
-            Perfil Usuario
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    
+
+    <div class="image-container">
+      <img src="/assets/logos/AppTiro.png" alt="Banner" class="banner-image">
+
+      <img src="/assets/logos/AppTiro.gif" alt="Banner" class="banner-image">
+    </div>
+
+    <div class="botones">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/lista-compra">
+              <ion-icon slot="start" name="storefront-outline"></ion-icon>
+              Lista de compras
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/inventory">
+              <ion-icon slot="start" name="home-outline"></ion-icon>
+              Inventario
+            </ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/scan">
+              <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+              Escanea tu boleta
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" size-md="3">
+            <ion-button expand="block" routerLink="/profile">
+              <ion-icon slot="start" name="hourglass-outline"></ion-icon>
+              Perfil Usuario
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-content>
 
- 

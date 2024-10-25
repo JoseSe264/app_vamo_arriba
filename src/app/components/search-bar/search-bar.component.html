@@ -1,1 +1,4 @@
-<app-search-bar (searchTermChanged)="onSearchTermChanged($event.target.value)"></app-search-bar>
+<ion-item class="search-bar">
+    <ion-searchbar (ionInput)="onSearchTermChanged($event.target.value)" placeholder="Buscar productos..."></ion-searchbar>
+</ion-item>
+  
