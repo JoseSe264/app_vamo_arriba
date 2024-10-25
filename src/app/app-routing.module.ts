@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
  
   {
@@ -23,18 +23,18 @@ const routes: Routes = [
   {
     path: 'index',
     loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule),
-    canActivate: [authGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
-    canActivate: [authGuard]
+    canActivate: [AuthGuard]
   },
   
   {
     path: 'lista-compra',
     loadChildren: () => import('./pages/lista-compra/lista-compra.module').then( m => m.ListaCompraPageModule),
-    canActivate: [authGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'loader',
@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'inventory',
     loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule),
-    canActivate: [authGuard]
+    canActivate: [AuthGuard]
   },
   
   {

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user.models';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -65,8 +67,10 @@ export class AuthService {
       });
   }
 
-  isLoggedIn(): boolean {
-    return this.afAuth.authState != null;
+  isLoggedIn(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      map(authState => authState !== null)// Devuelve true si hay un usuario autenticado, false si no
+    )
   }
 
   getCurrentUser(): Promise<any> {
