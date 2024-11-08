@@ -1,0 +1,23 @@
+.custom-header {
+    background-color: #03045e; /* Color de fondo */
+  }
+  
+  .toolbar {
+    --background: #03045e; /* Color de fondo de la barra */
+    --color: white; /* Color del texto de la barra */
+  }
+  
+  .custom-button {
+    background-color: transparent; /* Botón sin fondo */
+    color: white; /* Color del texto del botón */
+    &:hover {
+      background-color: #05050c; /* Fondo en hover */
+    }
+  }
+  
+  .title {
+    color: white; /* Color del título */
+    font-size: 1.5em; /* Tamaño del título */
+    font-weight: bold; /* Negrita */
+  }
+  

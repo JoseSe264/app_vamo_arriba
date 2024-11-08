@@ -1,0 +1,207 @@
+/* Estilos generales */
+
+/* Contenedor principal del perfil */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh; /* Usar 100vh para asegurar que ocupe toda la pantalla */
+  background-color: #03045e; /* Color de fondo azul oscuro */
+  padding: 20px; /* Agregar un poco de padding para no pegar contenido al borde */
+}
+
+/* Contenedor del inventario */
+.inventory-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Tomar el 100% del contenedor padre */
+  background-color: #05050c !important; /* Fondo negro para el contenedor de inventario */
+  color: white; /* Color de texto blanco */
+  padding: 20px; /* Padding para separar el contenido de los bordes */
+
+  /* Estilo adicional para textos dentro del contenedor de inventario */
+  h1, h2, p {
+      margin: 10px 0; /* Margen para separar textos */
+      text-align: center; /* Alinear textos al centro */
+  }
+}
+
+/* Estilo del logo */
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px; /* Ajustado para mantener consistencia */
+}
+
+/* Formulario de producto */
+.formProduct {
+  width: 100%; /* Para que se adapte al ancho completo del contenedor */
+  max-width: 400px; /* Limitar el ancho máximo para evitar que sea demasiado grande en pantallas grandes */
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  padding: 20px;
+  color: white;
+  transition: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo para items dentro de inventario */
+.items {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Estilo para el encabezado */
+.header {
+  background-color: #ffffff; /* Color de fondo del encabezado */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil en el encabezado */
+
+  ion-toolbar {
+      padding: 10px; /* Espaciado dentro de la barra de herramientas */
+  }
+
+  app-search-bar {
+      width: 100%; /* Asegura que la barra de búsqueda ocupe todo el ancho */
+      margin: 0; /* Sin márgenes */
+
+      /* Estilos para la barra de búsqueda */
+      ion-searchbar {
+          --background: #f8f9fa; /* Fondo claro para la barra de búsqueda */
+          --color: #00549c; /* Color del texto */
+          --padding-start: 12px; /* Espacio al inicio */
+          --padding-end: 12px; /* Espacio al final */
+          --border-radius: 10px; /* Bordes redondeados */
+          --border-width: 1px; /* Ancho del borde */
+          --border-color: #ccc; /* Color del borde */
+
+          /* Estilo para el input */
+          &::part(input) {
+              font-size: 16px; /* Tamaño de fuente */
+              color: #05050c; /* Color del texto del input */
+          }
+
+          /* Estilo para el ícono de búsqueda */
+          &::part(search-icon) {
+              color: #007bff; /* Color del ícono de búsqueda */
+          }
+
+          /* Estilo para el botón de cancelar */
+          &::part(cancel-button) {
+              color: #d9534f; /* Color del botón de cancelar */
+          }
+
+          /* Estilo para el texto del placeholder */
+          &::part(placeholder) {
+              color: #999; /* Color del texto del placeholder */
+          }
+      }
+  }
+}
+
+/* Estilo general para la lista */
+ion-list {
+  --background: #f9f9f9; /* Fondo de la lista */
+  padding: 10px; /* Espaciado interno de la lista */
+}
+
+/* Estilo para cada elemento de la lista */
+ion-item {
+  margin-bottom: 10px; /* Espaciado entre los elementos de la lista */
+  padding: 15px; /* Espaciado interno de cada elemento */
+  border-radius: 5px; /* Bordes redondeados */
+  background: white; /* Fondo blanco para cada elemento */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra de cada elemento */
+  display: flex; /* Para alinear la imagen y el texto */
+  align-items: center; /* Centrar verticalmente */
+  transition: box-shadow 0.3s; /* Transición para la sombra */
+  
+  /* Efecto al pasar el ratón (hover) */
+  &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el ratón */
+  }
+}
+
+/* Estilo para la imagen del producto */
+ion-img {
+  width: 50px; /* Ancho de la imagen */
+  height: 50px; /* Alto de la imagen */
+  object-fit: cover; /* Mantener la relación de aspecto */
+  border-radius: 5px; /* Bordes redondeados para la imagen */
+}
+
+/* Estilo para el ion-label que contiene el texto */
+.custom-label {
+  flex-grow: 1; /* Para ocupar el espacio restante */
+  margin-left: 10px; /* Espacio entre la imagen y el texto */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-weight: bold; /* Grosor de la fuente */
+  color: whitesmoke; /* Color del texto */
+  text-align: left; /* Alineación del texto */
+  text-transform: uppercase; /* Transformar a mayúsculas */
+  letter-spacing: 0.5px; /* Espaciado entre letras */
+  line-height: 1.5; /* Altura de la línea */
+}
+
+/* Estilo para los textos dentro de ion-label */
+h2 {
+  font-size: 1.2rem; /* Tamaño de fuente para el nombre del producto */
+  color: white; /* Color del texto */
+  margin: 0; /* Sin margen superior */
+}
+
+p {
+  margin: 5px 0; /* Margen entre párrafos */
+  color: white; /* Color de texto para descripciones */
+  font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+}
+
+/* Estilo para los botones */
+ion-button {
+  margin-top: 10px; /* Margen superior para separar del texto */
+  font-size: 0.9rem; /* Tamaño de fuente del botón */
+}
+
+/* Estilo para el botón de eliminar */
+ion-button[color="danger"] {
+  --background: #ff4d4d; /* Color de fondo del botón eliminar */
+  --color: white; /* Color del texto del botón eliminar */
+  
+  &:hover {
+      --background: #ff3333; /* Color de fondo al pasar el ratón */
+  }
+}
+
+/* Responsividad: Asegurando que los elementos no se desborden en pantallas pequeñas */
+@media (max-width: 768px) {
+  .profile-container, .inventory-container {
+      padding: 10px; /* Reducir el padding en pantallas pequeñas */
+  }
+
+  .logo {
+      padding: 0 10px; /* Reducir el padding del logo en pantallas pequeñas */
+  }
+}
+
+/* Estilos para el contenedor de inventario */
+.inv {
+  width: auto;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+ion-content {
+  --background: url('/assets/img_Inv/Azul.jpg') no-repeat center center / cover;
+}

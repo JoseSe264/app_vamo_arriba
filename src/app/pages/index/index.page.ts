@@ -28,9 +28,14 @@ export class IndexPage implements OnInit {
 
    // Funciones de navegación
    navigateToInventarioCasa() {
-    this.router.navigate(['/inventario-casa']);  // Navega a la página de Categoría
+    this.router.navigate(['/inventory']);  // Navega a la página de Categoría
   }
 
+  imageArray: string[] = [
+    'assets/img_Inv/detergente.jpg',
+    'assets/img_Inv/cerveza.jpg',
+    'assets/img_Inv/aceite.jpg',
+  ];
   
 
 }

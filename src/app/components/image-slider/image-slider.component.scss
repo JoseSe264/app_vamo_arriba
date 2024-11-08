@@ -1,0 +1,26 @@
+ion-slides {
+  height: 250px; /* Ajusta la altura según tus necesidades */
+  width: 100%; /* Asegura que el slider use todo el ancho del contenedor */
+  background-color: #f5f5f5; /* Color de fondo del slider */
+  padding: 20px; /* Agrega un poco de padding para que el texto no se pegue al borde */
+  overflow: hidden; /* Evita que el slider se desborde en dispositivos móviles */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil en el slider */
+}
+
+ion-slide {
+  display: flex; /* Permite centrar la imagen */
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5; /* Color de fondo del slide */
+  padding: 20px; /* Agrega un poco de padding para que el texto no se pegue al borde */
+}
+
+.slider-image {
+  width: 100%; /* Asegúrate de que la imagen ocupe el ancho completo */
+  height: 100%; /* Asegura que la imagen ocupe toda la altura del slide */
+  object-fit: cover; /* Cubre el área sin deformar la imagen */
+  background-size: cover; /* Ajusta la imagen a su tamaño original */
+  background-position: center; /* Centra la imagen en el slide */
+  border-radius: 5px; /* Añade un borde redondeado para la imagen */
+  transition: transform 0.3s; /* Transición para el efecto de zoom al pasar el ratón */
+}

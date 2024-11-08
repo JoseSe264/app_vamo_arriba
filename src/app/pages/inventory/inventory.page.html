@@ -1,0 +1,153 @@
+
+
+<ion-content>
+
+  <ion-header class="header">
+    <ion-toolbar>
+      <!-- Barra de búsqueda integrada -->
+      <app-search-bar (searchTermChanged)="onSearchTermChanged($event)"></app-search-bar>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Logo y título -->
+  <div class="logo">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <div>
+            <p class="inv">Inventario</p>
+            <img src="/assets/img_Inv/letra.png" alt="Banner" class="banner-image">
+
+            <img src="/assets/logos/AppTiro.gif" alt="Banner" class="banner-image">          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  
+
+  <!-- Botón para mostrar el formulario de agregar/editar producto -->
+  <ion-button expand="full" (click)="toggleForm()"> 
+    {{ isEditing ? 'Editar Producto' : 'Añadir Producto' }}
+  </ion-button>
+
+  <!-- Formulario para añadir/editar producto -->
+   <div class="formProduct" >
+
+    
+    
+  <form *ngIf="showForm" [formGroup]="productForm" (ngSubmit)="saveProduct()">
+
+    <!-- Nombre del Producto -->
+    <ion-item class="items">
+      <ion-label class="custom-label" position="stacked">Nombre del producto</ion-label>
+      <ion-input formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-note *ngIf="productForm.get('nombre').hasError('required') && productForm.get('nombre').touched" color="danger">
+      El nombre es obligatorio.
+    </ion-note>
+    <ion-note *ngIf="productForm.get('nombre').hasError('minlength') && productForm.get('nombre').touched" color="danger">
+      El nombre debe tener al menos 3 caracteres.
+    </ion-note>
+
+    <!-- Descripción -->
+    <ion-item class="items">
+      <ion-label class="custom-label" position="stacked">Descripción</ion-label>
+      <ion-input formControlName="descripcion"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="productForm.get('descripcion').hasError('required') && productForm.get('descripcion').touched" color="danger">
+      La descripción es obligatoria.
+    </ion-note>
+
+    <!-- Cantidad -->
+    <ion-item class="items">
+      <ion-label class="custom-label" position="stacked">Cantidad</ion-label>
+      <ion-input formControlName="cantidad" type="number"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="productForm.get('cantidad').hasError('required') && productForm.get('cantidad').touched" color="danger">
+      La cantidad es obligatoria.
+    </ion-note>
+    <ion-note *ngIf="productForm.get('cantidad').hasError('min') && productForm.get('cantidad').touched" color="danger">
+      La cantidad debe ser mayor que 0.
+    </ion-note>
+
+    <!-- Precio -->
+    <ion-item class="items">
+      <ion-label class="custom-label" position="stacked">Precio</ion-label>
+      <ion-input formControlName="precio" type="number"></ion-input>
+    </ion-item>
+    <ion-note *ngIf="productForm.get('precio').hasError('required') && productForm.get('precio').touched" color="danger">
+      El precio es obligatorio.
+    </ion-note>
+
+    <!-- Categoría -->
+    <ion-item class="items">
+      <ion-label class="custom-label" position="stacked">Categoría</ion-label>
+      <ion-select formControlName="categoria">
+        <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">
+          {{ categoria }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-note *ngIf="productForm.get('categoria').hasError('required') && productForm.get('categoria').touched" color="danger">
+      La categoría es obligatoria.
+    </ion-note>
+
+    <!-- Fecha de Expiración -->
+    <ion-item class="items">
+      <ion-label class="custom-label" position="stacked">Fecha de Expiración</ion-label>
+      <ion-input type="date" formControlName="fechaExpiracion"></ion-input>
+
+<!-- Campo para seleccionar imagen -->
+<ion-note></ion-note>
+
+<ion-item>
+  <ion-label class="custom-label">Imagen del Producto</ion-label>
+  <ion-button (click)="selectImage()">Seleccionar Imagen</ion-button>
+  <ion-button (click)="takePhoto()">Tomar Foto</ion-button> <!-- Botón para tomar una foto -->
+</ion-item>
+
+<!-- Vista previa de la imagen seleccionada -->
+<ion-item *ngIf="productForm.get('imagenUrl').value">
+  <ion-img [src]="productForm.get('imagenUrl').value"></ion-img>
+</ion-item>
+
+
+
+    </ion-item >
+    <ion-note *ngIf="productForm.get('fechaExpiracion').hasError('required') && productForm.get('fechaExpiracion').touched" color="danger">
+      La fecha de expiración es obligatoria.
+    </ion-note>
+    
+
+    <!-- Estado -->
+    
+
+    <!-- Botón de enviar -->
+    <ion-button expand="full" type="submit">{{ isEditing ? 'Actualizar Producto' : 'Guardar Producto' }}</ion-button>
+  </form>
+   
+
+  </div>
+
+  <!-- Listado de productos filtrados -->
+  <ion-list>
+    <ion-item *ngFor="let product of filteredProducts$ | async">
+
+      <ion-label class="custom-label">
+        <ion-img [src]="product.imagenUrl" alt="{{ product.nombre }}" slot="start"></ion-img>
+        <h2>{{ product.nombre }}</h2>
+        <p>{{ product.descripcion }}</p>
+        <p>Precio: {{ product.precio | currency }}</p>
+        <p>Cantidad: {{ product.cantidad }}</p>
+        <ion-button color="primary" (click)="editProduct(product)">Editar</ion-button>
+        <ion-button color="danger" (click)="removeProduct(product.id)">Eliminar</ion-button>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+<!-- Componente de encabezado -->
+<app-header-custom></app-header-custom>

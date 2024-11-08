@@ -1,43 +1,39 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>AppTiro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding" fullscreen>
-  <div class="signin-container">
-    <form [formGroup]="registerForm" (ngSubmit)="onRegister()"> <!-- Cambiar RegisterForm a registerForm -->
-      <img src="assets/logos/LoginLogo.png" alt="Logo de AppTiro" class="logo">
-
-      <ion-item lines="none">
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input type="text" formControlName="name" placeholder="John Doe"></ion-input> <!-- Cambiado de 'nombre' a 'name' -->
-      </ion-item>
-
-      
-
-      <ion-item lines="none">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" formControlName="email" placeholder="email@dominio.com"></ion-input>
-      </ion-item>
-
-      <ion-item lines="none">
-        <ion-label position="floating">Contraseña</ion-label>
-        <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
-      </ion-item>
-
-      <ion-item lines="none">
-        <ion-label position="floating">Confirmar Contraseña</ion-label>
-        <ion-input type="password" formControlName="confirmPassword" placeholder="Confirmar Contraseña"></ion-input>
-      </ion-item>
-
-      <ion-button expand="block" type="submit" color=" white " [disabled]="registerForm.invalid"> <!-- Cambiar RegisterForm a registerForm -->
-        Registrarme
-      </ion-button>
-    </form>
-
-    <div class="login-link">
-      <p>Ya soy miembro <a (click)="goToLogin()">¿Quieres iniciar sesión?</a></p>
+<ion-content>
+  <div class="container">
+    <div class="logo">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <img src="assets/logos/AppTiro.png" alt="">
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
-  </div>
+    <ion-card class="signin-card">
+      <ion-card-content>
+          <div class="container-signin">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()"> <!-- Cambiar RegisterForm a registerForm -->
+              
+              <br>
+                
+                <ion-input type="text" formControlName="name" placeholder="Nombre"></ion-input> <!-- Cambiado de 'nombre' a 'name' -->
+        
+                <ion-input type="email" formControlName="email" placeholder="email@dominio.com"></ion-input>
+
+                <ion-input type="password" formControlName="password" placeholder="Contraseña"></ion-input>
+
+                <ion-input type="password" formControlName="confirmPassword" placeholder="Confirmar Contraseña"></ion-input>
+              
+        
+              <ion-button expand="block" color="primary" class="login-button" [disabled]="registerForm.invalid"> 
+                Registrarme
+              </ion-button>
+            </form>
+            <a href="/login" class="goToLogin">¿ya tienes cuenta?</a>
+        
+          </div>
+      </ion-card-content>
+    </ion-card>
+    
+  </div>cac
 </ion-content>

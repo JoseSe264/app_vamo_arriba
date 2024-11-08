@@ -1,3 +1,32 @@
-<p>
-  product-form works!
-</p>
+<form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input formControlName="nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Descripción</ion-label>
+    <ion-input formControlName="descripcion"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Cantidad</ion-label>
+    <ion-input formControlName="cantidad" type="number"></ion-input>
+  </ion-item>
+
+  <!-- Más campos como precio, categoría, fecha de expiración -->
+  
+  <!-- Campo para seleccionar imagen -->
+  <ion-item>
+    <ion-label>Imagen del Producto</ion-label>
+    <ion-button (click)="selectImage()">Seleccionar Imagen</ion-button>
+  </ion-item>
+
+  <!-- Vista previa de la imagen seleccionada -->
+  <ion-item *ngIf="productForm.get('imagenUrl').value">
+    <ion-img [src]="productForm.get('imagenUrl').value"></ion-img>
+  </ion-item>
+
+  <!-- Botón para guardar producto -->
+  <ion-button expand="full" type="submit">Guardar Producto</ion-button>
+</form>

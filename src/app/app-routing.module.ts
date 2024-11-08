@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { authGuard } from './guards/auth.guard';
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
+ 
   {
     path: '',
     redirectTo: 'loader',
@@ -25,31 +22,40 @@ const routes: Routes = [
   },
   {
     path: 'index',
-    loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule)
+    loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [authGuard]
   },
-  {
-    path: 'inventario-casa',
-    loadChildren: () => import('./pages/inventario-casa/inventario-casa.module').then( m => m.InventarioCasaPageModule)
-  },
+  
   {
     path: 'lista-compra',
-    loadChildren: () => import('./pages/lista-compra/lista-compra.module').then( m => m.ListaCompraPageModule)
+    loadChildren: () => import('./pages/lista-compra/lista-compra.module').then( m => m.ListaCompraPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'loader',
     loadChildren: () => import('./pages/loader/loader.module').then( m => m.LoaderPageModule)
-  },  {
+  },
+  {
     path: 'not-found',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
+  },
+  {
+    path: 'inventory',
+    loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule),
+    canActivate: [authGuard]
+  },
+  
+  {
+    path: '**', redirectTo: 'not-found'
   },
 
 
 ];
-
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

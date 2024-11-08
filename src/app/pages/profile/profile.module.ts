@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'; // Importar ReactiveFormsModule
 
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from 'src/app/components/shared/shared.module';
 
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
@@ -13,6 +14,7 @@ import { ProfilePage } from './profile.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    SharedModule,  
     ReactiveFormsModule, 
     ProfilePageRoutingModule
   ],

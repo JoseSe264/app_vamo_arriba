@@ -4,7 +4,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="12">
-            <img src="assets/logos/LoginLogo" alt="">
+            <img src="assets/logos/AppTiro.png" alt="">
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -16,21 +16,24 @@
             <form [formGroup]="loginForm" (ngSubmit)="logOn()">
 
               <ion-input type="text" placeholder="Correo electrónico" formControlName="email"></ion-input>
+             
               <ion-input type="password" placeholder="Contraseña" formControlName="password"></ion-input>
-
+              
               <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
 
-              <ion-button expand="block" color="primary" class="login-button" (click)="logOn()">
+              <ion-button expand="block" color="primary" class="login-button" type="submit">
                 Iniciar sesión
               </ion-button>
 
             </form>
+            
           </div>
       </ion-card-content>
     </ion-card>
-    
-    <ion-button expand="block" color="secondary"   class="signup-button" (click)="navigateToRegister()">
+    <ion-button expand="block" color="secondary" class="signup-button" (click)="navigateToRegister()">
       Registrarme
     </ion-button>
   </div>
 </ion-content>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

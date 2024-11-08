@@ -1,3 +1,11 @@
-<p>
-  product-list works!
-</p>
+<ion-list>
+  <ion-item *ngFor="let product of products$ | async">
+    <ion-label>
+      <h2>{{ product.nombre }}</h2>
+      <p>{{ product.descripcion }}</p>
+      <p>Precio: {{ product.precio | currency }}</p>
+      <p>Cantidad: {{ product.cantidad }}</p>
+      <ion-button color="danger" (click)="removeProduct(product.id)">Eliminar</ion-button>
+    </ion-label>
+  </ion-item>
+</ion-list>

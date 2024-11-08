@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user.models';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs';
+Observable
 
 @Injectable({
   providedIn: 'root'
@@ -60,8 +63,8 @@ export class AuthService {
         this.router.navigate(['/login']);
       })
       .catch((error) => {
-        console.log('Error al enviar correo para restablecer contraseña', error); // Eliminado "envio Unknown word."
-        throw error; // Lanzar el error para que pueda ser manejado en el componente
+        console.log('Error al enviar correo para restablecer contraseña', error);
+        throw error;
       });
   }
 
@@ -69,7 +72,15 @@ export class AuthService {
     return this.afAuth.authState != null;
   }
 
+  // Obtener usuario actual
   getCurrentUser(): Promise<any> {
     return this.afAuth.currentUser;
+  }
+
+  // Comprobar si el usuario está autenticado
+  isAuthenticated(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      map(user => !!user) // Retorna true si hay un usuario, false si no
+    );
   }
 }
