@@ -32,11 +32,11 @@
   </ion-button>
 
   <!-- Formulario para añadir/editar producto -->
-   <div class="formProduct" >
+   <div  >
 
     
     
-  <form *ngIf="showForm" [formGroup]="productForm" (ngSubmit)="saveProduct()">
+  <form *ngIf="showForm" [formGroup]="productForm" (ngSubmit)="saveProduct()" class="formProduct">
 
     <!-- Nombre del Producto -->
     <ion-item class="items">
