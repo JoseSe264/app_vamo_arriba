@@ -71,13 +71,14 @@ export class InventoryPage implements OnInit {
     }
   
     const productData = { ...this.productForm.value }; // Clonar el formulario
-  
     const saveOperation = this.isEditing && this.currentProduct
       ? this.productService.updateProduct({ ...productData, id: this.currentProduct.id })
       : this.productService.addProduct(productData);
   
-    // Si hay una imagen para subir
-    if (productData.imagenUrl) {
+    // Si estamos editando, verifica si hay una nueva imagen para subir
+    const shouldUploadImage = this.isEditing && productData.imagenUrl && productData.imagenUrl !== this.currentProduct.imagenUrl;
+  
+    if (shouldUploadImage) {
       const storage = getStorage();
       const storageRef = ref(storage, `products/${Date.now()}.jpg`);
   
@@ -99,7 +100,7 @@ export class InventoryPage implements OnInit {
         console.error('Error al subir la imagen:', error);
       });
     } else {
-      // Si no hay imagen, guardar directamente
+      // Si no hay imagen o no ha cambiado, guardar directamente
       saveOperation.subscribe(
         () => {
           const action = this.isEditing ? 'actualizado' : 'agregado';
@@ -114,6 +115,7 @@ export class InventoryPage implements OnInit {
   }
 
   editProduct(product: Product): void {
+    console.log('Producto a editar:', product); // Verifica el contenido
     this.currentProduct = product;
     this.productForm.patchValue(product);
     this.isEditing = true;
