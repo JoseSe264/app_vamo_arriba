@@ -18,9 +18,7 @@ ion-title {
 ion-buttons ion-button {
   color: #FF4C4C;
 
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+
 }
 
 /* Estilo específico para ion-menu-button y el icono de ayuda */
@@ -36,6 +34,8 @@ ion-button[fill="clear"]:hover {
 .botones {
   display: flex;
   flex-direction: column;
+  justify-content: center; /* Centra los botones verticalmente */
+
   align-items: center;
   padding: 20px;
   gap: 20px;
@@ -45,15 +45,13 @@ ion-button[fill="clear"]:hover {
   transform: translateX(-50%);
   width: 90%;
   max-width: 400px;
-  background-color: #f8f8f8;
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  --background: #000000; /* Cambia el fondo del botón a negro */
-  --color: #ffffff;      /* Cambia el texto/icono a blanco */
+  --background: #000000; /* Fondo negro para los botones */
+  --color: #ffffff;      /* Texto en blanco */
 }
 
-
-
+/* Estilos de los botones */
 ion-button {
   background-color: #D43F3F;
   color: white;
@@ -64,6 +62,7 @@ ion-button {
   font-size: 1rem;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease, background-color 0.3s ease;
+  
 }
 
 ion-button:hover {
@@ -81,16 +80,20 @@ ion-icon {
 /* Fondo para el contenido principal */
 ion-content {
   --background: url('/assets/img_Inv/fondoIndex.jpg') no-repeat center center / cover;
+  padding-top: 10%; /* Añadido un padding superior para evitar que el contenido toque el borde superior */
 }
 
 /* Estilos Responsivos */
 @media (min-width: 768px) {
   .botones {
     max-width: 600px;
+    bottom: 5%;
   }
+
   ion-title {
-    font-size: 20px;
+    font-size: 1.5em;
   }
+
   .welcome-text {
     text-align: center;
     font-size: 1.5em;
@@ -99,38 +102,45 @@ ion-content {
   }
 }
 
-
-
-
 /* Estilos específicos para cada imagen */
 #png-banner {
   width: 50%; /* Ajusta el tamaño del PNG */
+  height: auto;
+
+
+
   filter: brightness(0) saturate(100%) invert(34%) sepia(81%) saturate(1785%) hue-rotate(3deg) brightness(93%) contrast(95%); /* Cambia el color del PNG */
+  transition: filter 0.3s; /* Transición para el efecto de cambio de color al pasar el ratón */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra negra para el PNG */
+  /* Efecto al pasar el ratón (hover) */
+  &:hover {
+    filter: brightness(100%) saturate(100%) invert(0%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%); /* Cambia el color del PNG al pasar el ratón */
+  }
 }
 
 #gif-banner {
-  width: 50%; /* Ajusta el tamaño del GIF */
-  filter: grayscale(100%); /* Cambia el color del GIF a escala de grises */
+  width: 20%; /* Ajusta el tamaño del GIF */
+  height: auto;
 }
 
 .image-container {
   display: flex;               /* Activa flexbox */
-  justify-content: center;     /* Centra horizontalmente */
-  align-items: center;     /* Alinea en la parte superior del contenedor */
-  height: 50vh;                /* Altura del contenedor (ajusta según sea necesario) */
-  margin-bottom: 20px;         /* Espacio entre la imagen y los botones */
+  height: 30vh;                /* Altura del contenedor (ajusta según sea necesario) */
   background-color: rgba(0, 0, 0, 0.7); /* Fondo negro transparente */
-  box-sizing: border-box;
-  width: 100%;
+  justify-content: center;      /* Centra los elementos en el contenedor */
+  align-items: center;        /* Alinea los elementos en el eje vertical centrado */
+  gap: 20px;                  /* Espacio entre las imágenes */
+  overflow: hidden;             /* Evita que el contenido se desborda */
+  align-self: center;          /* Alinea el contenedor en el eje horizontal centrado */
 }
 
 .banner-image {
-  height: 80px;               /* Ajusta el tamaño de la imagen */
+  height: 100px;               /* Ajusta el tamaño de la imagen */
   object-fit: cover;           /* Cubre el área sin deformar la imagen */
   border-radius: 5px;         /* Añade un borde redondeado para la imagen */
   transition: transform 0.3s;  /* Transición para el efecto de zoom al pasar el ratón */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7); /* Sombra negra para las imágenes */
-  align-items: center;     /* Alinea en la parte superior del contenedor */
+  align-items: center;        /* Alinea en la parte superior del contenedor */
   align-content: center;
   align-self: center;
   /* Efecto al pasar el ratón (hover) */
@@ -138,13 +148,34 @@ ion-content {
     transform: scale(1.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Sombra más intensa al pasar el ratón */
   }
- 
-
-
-
-  
 }
+
+/* Estilos adicionales para los botones negros */
 .boton-negro {
-  background: #000000;  /* Fondo negro */
-  color: #ffffff; /* Texto y íconos en blanco */
+  background: #000;  /* Fondo negro */
+  color: #fff; /* Texto y íconos en blanco */
+  font-size: 1rem ;
+}
+/* Ajuste en pantallas pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+  .boton-negro {
+    font-size: 0.9rem; /* Reducir el tamaño del texto en pantallas pequeñas */
+    padding: 12px; /* Ajustar el padding para que no sea demasiado grande */
+  }
+}
+
+/* Ajuste en pantallas medianas (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .boton-negro {
+    font-size: 1.1rem; /* Aumentar ligeramente el tamaño del texto */
+    padding: 14px;
+  }
+}
+
+/* Ajuste en pantallas grandes (más de 1024px) */
+@media (min-width: 1024px) {
+  .boton-negro {
+    font-size: 1.3rem; /* Aumentar el tamaño del texto en pantallas grandes */
+    padding: 16px;
+  }
 }

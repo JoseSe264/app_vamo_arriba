@@ -1,54 +1,49 @@
+<ion-content class="ion-padding">
+  <div class="image-container">
+    <img src="/assets/logos/AppTiro.png" alt="Banner" class="banner-image" id="png-banner">
+    <img src="/assets/logos/AppTiro.gif" alt="Banner" class="banner-image" id="gif-banner">
+  </div>
 
+  <div class="botones">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="3">
+          <ion-button class="boton-negro" expand="block" routerLink="/lista-compra">
+            <ion-icon slot="start" name="storefront-outline"></ion-icon>
+            Lista de compras
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-button class="boton-negro" expand="block" routerLink="/inventory">
+            <ion-icon slot="start" name="home-outline"></ion-icon>
+            Inventario
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col size="6" size-md="3">
+          <ion-button class="boton-negro" expand="block" routerLink="/scan">
+            <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+            Escanea tu boleta
+          </ion-button>
+        </ion-col>
+        <ion-col size="6" size-md="3">
+          <ion-button class="boton-negro" expand="block" routerLink="/profile">
+            <ion-icon slot="start" name="hourglass-outline"></ion-icon>
+            Perfil Usuario
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
-  <ion-content class="ion-padding">
-
-    <div class="image-container">
-      <img src="/assets/logos/AppTiro.png" alt="Banner" class="banner-image">
-
-      <img src="/assets/logos/AppTiro.gif" alt="Banner" class="banner-image">
-    </div>
-
-    <div class="botones">
-      <ion-grid>
-        <ion-row>
-          <ion-col size="6" size-md="3">
-            <ion-button class="boton-negro" expand="block" routerLink="/lista-compra">
-              <ion-icon slot="start" name="storefront-outline"></ion-icon>
-              Lista de compras
-            </ion-button>
-          </ion-col>
-          <ion-col size="6" size-md="3">
-            <ion-button  class="boton-negro" expand="block" routerLink="/inventory">
-              <ion-icon slot="start" name="home-outline"></ion-icon>
-              Inventario
-            </ion-button>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col size="6" size-md="3">
-            <ion-button  class="boton-negro" expand="block" routerLink="/scan">
-              <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-              Escanea tu boleta
-            </ion-button>
-          </ion-col>
-          <ion-col size="6" size-md="3">
-            <ion-button class="boton-negro" expand="block" routerLink="/profile">
-              <ion-icon slot="start" name="hourglass-outline"></ion-icon>
-              Perfil Usuario
-            </ion-button>
-          </ion-col>
-
-          <!-- index.html o cualquier otro archivo de plantilla donde quieras agregar el botón -->
-<ion-button (click)="cerrarSesion()" class="boton-negro" expand="block">
-  <ion-icon slot="start" name="log-out-outline"></ion-icon>
-  Cerrar sesión
-</ion-button>
-
-
-
-        </ion-row>
-      </ion-grid>
-    </div>
-  </ion-content>
-
+      <ion-row>
+        <ion-col size="12">
+          <ion-button (click)="cerrarSesion()" class="boton-negro" expand="block">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            Cerrar sesión
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
