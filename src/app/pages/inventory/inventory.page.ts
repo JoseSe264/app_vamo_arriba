@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { getStorage, ref, uploadString } from 'firebase/storage';
 
-
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.page.html',
@@ -23,6 +22,7 @@ export class InventoryPage implements OnInit {
   categorias = ['Alimentos', 'Limpieza', 'Electrónica'];
 
   constructor(private fb: FormBuilder, private productService: ProductService) {
+    // Inicializa el formulario con validaciones
     this.productForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       descripcion: ['', Validators.required],
@@ -34,18 +34,20 @@ export class InventoryPage implements OnInit {
       imagenUrl: ['']
     });
 
-    // Detectar cambios en el campo 'cantidad' para actualizar el estado
+    // Detecta cambios en la cantidad para actualizar el estado del producto
     this.productForm.get('cantidad').valueChanges.subscribe(cantidad => {
       this.updateProductStatus(cantidad);
     });
   }
 
   ngOnInit() {
+    // Obtiene los productos desde el servicio
     this.products$ = this.productService.getProducts();
     this.filteredProducts$ = this.products$;
   }
 
   toggleForm(): void {
+    // Alterna la visibilidad del formulario
     this.showForm = !this.showForm;
     if (!this.showForm) {
       this.isEditing = false;
@@ -54,6 +56,7 @@ export class InventoryPage implements OnInit {
   }
 
   onSearchTermChanged(searchTerm: string) {
+    // Filtra los productos por nombre o descripción
     this.filteredProducts$ = searchTerm
       ? this.products$.pipe(
           map(products => products.filter(product =>
@@ -65,23 +68,24 @@ export class InventoryPage implements OnInit {
   }
 
   saveProduct(): void {
+    // Verifica si el formulario es válido antes de guardar
     if (this.productForm.invalid) {
       console.log('El formulario es inválido. No se puede guardar el producto.');
       return;
     }
-  
-    const productData = { ...this.productForm.value }; // Clonar el formulario
+
+    const productData = { ...this.productForm.value }; // Clona el formulario
     const saveOperation = this.isEditing && this.currentProduct
       ? this.productService.updateProduct({ ...productData, id: this.currentProduct.id })
       : this.productService.addProduct(productData);
-  
+
     // Si estamos editando, verifica si hay una nueva imagen para subir
     const shouldUploadImage = this.isEditing && productData.imagenUrl && productData.imagenUrl !== this.currentProduct.imagenUrl;
-  
+
     if (shouldUploadImage) {
       const storage = getStorage();
       const storageRef = ref(storage, `products/${Date.now()}.jpg`);
-  
+
       // Sube la imagen en formato data_url
       uploadString(storageRef, productData.imagenUrl, 'data_url').then((snapshot) => {
         console.log('Imagen subida con éxito:', snapshot);
@@ -115,7 +119,7 @@ export class InventoryPage implements OnInit {
   }
 
   editProduct(product: Product): void {
-    console.log('Producto a editar:', product); // Verifica el contenido
+    // Carga los datos del producto a editar en el formulario
     this.currentProduct = product;
     this.productForm.patchValue(product);
     this.isEditing = true;
@@ -123,6 +127,7 @@ export class InventoryPage implements OnInit {
   }
 
   removeProduct(id: string): void {
+    // Elimina un producto
     this.productService.removeProduct(id).subscribe(
       () => {
         console.log('Producto eliminado correctamente');
@@ -132,6 +137,7 @@ export class InventoryPage implements OnInit {
   }
 
   resetForm(): void {
+    // Restablece el formulario
     this.showForm = false;
     this.isEditing = false;
     this.productForm.reset();
@@ -139,11 +145,13 @@ export class InventoryPage implements OnInit {
   }
 
   updateProductStatus(cantidad: number): void {
+    // Actualiza el estado del producto según la cantidad
     const statusControl = this.productForm.get('status');
     statusControl.setValue(this.getProductStatus(cantidad));
   }
 
   getProductStatus(cantidad: number): string {
+    // Devuelve el estado del producto según la cantidad
     if (cantidad === 0) {
       return 'Agotado';
     } else if (cantidad <= 5) {
@@ -155,6 +163,7 @@ export class InventoryPage implements OnInit {
 
   async selectImage() {
     try {
+      // Permite seleccionar una imagen desde la galería
       const image = await Camera.getPhoto({
         quality: 90,
         resultType: CameraResultType.Uri,
@@ -169,12 +178,12 @@ export class InventoryPage implements OnInit {
     }
   }
 
-
   async takePhoto() {
     try {
+      // Permite tomar una foto con la cámara y subirla como base64
       const image = await Camera.getPhoto({
         quality: 90,
-        resultType: CameraResultType.Base64, // Cambia a Base64
+        resultType: CameraResultType.Base64,
         source: CameraSource.Camera,
       });
   
@@ -194,8 +203,4 @@ export class InventoryPage implements OnInit {
       }
     }
   }
-  
-  
-  
-
 }
