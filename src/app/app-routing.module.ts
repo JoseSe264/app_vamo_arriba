@@ -23,6 +23,7 @@ const routes: Routes = [
   {
     path: 'index',
     loadChildren: () => import('./pages/index/index.module').then( m => m.IndexPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'profile',
@@ -46,7 +47,6 @@ const routes: Routes = [
   {
     path: 'inventory',
     loadChildren: () => import('./pages/inventory/inventory.module').then( m => m.InventoryPageModule),
-    canActivate: [authGuard]
   },
   
   {

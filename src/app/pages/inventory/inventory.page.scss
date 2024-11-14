@@ -5,8 +5,10 @@ ion-content {
 
 /* Encabezado */
 .header {
-  background-color: #ffffff;
+  background-color: #2c3e50;
+  padding-top: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: white
 }
 
 .header ion-toolbar {
@@ -28,7 +30,7 @@ ion-content {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: #05050c !important;
+  background-color: #05050c;
   color: white;
   padding: 20px;
 }
@@ -130,7 +132,7 @@ ion-button[color="danger"] {
 /* Responsividad */
 @media (max-width: 768px) {
   .logo {
-    padding: 0 10px;
+    padding: 0 20px;
   }
 }
 
