@@ -25,4 +25,11 @@ describe('RegisterPage', () => {
   it('Deberia Crearse', () => {
     expect(component).toBeTruthy(); // Verifica que el componente se cree correctamente
   });
+
+  it('Debería inicializar el formulario de registro correctamente', () => {
+    // Asumiendo que RegisterPage tiene una propiedad "registerForm"
+    expect(component.registerForm).toBeDefined();
+    expect(component.registerForm.controls['email']).toBeDefined();
+    expect(component.registerForm.controls['password']).toBeDefined();
+  });
 });
