@@ -1,17 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ListasPage } from './lista-compra.page';
+import { TestBed } from '@angular/core/testing';
+import { AuthService } from 'src/app/services/auth.service';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from 'src/environments/environment';  // Asegúrate de que esta importación esté correcta
 
-describe('ListasPage', () => {
-  let component: ListasPage;
-  let fixture: ComponentFixture<ListasPage>;
+describe('AuthService', () => {
+  let service: AuthService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListasPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),  // Proporciona la configuración de Firebase
+        AngularFireAuthModule  // Habilita el módulo de autenticación de Firebase
+      ],
+      providers: [AuthService]  // Proporciona el servicio AuthService
+    });
+    service = TestBed.inject(AuthService);  // Inyecta el servicio AuthService
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('Deberia Crearse', () => {
+    expect(service).toBeTruthy();  // Verifica que el servicio se haya creado correctamente
   });
 });

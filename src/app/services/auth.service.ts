@@ -1,86 +1,68 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/models/user.models';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs';
-Observable
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router
-  ) { }
+  ) {}
 
-  // Crear usuario en Firebase
-  register(user: User): Promise<any> {
-    return this.afAuth.createUserWithEmailAndPassword(user.email, user.password)
-      .then((result) => {
-        console.log('Usuario creado exitosamente', result);
-        this.router.navigate(['/login']);
-      })
-      .catch((error) => {
-        console.log('Error al crear el usuario', error);
-        throw error;
-      });
+  private handleError(error: any, defaultMessage: string): never {
+    console.error(error);
+    throw new Error(defaultMessage);
   }
 
-  // Iniciar sesión con Firebase
-  login(email: string, password: string): Promise<any> {
-    return this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        console.log('Inicio sesión exitosamente', result);
-        this.router.navigate(['/index']);
-      })
-      .catch((error) => {
-        console.log('Error al iniciar sesión', error);
-        throw error;
-      });
+  async register(user: { email: string; password: string }): Promise<void> {
+    try {
+      const result = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
+      console.log('Usuario creado exitosamente', result);
+    } catch (error) {
+      this.handleError(error, 'No se pudo crear el usuario. Por favor, intenta nuevamente.');
+    }
   }
 
-  // Cerrar sesión
-  logout(): Promise<any> {
-    return this.afAuth.signOut()
-      .then(() => {
-        console.log('Sesión cerrada exitosamente');
-        this.router.navigate(['/login']);
-      })
-      .catch((error) => {
-        console.log('Error al cerrar sesión', error);
-        throw error;
-      });
+  async login(email: string, password: string): Promise<void> {
+    try {
+      const result = await this.afAuth.signInWithEmailAndPassword(email, password);
+      console.log('Inicio de sesión exitoso', result);
+    } catch (error) {
+      this.handleError(error, 'Credenciales inválidas. Por favor, verifica tus datos.');
+    }
   }
 
-  // Cambio de contraseña
-  resetPassword(email: string): Promise<any> {
-    return this.afAuth.sendPasswordResetEmail(email)
-      .then(() => {
-        console.log('Se envió un correo para restablecer la contraseña');
-        this.router.navigate(['/login']);
-      })
-      .catch((error) => {
-        console.log('Error al enviar correo para restablecer contraseña', error);
-        throw error;
-      });
+  async logout(): Promise<void> {
+    try {
+      await this.afAuth.signOut();
+      console.log('Sesión cerrada exitosamente');
+    } catch (error) {
+      console.error('Error al cerrar sesión', error);
+      throw new Error('Hubo un problema al cerrar la sesión. Intenta de nuevo.');
+    }
+  }
+  
+
+  async resetPassword(email: string): Promise<void> {
+    try {
+      await this.afAuth.sendPasswordResetEmail(email);
+      console.log('Correo enviado para restablecer la contraseña');
+    } catch (error) {
+      this.handleError(error, 'No se pudo enviar el correo. Verifica el email proporcionado.');
+    }
   }
 
-  isLoggedIn(): boolean {
-    return this.afAuth.authState != null;
-  }
-
-  // Obtener usuario actual
-  getCurrentUser(): Promise<any> {
-    return this.afAuth.currentUser;
-  }
-
-  // Comprobar si el usuario está autenticado
   isAuthenticated(): Observable<boolean> {
     return this.afAuth.authState.pipe(
-      map(user => !!user) // Retorna true si hay un usuario, false si no
+      map((user) => !!user) // Retorna true si hay usuario, false si no
     );
+  }
+
+  async getCurrentUser(): Promise<any> {
+    return this.afAuth.currentUser;
   }
 }
