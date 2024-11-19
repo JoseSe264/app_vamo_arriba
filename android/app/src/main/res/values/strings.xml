@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">App Vamo Arriba</string>
+    <string name="title_activity_main">App Vamo Arriba</string>
+    <string name="package_name">com.apptiro.app</string>
+    <string name="custom_url_scheme">com.apptiro.app</string>
+</resources>
