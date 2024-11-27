@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -16,6 +16,11 @@ export class AuthService {
   private handleError(error: any, defaultMessage: string): never {
     console.error(error);
     throw new Error(defaultMessage);
+  }
+
+  // Verificar si el correo ya está registrado (retorna un Observable)
+  checkEmailExists(email: string): Observable<any> {
+    return from(this.afAuth.fetchSignInMethodsForEmail(email)); // Convertir el Promise a un Observable
   }
 
   async register(user: { email: string; password: string }): Promise<void> {
@@ -45,7 +50,6 @@ export class AuthService {
       throw new Error('Hubo un problema al cerrar la sesión. Intenta de nuevo.');
     }
   }
-  
 
   async resetPassword(email: string): Promise<void> {
     try {

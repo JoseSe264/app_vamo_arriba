@@ -23,6 +23,7 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    // Inicializa el formulario con validaciones
     this.registerForm = this.fb.group(
       {
         name: ['', [Validators.required, Validators.minLength(3)]],
@@ -43,15 +44,27 @@ export class RegisterPage implements OnInit {
     return password === confirmPassword ? null : { passwordsMismatch: true };
   }
 
+  // Manejo del registro del usuario
   async onRegister() {
     if (this.registerForm.valid) {
       this.isSubmitting = true; // Desactiva el botón mientras se procesa
       const user = this.registerForm.value as User;
+
       try {
+        // Verificar si el correo ya está registrado
+        const emailMethods = await this.authService.checkEmailExists(user.email).toPromise();
+        if (emailMethods.length > 0) {
+          this.errorMessage = 'Este correo ya está registrado.';
+          await this.showAlert('Error', this.errorMessage);
+          this.isSubmitting = false;
+          return;
+        }
+
+        // Intentar registrar al usuario
         const result = await this.authService.register(user);
         console.log('Registro exitoso', result);
 
-        // Muestra alerta de éxito
+        // Mostrar alerta de éxito
         const alert = await this.alertCtrl.create({
           header: 'Registro exitoso',
           message: 'Usuario registrado correctamente.',
@@ -59,26 +72,37 @@ export class RegisterPage implements OnInit {
             {
               text: 'Aceptar',
               handler: () => {
-                // Navega a la página de login después de cerrar la alerta
                 this.navCtrl.navigateForward('/login');
               },
             },
           ],
         });
-
         await alert.present();
       } catch (error) {
         console.error('Error al registrar:', error.message);
         this.errorMessage = 'No se pudo registrar el usuario. Intenta nuevamente.';
+        await this.showAlert('Error', this.errorMessage);
       } finally {
         this.isSubmitting = false; // Reactiva el botón
       }
     } else {
       this.errorMessage = 'Por favor, completa todos los campos correctamente.';
+      await this.showAlert('Error', this.errorMessage);
     }
   }
 
+  // Navegar a la página de inicio de sesión
   goToLogin() {
     this.navCtrl.navigateForward('/login');
+  }
+
+  // Función para mostrar alertas
+  async showAlert(header: string, message: string) {
+    const alert = await this.alertCtrl.create({
+      header,
+      message,
+      buttons: ['Aceptar'],
+    });
+    await alert.present();
   }
 }
