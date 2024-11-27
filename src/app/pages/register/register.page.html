@@ -26,7 +26,7 @@
                 <ion-input type="password" formControlName="confirmPassword" placeholder="Confirmar Contraseña"></ion-input>
               
         
-              <ion-button expand="block" color="primary" class="login-button" [disabled]="registerForm.invalid"> 
+              <ion-button expand="block" color="primary" class="login-button" [disabled]="registerForm.invalid" (click)="onRegister()"> 
                 Registrarme
               </ion-button>
             </form>
