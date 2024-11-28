@@ -1,47 +1,110 @@
-.signin-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: #03045e;
-  
-    .form-horizontal {
-      margin-bottom: 20px;
-      width: 90%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background-color: #00549c;
-      border-radius: 20px;
-    }
-    .logo {
-      margin-bottom: 20px;
-      width: 150px;
-      height: auto;
-    }
-  
-    .signin-item {
-      margin-bottom: 10px;
-      width: 90%;
-      max-width: 400px;
-      --background: #ffffff;
-      border-radius: 8px;
-    }
-  
-    .input {
-      --padding-start: 20px;
-    }
-  
-  
-    ion-button {
-      margin-top: 10px;
-      width: 90%;
-      max-width: 400px;
-      --border-radius: 20px;
-      color: 00549c;
-    }
-  }
-  
+
+/* Estilos personalizados para los campos de entrada */
+.input {
+  --background: #ffffff; /* Fondo blanco para los campos de texto */
+  --color: #03045e; /* Color de texto azul */
+  --padding-start: 20px; /* Espaciado a la izquierda dentro del campo de texto */
+  --padding-end: 20px; /* Espaciado a la derecha dentro del campo de texto */
+  --border-radius: 12px; /* Bordes redondeados para los campos de entrada */
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera para el campo */
+  --height: 45px; /* Altura del campo */
+  --font-size: 14px; /* Tamaño de texto */
+  --placeholder-color: #0077b6; /* Color del texto del placeholder (cuando el campo está vacío) */
+  margin-bottom: 15px; /* Espaciado entre los campos */
+  border: 2px solid #0077b6; /* Borde azul alrededor del campo */
+  transition: all 0.3s ease; /* Transición suave para los cambios de estado (cuando se enfoca el campo) */
+}
+
+
+
+
+
+.signin-container .logo {
+  margin-bottom: 20px;
+  width: 150px;
+  height: auto;
+}
+
+.signin-container .signin-item {
+  margin-bottom: 10px;
+  width: 90%;
+  max-width: 400px;
+  --background: #ffffff;
+  border-radius: 8px;
+}
+
+.signin-container .input {
+  --padding-start: 20px;
+}
+
+.signin-container ion-button {
+  margin-top: 10px;
+  width: 90%;
+  max-width: 400px;
+  --border-radius: 20px;
+  color: #00549c;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  background-color: #0077b6;
+  color: #00549c;
+  font-family: Arial, sans-serif;
+  padding-top: 5%; /* Espacio adicional desde el borde superior */
+}
+
+.signin-card {
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #03045e;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container-signin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #03045e;
+  color: white;
+  padding-top: 5%;
+}
+
+
+/* Estilo para las etiquetas sobre los campos */
+.signin-container .form-horizontal label {
+  font-size: 14px;
+  color: #ffffff; /* Color blanco para las etiquetas */
+  margin-bottom: 5px;
+  text-align: left;
+  width: 100%;
+}
+
+.banner-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}
+
+.goToLogin {
+  margin-top: 15px;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.goToLogin:hover {
+  text-decoration: underline;
+}
