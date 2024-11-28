@@ -7,52 +7,51 @@
 
 
   <div class="botones d-flex flex-column justify-content-end" style="height: 50vh;">
-    <ion-grid>
-      <ion-row>
-        <!-- Botón Lista de compras -->
-        <ion-col size="6" size-md="3">
-          <ion-button class="btn btn-dark w-100" expand="block" routerLink="/lista-compra">
-            <ion-icon slot="start" name="storefront-outline"></ion-icon>
-            Lista de compras
-          </ion-button>
-        </ion-col>
-  
-        <!-- Botón Inventario -->
-        <ion-col size="6" size-md="3">
-          <ion-button class="btn btn-dark w-100" expand="block" routerLink="/inventory">
-            <ion-icon slot="start" name="home-outline"></ion-icon>
-            Inventario
-          </ion-button>
-        </ion-col>
-      </ion-row>
-  
-      <ion-row>
-        <!-- Botón Escanea tu boleta -->
-        <ion-col size="6" size-md="3">
-          <ion-button class="btn btn-dark w-100" expand="block" routerLink="/scan">
-            <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-            Escanea tu boleta
-          </ion-button>
-        </ion-col>
-  
-        <!-- Botón Perfil Usuario -->
-        <ion-col size="6" size-md="3">
-          <ion-button class="btn btn-dark w-100" expand="block" routerLink="/profile">
-            <ion-icon slot="start" name="hourglass-outline"></ion-icon>
-            Perfil Usuario
-          </ion-button>
-        </ion-col>
-      </ion-row>
-  
-      <ion-row>
-        <!-- Botón Cerrar sesión -->
-        <ion-col size="12">
-          <ion-button (click)="cerrarSesion()" class="btn btn-danger w-100" expand="block">
-            <ion-icon slot="start" name="log-out-outline"></ion-icon>
-            Cerrar sesión
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
-  
+  <ion-grid>
+    <ion-row>
+      <!-- Botón Lista de compras -->
+      <ion-col size="6" size-md="3">
+        <ion-button class="btn btn-dark w-100" expand="block" routerLink="/lista-compra">
+          <ion-icon slot="start" name="storefront-outline"></ion-icon>
+          Lista de compras
+        </ion-button>
+      </ion-col>
+
+      <!-- Botón Inventario -->
+      <ion-col size="6" size-md="3">
+        <ion-button class="btn btn-dark w-100" expand="block" routerLink="/inventory">
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          Inventario
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Botón Escanea tu boleta -->
+      <ion-col size="6" size-md="3">
+        <ion-button class="btn btn-dark w-100" expand="block" routerLink="/scan">
+          <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+          Escanea tu boleta
+        </ion-button>
+      </ion-col>
+
+      <!-- Botón Perfil Usuario -->
+      <ion-col size="6" size-md="3">
+        <ion-button class="btn btn-dark w-100" expand="block" routerLink="/profile">
+          <ion-icon slot="start" name="hourglass-outline"></ion-icon>
+          Perfil Usuario
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Botón Cerrar sesión -->
+      <ion-col size="12">
+        <ion-button (click)="cerrarSesion()" class="btn btn-danger w-100" expand="block">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          Cerrar sesión
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
