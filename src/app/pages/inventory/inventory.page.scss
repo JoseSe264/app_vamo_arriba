@@ -1,3 +1,10 @@
+ion-content {
+  --background: url('/assets/img_Inv/Azul.jpg') no-repeat center center / cover;
+  padding-top: 10%; /* Añadido un padding superior para evitar que el contenido toque el borde superior */
+}
+
+
+
 .product-card {
   background-color: rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, background-color 0.3s ease;
@@ -35,4 +42,18 @@
   color: #fff;
   background-color: #f00;
   border-color: #f00;
+}
+
+.bg-lightblue {
+  background-color: primary;
+}
+
+/* Ajustar ancho completo en pantallas pequeñas */
+.form-control {
+  background: #fff;
+}
+
+/* Botones */
+.btn-block {
+  width: 100%;
 }
