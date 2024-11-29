@@ -1,11 +1,53 @@
-
-
-/* Fondo para el contenido principal */
 ion-content {
   --background: url('../../../assets/img_Inv/fondoIndex.jpg') no-repeat center center / cover;
-  padding-top: 10%;
+  background-size: cover;
+  transition: background-image 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
 
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%; /* Ajusta la altura de la imagen */
+}
 
+.banner-image {
+  width: 80%;
+  max-width: 300px;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}
 
+.banner-image:hover {
+  transform: scale(1.05);
+}
 
+.botones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%; /* Ocupa el espacio restante */
+}
+
+ion-button {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+ion-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .image-container {
+    height: 40%; /* Reduce altura en dispositivos pequeños */
+  }
+
+  .botones {
+    height: 60%; /* Ajusta los botones en pantallas pequeñas */
+  }
+}
