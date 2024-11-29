@@ -13,12 +13,12 @@
       <ion-card-content>
         <form [formGroup]="loginForm" (ngSubmit)="logOn()" class="container-login">
           <ion-item>
-            <ion-label position="stacked">Correo electrónico</ion-label>
-            <ion-input type="email" formControlName="email"></ion-input>
+            <ion-label position="stacked" aria-label="Correo electrónico">Correo electrónico</ion-label>
+            <ion-input type="email" formControlName="email" aria-label="Correo electrónico"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input type="password" formControlName="password"></ion-input>
+            <ion-label position="stacked" aria-label="Contraseña">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password" aria-label="Contraseña"></ion-input>
           </ion-item>
           <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
           <ion-button expand="block" color="primary" class="login-button" type="submit">

@@ -2,7 +2,10 @@
 
 /* Fondo para el contenido principal */
 ion-content {
-  --background: url('/assets/img_Inv/fondoIndex.jpg') no-repeat center center / cover;
-  padding-top: 10%; /* Añadido un padding superior para evitar que el contenido toque el borde superior */
+  --background: url('../../../assets/img_Inv/fondoIndex.jpg') no-repeat center center / cover;
+  padding-top: 10%;
 }
+
+
+
 
