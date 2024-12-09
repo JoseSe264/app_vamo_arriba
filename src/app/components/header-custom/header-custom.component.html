@@ -1,21 +1,21 @@
 <ion-header class="custom-header">
-  <ion-toolbar class="toolbar bobstrap-card">
+  <ion-toolbar class="toolbar">
     <!-- Botón de Volver a Inicio -->
     <ion-buttons slot="start" *ngIf="showBackButton">
-      <ion-button class="custom-button bobstrap-btn bobstrap-btn-primary" (click)="goBack()">
+      <ion-button class="custom-button" (click)="goBack()">
         <ion-icon slot="start" name="arrow-back" color="white"></ion-icon>
-        <span class="bobstrap-text">Atras</span> <!-- Texto del botón -->
+        <span>Atras</span> <!-- Texto del botón -->
       </ion-button>
     </ion-buttons>
 
     <!-- Título dinámico -->
-    <ion-title class="title bobstrap-text">{{ title }}</ion-title>
+    <ion-title class="title">{{ title }}</ion-title>
 
     <!-- Botón de Perfil -->
     <ion-buttons slot="end" *ngIf="showProfileButton">
-      <ion-button class="custom-button bobstrap-btn bobstrap-btn-secondary" [routerLink]="profileButtonUrl">
+      <ion-button class="custom-button" [routerLink]="profileButtonUrl">
         <ion-icon slot="start" name="person-circle-outline" color="white"></ion-icon>
-        <span class="bobstrap-text">Inicio</span> <!-- Texto del botón -->
+        <span>Inicio</span> <!-- Texto del botón -->
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
