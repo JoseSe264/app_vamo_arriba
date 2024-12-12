@@ -31,7 +31,7 @@ export class FirebaseService {
   // Obtener las listas desde Realtime Database
   getLists(): Observable<any[]> {
     return this.db
-      .list('lists')
+      .list('listas') // Asegúrate de usar la ruta correcta en Firebase
       .valueChanges()
       .pipe(
         catchError(err => {
@@ -44,7 +44,7 @@ export class FirebaseService {
   // Obtener los productos desde Realtime Database
   getProducts(): Observable<any[]> {
     return this.db
-      .list('products')
+      .list('products') // Asegúrate de que esta ruta esté correcta
       .valueChanges()
       .pipe(
         catchError(err => {
@@ -58,38 +58,14 @@ export class FirebaseService {
   getStats(): Observable<any> {
     return new Observable(observer => {
       combineLatest([
-        this.db
-          .list('users')
-          .valueChanges()
-          .pipe(
-            catchError(err => {
-              console.error('Error al obtener usuarios:', err);
-              return of([]); // Retorna un arreglo vacío en caso de error
-            })
-          ),
-        this.db
-          .list('lists')
-          .valueChanges()
-          .pipe(
-            catchError(err => {
-              console.error('Error al obtener listas:', err);
-              return of([]);
-            })
-          ),
-        this.db
-          .list('products')
-          .valueChanges()
-          .pipe(
-            catchError(err => {
-              console.error('Error al obtener productos:', err);
-              return of([]);
-            })
-          ),
+        this.getUsers(),  // Cambiado para usar getUsers
+        this.getLists(),
+        this.getProducts(),
       ]).subscribe(
         ([users, lists, products]) => {
-          console.log('Usuarios:', users);
-          console.log('Listas:', lists);
-          console.log('Productos:', products);
+          console.log('Usuarios:', users); // Mensaje de depuración
+          console.log('Listas:', lists);   // Mensaje de depuración
+          console.log('Productos:', products); // Mensaje de depuración
 
           observer.next({
             users: users.length,
