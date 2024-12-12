@@ -19,22 +19,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';  // Módulo de 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(),
+    BrowserModule,
+    IonicModule.forRoot(),  // Inicializa Ionic
     AppRoutingModule,
-    ReactiveFormsModule,
-    SharedModule,  // Importar el módulo SharedModule para compartir componentes y servicios entre las páginas
-    FormsModule,
-    RouterModule,  // Importar el RouterModule para el enrutamiento
-    AngularFireModule.initializeApp(environment.firebaseConfig),  // Inicializar Firebase con la configuración de environment
-    AngularFireDatabaseModule,  // Módulo de base de datos de Firebase
-    AngularFireAuthModule,  // Módulo de autenticación de Firebase
-    HttpClientModule,  // Módulo para peticiones HTTP
-    MatSnackBarModule,  // Importar el módulo de Snackbar de Angular Material
+    ReactiveFormsModule,  // Reactive forms
+    SharedModule,  // Importa SharedModule para reutilizar componentes y servicios
+    FormsModule,  // Formularios reactivos y template-driven
+    RouterModule,  // Enrutamiento
+    AngularFireModule.initializeApp(environment.firebaseConfig),  // Inicializa Firebase con la configuración
+    AngularFireDatabaseModule,  // Firebase Database
+    AngularFireAuthModule,  // Firebase Auth
+    HttpClientModule,  // Módulo HTTP para realizar peticiones
+    MatSnackBarModule,  // Angular Material Snackbar para mostrar notificaciones
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  // Estrategia de reutilización de rutas
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent]  // Componente raíz
 })
 export class AppModule {}

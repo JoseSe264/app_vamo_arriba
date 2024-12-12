@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AngularFirestore } from '@angular/fire/compat/firestore';  // Importa AngularFirestore
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,8 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private db: AngularFirestore  // Aquí es 'db', no 'firestore'
   ) {}
 
   private handleError(error: any, defaultMessage: string): void {
@@ -85,5 +87,12 @@ export class AuthService {
       throw new Error('No hay usuario autenticado');
     }
     return user;
+  }
+
+  // Método para obtener el número total de usuarios
+  getTotalUsuarios(): Observable<number> {
+    return this.db.collection('users').get().pipe(  // Cambié firestore por db aquí
+      map((snapshot) => snapshot.size) // Devuelve el tamaño de la colección 'users'
+    );
   }
 }
