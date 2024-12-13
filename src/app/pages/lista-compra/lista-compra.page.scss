@@ -1,6 +1,8 @@
-ion-content{
-  --background: blue; //fondo de
+
+ion-content {
+  --background: url('/assets/img_Inv/Azul.jpg') no-repeat center center / cover;
 }
+
 ion-input{
   --background: #138ac2;
   --color: #ffffff;
@@ -23,8 +25,6 @@ ion-header {
 }
 
 ion-content {
-  background-color: #00147e; // Fondo azul oscuro
-  padding: 20px;
 
     ion-item {
       --border-color: transparent;
@@ -61,31 +61,5 @@ ion-content {
   }
   #icon_plus{
     color:  #FFFFFF;
-  }
-}
-
-ion-footer {
-  ion-toolbar {
-    --background: #00147e;
-    display: flex;
-    justify-content: space-between;
-    ion-buttons {
-      margin-top: 15px;
-
-
-      ion-button {
-      background: #ffffff; // Fondo blanco para los botones del footer
-      color: #00147e; // Texto azul
-      border-radius: 10px;
-      }
-
-      #icon_load_button{
-        color: black;
-       
-      }
-      #button_bottom{
-        --background: black;
-      }
-    }
   }
 }
