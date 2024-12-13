@@ -11,11 +11,14 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { HeaderCustomComponent } from '../header-custom/header-custom.component';
 import { ImageSliderComponent } from '../image-slider/image-slider.component';
+import { CerrarSesionComponent } from '../cerrar-sesion/cerrar-sesion.component';
+
 
 @NgModule({
   declarations: [
     ProductCardComponent,
     ProductListComponent,
+    CerrarSesionComponent,
     ImageSliderComponent,
     HeaderCustomComponent,  // Agrega HeaderCustomComponent al módulo SharedModule
     ProductFormComponent,  // Agrega ProductFormComponent al módulo SharedModule
@@ -31,6 +34,7 @@ import { ImageSliderComponent } from '../image-slider/image-slider.component';
   exports: [
     SearchBarComponent,
     ProductCardComponent,
+    CerrarSesionComponent,  // Exporta CerrarSesionComponent para que pueda ser usado en otros módulos
     ImageSliderComponent,  // Exporta ImageSliderComponent para que pueda ser usado en otros módulos
     HeaderCustomComponent,  // Exporta HeaderCustomComponent para que pueda ser usado en otros módulos
     ProductFormComponent,  // Exporta ProductFormComponent para que pueda ser usado en otros módulos

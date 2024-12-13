@@ -1,0 +1,89 @@
+
+<app-header-custom></app-header-custom>
+
+
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú de Administración</ion-title>
+    </ion-toolbar>
+
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/admin">
+        <ion-icon slot="start" name="stats-chart-outline"></ion-icon>
+        Dashboard
+      </ion-item>
+      <ion-item routerLink="/admin/users">
+        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+        Gestionar Usuarios
+      </ion-item>
+      <ion-item routerLink="/admin/lists">
+        <ion-icon slot="start" name="list-outline"></ion-icon>
+        Gestionar Listas
+      </ion-item>
+      <ion-item routerLink="/admin/products">
+        <ion-icon slot="start" name="cube-outline"></ion-icon>
+        Gestionar Productos
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content id="main-content">
+  <ion-grid>
+    <ion-row class="ion-margin-top">
+      <ion-col size="12" size-md="6" offset-md="3">
+        <ion-button expand="block" color="primary" (click)="openMenu()">
+          <ion-icon slot="start" name="menu-outline"></ion-icon>
+          Abrir Menú
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-margin-top">
+      <ion-col size="12" size-md="4">
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">
+              <ion-icon name="people-outline" slot="start"></ion-icon>
+              Usuarios Registrados
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <h2>{{ totalUsuarios }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">
+              <ion-icon name="list-outline" slot="start"></ion-icon>
+              Listas Guardadas
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <h2>{{ totalListas }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="4">
+        <ion-card color="light">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">
+              <ion-icon name="cart-outline" slot="start"></ion-icon>
+              Productos Registrados
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <h2>{{ cantidadProductos }}</h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

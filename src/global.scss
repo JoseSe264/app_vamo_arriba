@@ -35,3 +35,21 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+
+/* Ejemplo: personalizar el color de fondo de la aplicación */
+body {
+    background-color: #f4f4f9;
+  }
+  
+  /* Ejemplo: agregar un borde redondeado a los botones */
+  ion-button {
+    border-radius: 12px;
+  }
+  
+  /* 5. Estilos adicionales o para componentes específicos */
+  .custom-class {
+    color: #007bff;
+    background-color: #f8f9fa;
+  }

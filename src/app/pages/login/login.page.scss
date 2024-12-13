@@ -8,55 +8,82 @@
   color: white;
 }
 
-.login-card{
-  min-width: 85%;
-  border-radius: 50px;
-  background-color: #0077b6;
-}
-
 .logo {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 0 25px;
 }
 
-ion-input {
-  margin-bottom: 15px;
-  text-indent: 20px;
-  background-color: white;
+.login-card {
+  width: 85%;
   border-radius: 50px;
-  color:#03045e;
-  border: none;
+  background-color: #0077b6;
 }
 
-.container-login{
+.container-login {
   display: flex;
-  flex-direction: column; 
-  align-items: center; 
-  justify-content: center; 
-}
-
-ion-card-content{
-  padding-top:50px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .forgot-password {
-  text-align: right;
+  align-self: flex-end;
   color: white;
   text-decoration: none;
   font-size: 0.8rem;
   margin-bottom: 15px;
 }
 
-.login-button {
+ion-input {
+  margin-bottom: 15px;
+  padding-left: 20px;
+  background-color: white;
+  border-radius: 50px;
+  color: #03045e;
+  border: none;
+}
+
+.login-button,
+.signup-button {
+  width: 80%;
   margin-bottom: 20px;
 }
 
-.signup-button {
-  width: 80%;
+ion-card-content {
+  padding-top: 50px;
 }
-.ion-button{
-  border-radius: 100px;
+
+ion-item {
+  --background: transparent; /* Fondo transparente para los elementos de entrada */
+  color: white; /* Color del texto dentro del ion-item */
+}
+
+ion-label[position="stacked"] {
+  margin-bottom: 12px; /* Ajustado para evitar que las etiquetas se superpongan */
+}
+
+ion-label {
+  color: white; /* Color del texto de los labels */
+  border-radius: 8px;
+}
+
+ion-input {
+  --color: #03045e; /* Color del texto dentro del campo de entrada */
+  background-color: white; /* Fondo blanco para mayor contraste */
+  border-radius: 50px;
+  padding-left: 20px;
+}
+
+/* Responsividad para dispositivos pequeños */
+@media (max-width: 600px) {
+  .login-card {
+    width: 90%; /* Aumentar el tamaño del card en pantallas más pequeñas */
+  }
+
+  .login-button,
+  .signup-button {
+    width: 100%; /* Asegura que los botones ocupen el 100% del ancho */
+  }
 }

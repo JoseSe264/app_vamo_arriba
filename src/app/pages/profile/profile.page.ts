@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,28 +10,60 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfilePage implements OnInit {
   profileForm: FormGroup; // Declarar la propiedad profileForm
 
-  constructor(private formBuilder: FormBuilder) {
-    // Inicializar el formulario reactivo
-    this.profileForm = this.formBuilder.group({
-      name: ['', Validators.required], // Campo para el nombre
-      email: [{ value: '', disabled: true }, [Validators.required, Validators.email]], // Campo para el email, deshabilitado
-      profileImage: [''], // Campo para la URL de la imagen de perfil
-      password: ['', Validators.required] // Campo de contraseña (requerido)
-      //quiero un formulario para este user
-    });
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService)
+    {
+      this.profileForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        email: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
+        profileImage: [''],
+        password: [''],
+      });
+    }
+
+  async ngOnInit() {
+    try {
+      const user = await this.authService.getCurrentUser(); // Obtener datos del usuario
+      this.profileForm.patchValue({
+        name: user.displayName || '',
+        email: user.email || '',
+        profileImage: user.photoURL || '',
+      });
+    } catch (error) {
+      console.error('Error al cargar los datos del usuario:', error);
+    }
   }
 
-  ngOnInit() {
-    // Aquí puedes cargar los datos del perfil si es necesario
-    // Por ejemplo, puedes llenar el formulario con datos existentes
-  }
-
-  updateProfile() {
+  async onSubmit() {
     if (this.profileForm.valid) {
-      // Lógica para actualizar el perfil
-      console.log('Perfil actualizado:', this.profileForm.value);
+      const updatedProfile = this.profileForm.getRawValue();
+
+      try {
+        const user = await this.authService.getCurrentUser();
+        if (user) {
+          const uid = user.uid;
+
+          // Actualizar perfil en Firebase Authentication
+          await user.updateProfile({
+            displayName: updatedProfile.name,
+            photoURL: updatedProfile.profileImage,
+          });
+
+          // Actualizar datos en Realtime Database usando AuthService
+          const userRef = this.authService.getUserRef(uid);
+          await userRef.update({
+            name: updatedProfile.name,
+            profileImage: updatedProfile.profileImage,
+          });
+
+          console.log('Perfil actualizado correctamente');
+        }
+      } catch (error) {
+        console.error('Error al actualizar el perfil:', error);
+      }
     } else {
-      console.log('Formulario no válido');
+      console.error('El formulario no es válido');
     }
   }
 

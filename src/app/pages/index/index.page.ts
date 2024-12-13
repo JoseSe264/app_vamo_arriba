@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-index',
   templateUrl: './index.page.html',
@@ -12,7 +13,8 @@ export class IndexPage implements OnInit {
   usuario!: string;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
   ) {
     if (this.router.getCurrentNavigation()?.extras.state){
       const datos = this.router.getCurrentNavigation()?.extras.state;
@@ -24,7 +26,15 @@ export class IndexPage implements OnInit {
 
   ngOnInit() {
   }
-
+  
+   // Método para cerrar sesión
+   cerrarSesion() {
+    this.authService.logout().then(() => {
+      this.router.navigate(['/login']);  // Redirige al login después de cerrar sesión
+    }).catch(error => {
+      console.log('Error al cerrar sesión:', error);
+    });
+  }
 
    // Funciones de navegación
    navigateToInventarioCasa() {
