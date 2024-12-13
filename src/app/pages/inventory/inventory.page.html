@@ -1,9 +1,10 @@
+<app-header-custom></app-header-custom>
 <ion-content>
 
   <!-- Encabezado con barra de búsqueda -->
   <ion-header class="header">
     <ion-toolbar>
-      <app-search-bar (searchTermChanged)="onSearchTermChanged($event)"></app-search-bar>
+      <app-search-bar placeholder="Buscar productos..." (searchTermChanged)="onSearchTermChanged($event)"></app-search-bar>
     </ion-toolbar>
   </ion-header>
 
@@ -164,4 +165,4 @@
   </div>
 
 </ion-content>
-<app-header-custom></app-header-custom>
+

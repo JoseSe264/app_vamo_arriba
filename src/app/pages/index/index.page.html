@@ -1,6 +1,6 @@
 <ion-content>
   <div class="image-container">
-    <img src="../../../assets/logos/2apptiro.png" alt="Banner" class="banner-image">
+    <img src="../../../assets/logos/apptirologo.png" alt="Banner" class="banner-image">
   </div>
 
   <div class="botones">
@@ -8,14 +8,14 @@
       <ion-row>
         <ion-col size="6" size-md="3">
           <ion-button expand="block" color="primary" routerLink="/lista-compra">
-            <ion-icon slot="start" name="storefront-outline"></ion-icon>
+            <ion-icon slot="start" name="basket-outline"></ion-icon>
             Lista de compras
           </ion-button>
         </ion-col>
 
         <ion-col size="6" size-md="3">
           <ion-button expand="block" color="primary" routerLink="/inventory">
-            <ion-icon slot="start" name="home-outline"></ion-icon>
+            <ion-icon slot="start" name="clipboard-outline"></ion-icon>
             Inventario
           </ion-button>
         </ion-col>
@@ -24,22 +24,22 @@
       <ion-row>
         <ion-col size="6" size-md="3">
           <ion-button expand="block" color="primary" routerLink="/scan">
-            <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+            <ion-icon slot="start" name="barcode-outline"></ion-icon>
             Escanea tu boleta
           </ion-button>
         </ion-col>
 
         <ion-col size="6" size-md="3">
           <ion-button expand="block" color="primary" routerLink="/profile">
-            <ion-icon slot="start" name="hourglass-outline"></ion-icon>
-            Perfil Usuario
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            Tu Perfil
           </ion-button>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col size="12">
-          <ion-button size="large" expand="block" color="danger" (click)="cerrarSesion()">
+          <ion-button size="large" expand="block" color="tertiary" (click)="cerrarSesion()">
             <ion-icon slot="start" name="log-out-outline"></ion-icon>
             Cerrar sesión
           </ion-button>
