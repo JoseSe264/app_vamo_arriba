@@ -13,30 +13,41 @@ export class FirebaseService {
     private afAuth: AngularFireAuth
   ) {}
 
-  // Obtener los usuarios desde Firebase Authentication
-  getUsers(): Observable<any[]> {
+  // Obtener todos los usuarios registrados desde Realtime Database
+  getAllUsers(): Observable<any[]> {
+    return this.db
+      .list('users') // Ruta en Firebase
+      .valueChanges()
+      .pipe(
+        catchError(err => {
+          console.error('Error al obtener todos los usuarios:', err);
+          return of([]); // Retorna un arreglo vacío si hay error
+        })
+      );
+  }
+
+  // Obtener el usuario autenticado
+  getAuthenticatedUser(): Observable<any[]> {
     return new Observable(observer => {
       this.afAuth.authState.subscribe(user => {
         if (user) {
-          console.log('Usuario autenticado:', user);
-          observer.next([user]); // Solo el usuario autenticado
+          observer.next([user]); // Solo usuario autenticado
         } else {
-          console.log('No hay usuario autenticado.');
-          observer.next([]); // Retorna un arreglo vacío si no hay usuario autenticado
+          observer.next([]); // Si no está autenticado
         }
       });
     });
   }
 
-  // Obtener las listas desde Realtime Database
+  // Obtener las listas de compra desde Realtime Database
   getLists(): Observable<any[]> {
     return this.db
-      .list('listas') // Asegúrate de usar la ruta correcta en Firebase
+      .list('listas') // Ruta de listas
       .valueChanges()
       .pipe(
         catchError(err => {
           console.error('Error al obtener listas:', err);
-          return of([]); // Retorna un arreglo vacío en caso de error
+          return of([]); // Retornar vacío en caso de error
         })
       );
   }
@@ -44,29 +55,25 @@ export class FirebaseService {
   // Obtener los productos desde Realtime Database
   getProducts(): Observable<any[]> {
     return this.db
-      .list('products') // Asegúrate de que esta ruta esté correcta
+      .list('products') // Ruta de productos
       .valueChanges()
       .pipe(
         catchError(err => {
           console.error('Error al obtener productos:', err);
-          return of([]); // Retorna un arreglo vacío en caso de error
+          return of([]); // Retornar vacío en caso de error
         })
       );
   }
 
-  // Obtener estadísticas (usuarios, listas y productos)
+  // Combinar datos para estadísticas
   getStats(): Observable<any> {
     return new Observable(observer => {
       combineLatest([
-        this.getUsers(),  // Cambiado para usar getUsers
+        this.getAllUsers(), // Cambiado para obtener todos los usuarios
         this.getLists(),
         this.getProducts(),
       ]).subscribe(
         ([users, lists, products]) => {
-          console.log('Usuarios:', users); // Mensaje de depuración
-          console.log('Listas:', lists);   // Mensaje de depuración
-          console.log('Productos:', products); // Mensaje de depuración
-
           observer.next({
             users: users.length,
             lists: lists.length,
@@ -75,7 +82,7 @@ export class FirebaseService {
         },
         error => {
           console.error('Error en combineLatest:', error);
-          observer.next({ users: 0, lists: 0, products: 0 }); // Valores por defecto
+          observer.next({ users: 0, lists: 0, products: 0 });
         }
       );
     });

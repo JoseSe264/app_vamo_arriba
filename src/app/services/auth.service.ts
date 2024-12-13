@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AngularFirestore } from '@angular/fire/compat/firestore';  // Importa AngularFirestore
+import { AngularFireDatabase } from '@angular/fire/compat/database';  // Cambié aquí para usar Realtime Database
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private router: Router,
     private snackBar: MatSnackBar,
-    private db: AngularFirestore  // Aquí es 'db', no 'firestore'
+    private db: AngularFireDatabase  // Usando AngularFireDatabase para Realtime Database
   ) {}
 
   private handleError(error: any, defaultMessage: string): void {
@@ -30,11 +30,20 @@ export class AuthService {
     return from(this.afAuth.fetchSignInMethodsForEmail(email)); // Convertir el Promise a un Observable
   }
 
-  // Registrar un nuevo usuario
-  async register(user: { email: string; password: string }): Promise<void> {
+  // Registrar un nuevo usuario y guardar en Realtime Database
+  async register(user: { email: string; password: string, name: string }): Promise<void> {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
       console.log('Usuario creado exitosamente', result);
+
+      // Guardar los datos del usuario en Realtime Database
+      const userRef = this.db.list('users');
+      userRef.push({
+        uid: result.user?.uid,
+        email: user.email,
+        name: user.name
+      });
+
       this.router.navigate(['/home']);
     } catch (error) {
       this.handleError(error, 'No se pudo crear el usuario. Intenta nuevamente.');
@@ -89,10 +98,10 @@ export class AuthService {
     return user;
   }
 
-  // Método para obtener el número total de usuarios
+  // Método para obtener el número total de usuarios desde Realtime Database
   getTotalUsuarios(): Observable<number> {
-    return this.db.collection('users').get().pipe(  // Cambié firestore por db aquí
-      map((snapshot) => snapshot.size) // Devuelve el tamaño de la colección 'users'
+    return this.db.list('users').snapshotChanges().pipe(
+      map((actions) => actions.length) // Devuelve el número de usuarios en la base de datos
     );
   }
 }
