@@ -133,16 +133,53 @@ export class ProductService {
     });
   }
 
-  // Método para subir la imagen a Firebase Storage
-  private async uploadImage(imageUrl: string): Promise<string> {
-    try {
+// Método para subir la imagen a Firebase Storage
+private async uploadImage(imageUrl: string): Promise<string> {
+  try {
+    // Verifica si la URL de la imagen es en formato base64
+    const isBase64 = imageUrl.startsWith('data:'); // Verifica si la URL de la imagen es base64
+    
+    if (isBase64) {
+      // Si es base64, crea una referencia única para la imagen en Firebase Storage
       const filePath = `images/${new Date().getTime()}_image`; // Nombre único para la imagen
       const fileRef = this.storage.ref(filePath);
-      await fileRef.putString(imageUrl, 'data_url'); // Sube la imagen
-      return await fileRef.getDownloadURL().toPromise(); // Obtiene la URL de descarga
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      throw error;
+      
+      // Subir la imagen en formato base64
+      await fileRef.putString(imageUrl, 'data_url'); // Sube la imagen en formato base64
+      
+      // Obtiene la URL de descarga de Firebase Storage
+      const downloadUrl = await fileRef.getDownloadURL().toPromise();
+      console.log('Imagen subida correctamente. URL:', downloadUrl);
+      return downloadUrl; // Devuelve la URL para acceder a la imagen
+    } else if (imageUrl.startsWith('blob:')) {
+      // Si la URL es un blob, convertimos a un objeto File
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const file = new File([blob], `image_${new Date().getTime()}.jpg`, { type: blob.type });
+
+      // Crea una referencia para el archivo en Firebase Storage
+      const filePath = `images/${new Date().getTime()}_image.jpg`; // Ruta única para la imagen
+      const fileRef = this.storage.ref(filePath);
+
+      // Subir la imagen (ahora como archivo) a Firebase Storage
+      await fileRef.put(file);
+      
+      // Obtener la URL de descarga de Firebase Storage
+      const downloadUrl = await fileRef.getDownloadURL().toPromise();
+      console.log('Imagen subida correctamente. URL:', downloadUrl);
+      return downloadUrl;
+    } else {
+      // Si no es base64 ni blob, simplemente devuelve la URL tal cual (se asume que es una URL válida)
+      console.log('URL de imagen ya proporcionada:', imageUrl);
+      return imageUrl;
     }
+  } catch (error) {
+    // En caso de error, muestra el error en consola
+    console.error("Error uploading image:", error);
+    throw error;
   }
 }
+
+
+
+}  

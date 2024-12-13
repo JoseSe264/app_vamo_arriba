@@ -1,34 +1,29 @@
+/* Estilo de la barra de búsqueda */
 .search-bar {
-  margin: 20px 0;                 /* Espacio arriba y abajo de la barra de búsqueda */
-  border-radius: 10px;            /* Bordes redondeados */
+  background-color: #0077b6; /* Fondo azul para el item de búsqueda */
+  border-radius: 8px; /* Bordes redondeados para el contenedor */
+  padding: 5px; /* Espaciado interno */
 }
 
-.search-bar ion-searchbar {
-  --background: #f8f9fa;          /* Fondo claro para la barra de búsqueda */
-  --color: #f8f9fa;                  /* Color del texto */
-  --border-radius: 10px;          /* Bordes redondeados */
-  --padding-start: 12px;          /* Espaciado inicial */
-  --padding-end: 12px;            /* Espaciado final */
-  --input-background: transparent; /* Fondo del input transparente */
+.bobstrap-card {
+  border-radius: 8px; /* Bordes redondeados para el card */
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
-.search-bar ion-searchbar::part(input) {
-  font-size: 16px;                /* Tamaño de fuente */
-  color: white;                  /* Color del texto del input */
-  padding-top: 8px;               /* Espaciado superior */
-  padding-bottom: 8px;             /* Espaciado inferior */
-  padding-left: 36px;             /* Espaciado izquierdo del input */
-  padding-right: 36px;           /* Espaciado derecho del input */
-  border-radius: 10px;          /* Bordes redondeados */
-  border-color: #ced4da;           /* Color del borde */
-  border-width: 1px;               /* Ancho del borde */
-  border-style: solid;            /* Estilo del borde */
+.bobstrap-searchbar {
+  --background: #0077b6; /* Fondo azul para la barra de búsqueda */
+  --color: #ffffff; /* Texto blanco para la barra de búsqueda */
+  --placeholder-color: #ffffff; /* Color del placeholder en blanco */
+  --padding-start: 15px; /* Relleno del lado izquierdo */
+  --border-radius: 8px; /* Bordes redondeados para la búsqueda */
+  height: 40px; /* Altura de la barra de búsqueda */
+  font-size: 14px; /* Tamaño de la fuente */
 }
 
-.search-bar ion-searchbar::part(search-icon) {
-  color: #007bff;                 /* Color del ícono de búsqueda */
+.bobstrap-searchbar::part(input) {
+  color: #ffffff; /* Color del texto de la búsqueda */
 }
 
-.search-bar ion-searchbar::part(cancel-button) {
-  color: #d9534f;                 /* Color del botón de cancelar */
+.bobstrap-searchbar::part(placeholder) {
+  color: #ffffff; /* Color del texto del placeholder */
 }

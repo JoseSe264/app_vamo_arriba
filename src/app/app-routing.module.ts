@@ -51,8 +51,15 @@ const routes: Routes = [
   },
   
   {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminPageModule),
+    canActivate: [authGuard] // Si necesitas un guard especializado para admin, cámbialo aquí
+  },
+  {
     path: '**', redirectTo: 'not-found'
   },
+  
+
 
 
 ];

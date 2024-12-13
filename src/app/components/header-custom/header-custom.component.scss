@@ -1,23 +1,32 @@
+/* Ejemplo de estilos globales para Bobstrap */
 .custom-header {
-    background-color: #03045e; /* Color de fondo */
-  }
-  
-  .toolbar {
-    --background: #03045e; /* Color de fondo de la barra */
-    --color: white; /* Color del texto de la barra */
-  }
-  
-  .custom-button {
-    background-color: transparent; /* Botón sin fondo */
-    color: white; /* Color del texto del botón */
-    &:hover {
-      background-color: #05050c; /* Fondo en hover */
-    }
-  }
-  
-  .title {
-    color: white; /* Color del título */
-    font-size: 1.5em; /* Tamaño del título */
-    font-weight: bold; /* Negrita */
-  }
-  
+  background-color: #0077b6; /* Azul para el fondo del encabezado */
+  padding: 10px 0;
+}
+
+.toolbar {
+  --background: #03045e; /* Color de fondo oscuro para la barra de herramientas */
+  padding: 0 15px; /* Espaciado horizontal */
+}
+
+.custom-button {
+  --background: #0077b6; /* Color de fondo de los botones */
+  --color: white; /* Color de texto blanco */
+  border-radius: 8px; /* Bordes redondeados en los botones */
+  font-size: 14px; /* Tamaño de la fuente */
+}
+
+.bobstrap-btn-primary {
+  background-color: #0077b6; /* Color de fondo azul */
+  border: none;
+}
+
+.bobstrap-btn-secondary {
+  background-color: #00549c; /* Color de fondo azul más oscuro */
+  border: none;
+}
+
+.bobstrap-text {
+  color: #ffffff; /* Color blanco para el texto */
+  font-size: 16px; /* Ajuste de tamaño de texto */
+}

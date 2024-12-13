@@ -5,8 +5,7 @@ import { Product } from 'src/app/models/product.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { getStorage, ref, uploadString } from 'firebase/storage';
-
+import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 
 @Component({
   selector: 'app-inventory',
@@ -34,7 +33,6 @@ export class InventoryPage implements OnInit {
       imagenUrl: ['']
     });
 
-    // Detectar cambios en el campo 'cantidad' para actualizar el estado
     this.productForm.get('cantidad').valueChanges.subscribe(cantidad => {
       this.updateProductStatus(cantidad);
     });
@@ -64,52 +62,54 @@ export class InventoryPage implements OnInit {
       : this.products$;
   }
 
-  saveProduct(): void {
+  async saveProduct(): Promise<void> {
     if (this.productForm.invalid) {
       console.log('El formulario es inválido. No se puede guardar el producto.');
       return;
     }
-  
-    const productData = { ...this.productForm.value }; // Clonar el formulario
-  
+
+    const productData = { ...this.productForm.value };
+
+    // Subir la imagen si existe y está en formato base64
+    if (productData.imagenUrl && productData.imagenUrl.startsWith('data:')) {
+      try {
+        const imageUrl = await this.uploadImageToFirebase(productData.imagenUrl);
+        productData.imagenUrl = imageUrl; // Actualiza la URL con la de Firebase Storage
+      } catch (error) {
+        console.error('Error al subir la imagen:', error);
+        return;
+      }
+    }
+
     const saveOperation = this.isEditing && this.currentProduct
       ? this.productService.updateProduct({ ...productData, id: this.currentProduct.id })
       : this.productService.addProduct(productData);
-  
-    // Si hay una imagen para subir
-    if (productData.imagenUrl) {
-      const storage = getStorage();
-      const storageRef = ref(storage, `products/${Date.now()}.jpg`);
-  
-      // Sube la imagen en formato data_url
-      uploadString(storageRef, productData.imagenUrl, 'data_url').then((snapshot) => {
-        console.log('Imagen subida con éxito:', snapshot);
-        // Continúa con la lógica de guardado del producto
-        saveOperation.subscribe(
-          () => {
-            const action = this.isEditing ? 'actualizado' : 'agregado';
-            console.log(`Producto ${action}`);
-            this.resetForm();
-          },
-          error => {
-            console.error('Error al guardar producto:', error);
-          }
-        );
-      }).catch(error => {
-        console.error('Error al subir la imagen:', error);
-      });
-    } else {
-      // Si no hay imagen, guardar directamente
-      saveOperation.subscribe(
-        () => {
-          const action = this.isEditing ? 'actualizado' : 'agregado';
-          console.log(`Producto ${action}`);
-          this.resetForm();
-        },
-        error => {
-          console.error('Error al guardar producto:', error);
-        }
-      );
+
+    saveOperation.subscribe(
+      () => {
+        const action = this.isEditing ? 'actualizado' : 'agregado';
+        console.log(`Producto ${action}`);
+        this.resetForm();
+      },
+      (error) => {
+        console.error('Error al guardar producto:', error);
+      }
+    );
+  }
+
+  private async uploadImageToFirebase(base64Image: string): Promise<string> {
+    const storage = getStorage();
+    const storageRef = ref(storage, `products/${Date.now()}.jpg`);
+
+    console.log('Subiendo imagen:', base64Image);
+
+    try {
+      const snapshot = await uploadString(storageRef, base64Image, 'data_url');
+      console.log('Imagen subida con éxito:', snapshot);
+      return await getDownloadURL(snapshot.ref); // Obtiene la URL de descarga
+    } catch (error) {
+      console.error('Error al subir la imagen:', error);
+      throw error;
     }
   }
 
@@ -159,23 +159,32 @@ export class InventoryPage implements OnInit {
         source: CameraSource.Photos,
       });
 
-      this.productForm.patchValue({
-        imagenUrl: image.webPath
-      });
+      if (image && image.webPath) {
+        const response = await fetch(image.webPath);
+        const blob = await response.blob();
+
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64Data = reader.result as string;
+          this.productForm.patchValue({
+            imagenUrl: base64Data,
+          });
+        };
+        reader.readAsDataURL(blob);
+      }
     } catch (error) {
       console.error('Error al seleccionar la imagen:', error);
     }
   }
 
-
   async takePhoto() {
     try {
       const image = await Camera.getPhoto({
         quality: 90,
-        resultType: CameraResultType.Base64, // Cambia a Base64
+        resultType: CameraResultType.Base64,
         source: CameraSource.Camera,
       });
-  
+
       if (image && image.base64String) {
         const base64Data = `data:image/jpeg;base64,${image.base64String}`;
         this.productForm.patchValue({
@@ -192,8 +201,4 @@ export class InventoryPage implements OnInit {
       }
     }
   }
-  
-  
-  
-
 }
