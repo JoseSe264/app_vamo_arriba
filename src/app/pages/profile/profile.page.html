@@ -6,34 +6,30 @@
 
 <ion-content class="ion-padding" fullscreen>
   <div class="profile-container">
-    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="form-horizontal">
-      
-      <div class="text-center mb-4">
-        <ion-avatar>
-          <img src="../../../assets/icon/profile.png" alt="Foto de perfil" class="profile-pic">
-        </ion-avatar>
-      </div>
+    <div class="profile-image-container">
+      <img 
+        [src]="profileForm.get('profileImage')?.value || 'assets/default-profile.png'" 
+        alt="Imagen de perfil" 
+        class="profile-image"
+      />
+    </div>
 
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="form-horizontal">
       <ion-item lines="none" class="profile-item">
         <ion-label position="floating">Nombre</ion-label>
         <ion-input formControlName="name" type="text" placeholder="Nombre"></ion-input>
       </ion-item>
-
       <ion-item lines="none" class="profile-item">
         <ion-label position="floating">Email</ion-label>
         <ion-input formControlName="email" type="email" placeholder="tuemail@dominio.com" [disabled]="true"></ion-input>
       </ion-item>
-
       <ion-item lines="none" class="profile-item">
         <ion-label position="floating">URL de Imagen de Perfil</ion-label>
         <ion-input formControlName="profileImage" type="url" placeholder="https://imagen.com"></ion-input>
       </ion-item>
-
+      
       <div class="form-buttons">
-        <ion-button expand="full" color="primary" type="submit" [disabled]="profileForm.invalid">
-          Actualizar Perfil
-        </ion-button>
-
+        <ion-button expand="full" type="submit" [disabled]="!profileForm.valid">Guardar Cambios</ion-button>
         <ion-button expand="full" color="danger" (click)="logout()">
           Cerrar Sesión
         </ion-button>

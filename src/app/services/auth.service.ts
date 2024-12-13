@@ -35,14 +35,18 @@ export class AuthService {
     try {
       const result = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
       console.log('Usuario creado exitosamente', result);
-
-      // Guardar los datos del usuario en Realtime Database
-      const userRef = this.db.list('users');
-      userRef.push({
-        uid: result.user?.uid,
-        email: user.email,
-        name: user.name
-      });
+      if (result.user) {
+        const uid = result.user.uid;
+  
+        // Guardar los datos del usuario utilizando el uid como clave
+        const userRef = this.db.object(`users/${uid}`);
+        await userRef.set({
+          uid: uid,
+          email: user.email,
+          name: user.name,
+          profileImage: '', // Campo inicial para la imagen de perfil
+        });
+      }
 
       this.router.navigate(['/home']);
     } catch (error) {
@@ -103,5 +107,9 @@ export class AuthService {
     return this.db.list('users').snapshotChanges().pipe(
       map((actions) => actions.length) // Devuelve el número de usuarios en la base de datos
     );
+  }
+
+  getUserRef(uid: string) {
+    return this.db.object(`users/${uid}`);
   }
 }
