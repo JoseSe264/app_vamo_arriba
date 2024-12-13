@@ -42,6 +42,12 @@
               <ion-input type="password" formControlName="confirmPassword" placeholder="Confirmar Contraseña" class="input"></ion-input>
             </div>
 
+            <!-- Selección de Rol: Administrador -->
+            <div class="form-horizontal">
+              <label for="isAdmin">¿Eres Administrador?</label>
+              <ion-toggle formControlName="isAdmin"></ion-toggle>
+            </div>
+
             <!-- Botón de Registro -->
             <ion-button expand="block" color="primary" class="login-button" [disabled]="registerForm.invalid" (click)="onRegister()"> 
               Registrarme
