@@ -1,5 +1,5 @@
 ion-content{
-  --background: blue; //fondo de
+  --background: url('/assets/img_Inv/Azul.jpg') no-repeat center center / cover;
 }
 ion-input{
   --background: #138ac2;
@@ -23,8 +23,6 @@ ion-header {
 }
 
 ion-content {
-  background-color: #00147e; // Fondo azul oscuro
-  padding: 20px;
 
     ion-item {
       --border-color: transparent;
