@@ -1,5 +1,5 @@
 ion-content {
-  --background: url('../../../assets/img_Inv/fondoIndex.jpg') no-repeat center center / cover;
+  --background: url('../../../assets/img_Inv/FondoIndex2.png') no-repeat center center / cover;
   background-size: cover;
   transition: background-image 0.5s ease-in-out;
   display: flex;
@@ -16,7 +16,7 @@ ion-content {
 }
 
 .banner-image {
-  width: 80%;
+  width: 85%;
   max-width: 300px;
   height: auto;
   transition: transform 0.3s ease-in-out;
@@ -50,4 +50,7 @@ ion-button:hover {
   .botones {
     height: 60%; /* Ajusta los botones en pantallas pequeñas */
   }
+}
+.colorboton{background-color: #90e0ef !important;
+  
 }
